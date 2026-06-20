@@ -676,6 +676,90 @@
     .hero-inner > *:nth-child(4) { animation-delay: 0.4s; }
     .hero-inner > *:nth-child(5) { animation-delay: 0.5s; }
     .hero-inner > *:nth-child(6) { animation-delay: 0.6s; }
+
+    /* ── WAITLIST ── */
+    .waitlist {
+      background: var(--bg);
+    }
+
+    .waitlist-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(9,69,112,0.08);
+    }
+
+    .waitlist-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+
+    .waitlist-stat {
+      text-align: center;
+    }
+
+    .waitlist-stat-num {
+      display: block;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--regal);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .waitlist-stat-label {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .waitlist-stat-divider {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+    }
+
+    .waitlist-form-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .waitlist-btn {
+      display: inline-block;
+      padding: 16px 48px;
+      background: linear-gradient(135deg, #094570, #1a6fa8);
+      color: var(--white);
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 20px rgba(9,69,112,0.3);
+      letter-spacing: 0.02em;
+    }
+
+    .waitlist-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(9,69,112,0.4);
+    }
+
+    .waitlist-note {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    @media (max-width: 768px) {
+      .waitlist-card { padding: 24px 20px; }
+      .waitlist-stat-divider { display: none; }
+      .waitlist-btn { padding: 14px 32px; font-size: 0.9rem; }
+    }
   </style>
 </head>
 <body>
@@ -699,6 +783,7 @@
       <li><a href="#features">Features</a></li>
       <li><a href="#disciplines">Disciplines</a></li>
       <li><a href="#why">Why Sual</a></li>
+      <li><a href="#waitlist">Waitlist</a></li>
       <li><a href="#community">Community</a></li>
       <li><a href="https://sual-seven.vercel.app/" target="_blank" class="nav-cta">Open App →</a></li>
     </ul>
@@ -828,7 +913,42 @@
       </div>
     </div>
   </section>
-
+  <!-- WAITLIST -->
+  <section class="waitlist" id="waitlist">
+    <div class="section-inner">
+      <span class="section-tag">Waitlist</span>
+      <h2 class="section-title">Be the first to know</h2>
+      <p class="section-sub">Join the waitlist and get notified the moment new features, content, and updates drop on Sual.</p>
+      <div class="waitlist-card">
+        <div class="waitlist-stats">
+          <div class="waitlist-stat">
+            <span class="waitlist-stat-num">7,000+</span>
+            <span class="waitlist-stat-label">Community members</span>
+          </div>
+          <div class="waitlist-stat-divider"></div>
+          <div class="waitlist-stat">
+            <span class="waitlist-stat-num">Free</span>
+            <span class="waitlist-stat-label">Always and forever</span>
+          </div>
+          <div class="waitlist-stat-divider"></div>
+          <div class="waitlist-stat">
+            <span class="waitlist-stat-num">7</span>
+            <span class="waitlist-stat-label">Islamic sciences</span>
+          </div>
+        </div>
+        <div class="waitlist-form-wrapper">
+          
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdRT2qg71V_r0m68BOgxrxW92TRQ0XgqQPbMaBPITjyr6rPOw/viewform"
+            target="_blank"
+            class="waitlist-btn"
+          >
+            🌙 Join the Waitlist
+          </a>
+          <p class="waitlist-note">No spam. Just meaningful updates on Sual.</p>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- COMMUNITY -->
   <section class="community" id="community">
     <div class="section-inner">
