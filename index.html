@@ -5,15 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sual | سُؤَال — Islamic Knowledge App</title>
   <meta name="description" content="Sual is your companion for the Islamic sciences — ask, learn, and test your knowledge in Fiqh, Seerah, Arabiyyah, Usul al-Fiqh, Sarf, Nahw, and Tafseer." />
-  <meta property="og:title" content="Sual | سُؤَال — Islamic Knowledge App" />
-  <meta property="og:description" content="Your companion for the Islamic sciences. Q&A, Quizzes, Flashcards, Stories, Duas, Tajweed and more." />
-  <meta property="og:image" content="https://sual-seven.vercel.app//pwa-512x512.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -23,743 +17,283 @@
       --white: #ffffff;
       --bg: #F0F8FF;
       --text: #0d1b2a;
-      --text-secondary: #4a6080;
+      --muted: #4a6080;
       --border: #c8d8e8;
       --radius: 14px;
-      --font-ui: 'Inter', sans-serif;
-      --font-arabic: 'Amiri', serif;
+      --font: 'Inter', sans-serif;
+      --arabic: 'Amiri', serif;
     }
 
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-ui);
-      background: var(--white);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+    body { font-family: var(--font); color: var(--text); background: var(--white); overflow-x: hidden; line-height: 1.6; }
 
     /* ── SPLASH ── */
     #splash {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
+      position: fixed; inset: 0; z-index: 9999;
       background: linear-gradient(160deg, #062f4a, #094570, #0d6fa8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
+      display: flex; align-items: center; justify-content: center;
       transition: opacity 0.9s ease, visibility 0.9s ease;
     }
-
-    #splash.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .splash-inner {
-      text-align: center;
-      animation: splashIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-    }
-
+    #splash.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .splash-inner { text-align: center; animation: splashIn 0.9s cubic-bezier(0.16,1,0.3,1) both; }
     @keyframes splashIn {
       from { opacity: 0; transform: scale(0.85) translateY(20px); }
       to   { opacity: 1; transform: scale(1) translateY(0); }
     }
-
     .splash-arabic {
-      font-family: var(--font-arabic);
-      font-size: clamp(4rem, 14vw, 9rem);
-      color: #ffffff;
-      line-height: 1.2;
-      margin-bottom: 8px;
+      font-family: var(--arabic); font-size: clamp(4rem,14vw,9rem); color: #fff; line-height: 1.2; margin-bottom: 8px;
       animation: splashGlow 1.8s ease-in-out infinite alternate;
     }
-
     @keyframes splashGlow {
-      from {
-        text-shadow:
-          0 0 30px rgba(133,204,255,0.6),
-          0 0 60px rgba(133,204,255,0.3);
-      }
-      to {
-        text-shadow:
-          0 0 50px rgba(133,204,255,1),
-          0 0 100px rgba(133,204,255,0.6),
-          0 0 160px rgba(133,204,255,0.3);
-      }
+      from { text-shadow: 0 0 30px rgba(133,204,255,0.6), 0 0 60px rgba(133,204,255,0.3); }
+      to   { text-shadow: 0 0 50px rgba(133,204,255,1), 0 0 100px rgba(133,204,255,0.6); }
     }
-
     .splash-latin {
-      font-size: clamp(1.2rem, 4vw, 2rem);
-      font-weight: 800;
-      color: var(--pastel);
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      animation: splashFadeIn 0.8s ease 0.3s both;
+      font-size: clamp(1.2rem,4vw,2rem); font-weight: 800; color: var(--pastel);
+      letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 20px;
+      animation: fadeUp 0.8s ease 0.3s both;
     }
-
     .splash-tagline {
-      font-family: var(--font-arabic);
-      font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-      color: rgba(255,255,255,0.55);
-      animation: splashFadeIn 0.8s ease 0.6s both;
+      font-family: var(--arabic); font-size: clamp(0.9rem,2.5vw,1.2rem);
+      color: rgba(255,255,255,0.55); animation: fadeUp 0.8s ease 0.6s both;
     }
-
-    @keyframes splashFadeIn {
+    @keyframes fadeUp {
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
       padding: 16px 48px;
-      background: rgba(255,255,255,0.92);
+      background: rgba(255,255,255,0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-arabic { font-family: var(--arabic); font-size: 1.6rem; color: var(--regal); font-weight: 700; }
+    .nav-logo-latin { font-size: 1.1rem; font-weight: 800; color: var(--regal); }
 
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-
-    .nav-logo-arabic {
-      font-family: var(--font-arabic);
-      font-size: 1.6rem;
-      color: var(--regal);
-      font-weight: 700;
-    }
-
-    .nav-logo-latin {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: var(--regal);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: color 0.15s;
-    }
-
+    /* Desktop nav links — always visible on desktop */
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.875rem; font-weight: 500; transition: color 0.15s; }
     .nav-links a:hover { color: var(--regal); }
-
     .nav-cta {
-      padding: 9px 22px;
-      background: var(--regal);
-      color: var(--white) !important;
-      border-radius: 100px;
-      font-weight: 700 !important;
-      font-size: 0.85rem !important;
+      padding: 9px 22px; background: var(--regal); color: var(--white) !important;
+      border-radius: 100px; font-weight: 700 !important; font-size: 0.85rem !important;
       transition: all 0.2s ease !important;
     }
+    .nav-cta:hover { background: #0d5a8a !important; box-shadow: 0 4px 14px rgba(9,69,112,0.3); }
 
-    .nav-cta:hover {
-      background: #0d5a8a !important;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(9,69,112,0.3);
+    /* Hamburger — hidden on desktop */
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
     }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--regal); border-radius: 2px; transition: all 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile dropdown menu */
+    .mobile-menu {
+      display: none;
+      position: fixed; top: 57px; left: 0; right: 0; z-index: 99;
+      background: rgba(255,255,255,0.98); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px 20px; flex-direction: column; gap: 4px;
+    }
+    .mobile-menu.open { display: flex; animation: slideDown 0.25s ease both; }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .mobile-menu a {
+      padding: 12px 16px; border-radius: 10px; color: var(--text);
+      text-decoration: none; font-size: 0.95rem; font-weight: 600;
+      transition: background 0.15s; display: block;
+    }
+    .mobile-menu a:hover { background: var(--bg); color: var(--regal); }
+    .mobile-menu .mobile-cta {
+      margin-top: 8px; background: var(--regal); color: var(--white) !important;
+      border-radius: 12px; text-align: center; font-weight: 700 !important;
+    }
+    .mobile-menu .mobile-cta:hover { background: #0d5a8a !important; }
 
     /* ── HERO ── */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
       padding: 120px 48px 80px;
-      background: linear-gradient(160deg, #F0F8FF 0%, #ffffff 50%, #e8f4ff 100%);
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(160deg, #F0F8FF 0%, #fff 50%, #e8f4ff 100%);
+      position: relative; overflow: hidden;
     }
-
     .hero::before {
-      content: 'سُؤَال';
-      font-family: var(--font-arabic);
-      position: absolute;
-      font-size: 32vw;
-      color: rgba(9,69,112,0.03);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      user-select: none;
-      white-space: nowrap;
+      content: 'سُؤَال'; font-family: var(--arabic); position: absolute;
+      font-size: 32vw; color: rgba(9,69,112,0.03); top: 50%; left: 50%;
+      transform: translate(-50%,-50%); pointer-events: none; user-select: none; white-space: nowrap;
     }
-
-    .hero-inner {
-      max-width: 860px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
+    .hero-inner { max-width: 860px; text-align: center; position: relative; z-index: 1; }
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
-      background: rgba(9,69,112,0.08);
-      border: 1px solid rgba(9,69,112,0.15);
-      border-radius: 100px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--regal);
-      margin-bottom: 28px;
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px;
+      background: rgba(9,69,112,0.08); border: 1px solid rgba(9,69,112,0.15);
+      border-radius: 100px; font-size: 0.78rem; font-weight: 600; color: var(--regal); margin-bottom: 28px;
     }
-
-    .hero-arabic {
-      font-family: var(--font-arabic);
-      font-size: clamp(3rem, 8vw, 6rem);
-      color: var(--regal);
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-
-    .hero-title {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      color: var(--regal);
-      margin-bottom: 20px;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-title span {
-      background: linear-gradient(135deg, #094570, #1a8fd1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-subtitle {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
-      color: var(--text-secondary);
-      max-width: 580px;
-      margin: 0 auto 40px;
-      line-height: 1.8;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 64px;
-    }
-
+    .hero-arabic { font-family: var(--arabic); font-size: clamp(3rem,8vw,6rem); color: var(--regal); line-height: 1.2; margin-bottom: 8px; }
+    .hero-title { font-size: clamp(2rem,5vw,3.5rem); font-weight: 800; color: var(--regal); margin-bottom: 20px; letter-spacing: -0.02em; }
+    .hero-title span { background: linear-gradient(135deg,#094570,#1a8fd1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: clamp(1rem,2.5vw,1.2rem); color: var(--muted); max-width: 580px; margin: 0 auto 40px; line-height: 1.8; }
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 64px; }
     .btn-primary {
-      padding: 14px 32px;
-      background: var(--regal);
-      color: var(--white);
-      border-radius: 100px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: all 0.2s ease;
+      padding: 14px 32px; background: var(--regal); color: var(--white); border-radius: 100px;
+      font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.2s ease;
       box-shadow: 0 4px 20px rgba(9,69,112,0.3);
     }
-
-    .btn-primary:hover {
-      background: #0d5a8a;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(9,69,112,0.4);
-    }
-
+    .btn-primary:hover { background: #0d5a8a; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(9,69,112,0.4); }
     .btn-secondary {
-      padding: 14px 32px;
-      background: transparent;
-      color: var(--regal);
-      border: 2px solid var(--regal);
-      border-radius: 100px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: all 0.2s ease;
+      padding: 14px 32px; background: transparent; color: var(--regal);
+      border: 2px solid var(--regal); border-radius: 100px; font-weight: 700;
+      font-size: 0.95rem; text-decoration: none; transition: all 0.2s ease;
     }
+    .btn-secondary:hover { background: var(--regal); color: var(--white); transform: translateY(-2px); }
 
-    .btn-secondary:hover {
-      background: var(--regal);
-      color: var(--white);
-      transform: translateY(-2px);
-    }
-
+    /* Mockup */
     .hero-mockup {
-      background: var(--white);
-      border-radius: 20px;
-      padding: 24px;
+      background: var(--white); border-radius: 20px; padding: 24px;
       box-shadow: 0 24px 80px rgba(9,69,112,0.15), 0 4px 20px rgba(9,69,112,0.08);
-      border: 1.5px solid var(--border);
-      max-width: 700px;
-      margin: 0 auto;
+      border: 1.5px solid var(--border); max-width: 700px; margin: 0 auto;
     }
-
-    .mockup-bar {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-
+    .mockup-bar { display: flex; gap: 6px; margin-bottom: 16px; }
     .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
     .mockup-dot:nth-child(1) { background: #ff5f57; }
     .mockup-dot:nth-child(2) { background: #febc2e; }
     .mockup-dot:nth-child(3) { background: #28c840; }
-
-    .mockup-inner {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      height: 320px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-
-    .mockup-sidebar {
-      background: var(--regal);
-      padding: 16px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .mockup-logo {
-      font-family: var(--font-arabic);
-      color: var(--white);
-      font-size: 1.2rem;
-      margin-bottom: 12px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
-    }
-
-    .mockup-nav-item {
-      padding: 8px 10px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.7);
-    }
-
-    .mockup-nav-item.active {
-      background: rgba(133,204,255,0.2);
-      color: var(--pastel);
-    }
-
-    .mockup-content {
-      background: var(--bg);
-      padding: 16px;
-      overflow: hidden;
-    }
-
-    .mockup-title {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--regal);
-      margin-bottom: 12px;
-    }
-
-    .mockup-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 8px;
-    }
-
-    .mockup-card-q {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--regal);
-      margin-bottom: 6px;
-    }
-
-    .mockup-card-tags { display: flex; gap: 4px; }
-
-    .mockup-tag {
-      padding: 2px 8px;
-      background: #e8f4ff;
-      border-radius: 100px;
-      font-size: 0.62rem;
-      color: var(--regal);
-    }
+    .mockup-inner { display: grid; grid-template-columns: 200px 1fr; height: 320px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+    .mockup-sidebar { background: var(--regal); padding: 16px 12px; display: flex; flex-direction: column; gap: 4px; }
+    .mockup-logo { font-family: var(--arabic); color: var(--white); font-size: 1.2rem; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+    .mockup-nav-item { padding: 8px 10px; border-radius: 8px; font-size: 0.75rem; color: rgba(255,255,255,0.7); }
+    .mockup-nav-item.active { background: rgba(133,204,255,0.2); color: var(--pastel); }
+    .mockup-content { background: var(--bg); padding: 16px; overflow: hidden; }
+    .mockup-title { font-size: 0.9rem; font-weight: 700; color: var(--regal); margin-bottom: 12px; }
+    .mockup-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 8px; }
+    .mockup-card-q { font-size: 0.72rem; font-weight: 600; color: var(--regal); margin-bottom: 6px; }
+    .mockup-tags { display: flex; gap: 4px; }
+    .mockup-tag { padding: 2px 8px; background: #e8f4ff; border-radius: 100px; font-size: 0.62rem; color: var(--regal); }
 
     /* ── STATS ── */
     .stats { background: var(--regal); padding: 60px 48px; }
-
-    .stats-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 40px;
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 2.8rem;
-      font-weight: 800;
-      color: var(--pastel);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .stat-label {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.75);
-      font-weight: 500;
-    }
+    .stats-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 40px; text-align: center; }
+    .stat-num { font-size: 2.8rem; font-weight: 800; color: var(--pastel); line-height: 1; margin-bottom: 6px; }
+    .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.75); font-weight: 500; }
 
     /* ── SECTIONS ── */
     section { padding: 80px 48px; }
+    .inner { max-width: 1000px; margin: 0 auto; }
+    .tag { display: inline-block; padding: 4px 14px; background: rgba(9,69,112,0.08); border-radius: 100px; font-size: 0.72rem; font-weight: 700; color: var(--regal); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
+    .sec-title { font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 800; color: var(--regal); margin-bottom: 12px; letter-spacing: -0.01em; }
+    .sec-sub { font-size: 1rem; color: var(--muted); max-width: 560px; line-height: 1.7; margin-bottom: 48px; }
 
-    .section-inner { max-width: 1000px; margin: 0 auto; }
-
-    .section-tag {
-      display: inline-block;
-      padding: 4px 14px;
-      background: rgba(9,69,112,0.08);
-      border-radius: 100px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--regal);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 14px;
-    }
-
-    .section-title {
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 800;
-      color: var(--regal);
-      margin-bottom: 12px;
-      letter-spacing: -0.01em;
-    }
-
-    .section-sub {
-      font-size: 1rem;
-      color: var(--text-secondary);
-      max-width: 560px;
-      line-height: 1.7;
-      margin-bottom: 48px;
-    }
-
-    /* ── FEATURES ── */
+    /* Features */
     .features { background: var(--white); }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    .feature-card {
-      padding: 28px;
-      background: var(--bg);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      transition: all 0.2s ease;
-    }
-
-    .feature-card:hover {
-      border-color: var(--pastel);
-      box-shadow: 0 8px 24px rgba(9,69,112,0.1);
-      transform: translateY(-3px);
-    }
-
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 20px; }
+    .feature-card { padding: 28px; background: var(--bg); border: 1.5px solid var(--border); border-radius: var(--radius); transition: all 0.2s ease; }
+    .feature-card:hover { border-color: var(--pastel); box-shadow: 0 8px 24px rgba(9,69,112,0.1); transform: translateY(-3px); }
     .feature-icon { font-size: 2rem; margin-bottom: 14px; }
     .feature-name { font-size: 1rem; font-weight: 700; color: var(--regal); margin-bottom: 8px; }
-    .feature-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.7; }
+    .feature-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
 
-    /* ── DISCIPLINES ── */
+    /* Disciplines */
     .disciplines { background: var(--bg); }
+    .disc-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 16px; }
+    .disc-card { padding: 24px 20px; background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); text-align: center; transition: all 0.2s ease; text-decoration: none; }
+    .disc-card:hover { border-color: var(--regal); box-shadow: 0 6px 20px rgba(9,69,112,0.12); transform: translateY(-3px); }
+    .disc-icon { font-size: 2rem; margin-bottom: 10px; }
+    .disc-name { font-size: 0.95rem; font-weight: 700; color: var(--regal); margin-bottom: 4px; }
+    .disc-arabic { font-family: var(--arabic); font-size: 1rem; color: var(--muted); }
 
-    .disciplines-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 16px;
-    }
-
-    .discipline-card {
-      padding: 24px 20px;
-      background: var(--white);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      text-align: center;
-      transition: all 0.2s ease;
-      text-decoration: none;
-    }
-
-    .discipline-card:hover {
-      border-color: var(--regal);
-      box-shadow: 0 6px 20px rgba(9,69,112,0.12);
-      transform: translateY(-3px);
-    }
-
-    .discipline-icon { font-size: 2rem; margin-bottom: 10px; }
-    .discipline-name { font-size: 0.95rem; font-weight: 700; color: var(--regal); margin-bottom: 4px; }
-    .discipline-arabic { font-family: var(--font-arabic); font-size: 1rem; color: var(--text-secondary); }
-
-    /* ── WHY ── */
+    /* Why */
     .why { background: var(--white); }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 24px; }
     .why-item { display: flex; gap: 16px; }
+    .why-num { font-size: 0.7rem; font-weight: 800; color: var(--pastel); background: var(--regal); padding: 4px 8px; border-radius: 6px; flex-shrink: 0; height: fit-content; margin-top: 2px; }
+    .why-title { font-size: 0.95rem; font-weight: 700; color: var(--regal); margin-bottom: 6px; }
+    .why-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
 
-    .why-num {
-      font-size: 0.7rem;
-      font-weight: 800;
-      color: var(--pastel);
-      background: var(--regal);
-      padding: 4px 8px;
-      border-radius: 6px;
-      flex-shrink: 0;
-      height: fit-content;
-      margin-top: 2px;
+    /* Waitlist */
+    .waitlist { background: var(--bg); }
+    .waitlist-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 20px; padding: 40px; box-shadow: 0 8px 32px rgba(9,69,112,0.08); }
+    .waitlist-stats { display: flex; align-items: center; justify-content: center; gap: 32px; margin-bottom: 36px; flex-wrap: wrap; }
+    .waitlist-stat { text-align: center; }
+    .waitlist-stat-num { display: block; font-size: 2rem; font-weight: 800; color: var(--regal); line-height: 1; margin-bottom: 4px; }
+    .waitlist-stat-label { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+    .waitlist-divider { width: 1px; height: 40px; background: var(--border); }
+    .waitlist-form { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .waitlist-btn {
+      display: inline-block; padding: 16px 48px; background: linear-gradient(135deg,#094570,#1a6fa8);
+      color: var(--white); border-radius: 100px; font-weight: 700; font-size: 1rem;
+      text-decoration: none; transition: all 0.2s ease; box-shadow: 0 4px 20px rgba(9,69,112,0.3);
     }
+    .waitlist-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(9,69,112,0.4); }
+    .waitlist-note { font-size: 0.78rem; color: var(--muted); }
 
-    .why-content-title { font-size: 0.95rem; font-weight: 700; color: var(--regal); margin-bottom: 6px; }
-    .why-content-desc { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.7; }
-
-    /* ── COMMUNITY ── */
-    .community {
-      background: linear-gradient(135deg, #094570, #1a6fa8);
-      text-align: center;
-    }
-
-    .community .section-title { color: var(--white); }
-    .community .section-sub { color: rgba(255,255,255,0.8); margin: 0 auto 36px; }
-
+    /* Community */
+    .community { background: linear-gradient(135deg,#094570,#1a6fa8); text-align: center; }
+    .community .sec-title { color: var(--white); }
+    .community .sec-sub { color: rgba(255,255,255,0.8); margin: 0 auto 36px; }
+    .community .tag { background: rgba(255,255,255,0.15); color: var(--pastel); }
     .community-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-
-    .btn-white {
-      padding: 14px 32px;
-      background: var(--white);
-      color: var(--regal);
-      border-radius: 100px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    }
-
+    .btn-white { padding: 14px 32px; background: var(--white); color: var(--regal); border-radius: 100px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.2s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
     .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+    .btn-outline-white { padding: 14px 32px; background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.6); border-radius: 100px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.2s ease; }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: var(--white); transform: translateY(-2px); }
 
-    .btn-outline-white {
-      padding: 14px 32px;
-      background: transparent;
-      color: var(--white);
-      border: 2px solid rgba(255,255,255,0.6);
-      border-radius: 100px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .btn-outline-white:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: var(--white);
-      transform: translateY(-2px);
-    }
-
-    /* ── FOOTER ── */
+    /* Footer */
     footer { background: #06304d; padding: 48px; }
-
-    .footer-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 48px;
-      align-items: start;
-    }
-
-    .footer-brand-arabic { font-family: var(--font-arabic); font-size: 2rem; color: var(--pastel); margin-bottom: 6px; }
-
-    .footer-brand-tagline {
-      font-size: 0.875rem;
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 20px;
-      max-width: 360px;
-      line-height: 1.6;
-    }
-
+    .footer-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: start; }
+    .footer-arabic { font-family: var(--arabic); font-size: 2rem; color: var(--pastel); margin-bottom: 6px; }
+    .footer-tagline { font-size: 0.875rem; color: rgba(255,255,255,0.6); margin-bottom: 20px; max-width: 360px; line-height: 1.6; }
     .footer-social { display: flex; gap: 12px; }
-
-    .footer-social-link {
-      padding: 8px 16px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 100px;
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
-      font-size: 0.8rem;
-      font-weight: 600;
-      transition: all 0.15s;
-    }
-
-    .footer-social-link:hover {
-      background: rgba(133,204,255,0.15);
-      color: var(--pastel);
-      border-color: var(--pastel);
-    }
-
+    .footer-social a { padding: 8px 16px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 100px; color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.8rem; font-weight: 600; transition: all 0.15s; }
+    .footer-social a:hover { background: rgba(133,204,255,0.15); color: var(--pastel); border-color: var(--pastel); }
     .footer-links { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+    .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.15s; }
+    .footer-links a:hover { color: var(--pastel); }
+    .footer-copy { border-top: 1px solid rgba(255,255,255,0.08); margin-top: 40px; padding-top: 24px; text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.4); }
 
-    .footer-link { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.15s; }
-    .footer-link:hover { color: var(--pastel); }
-
-    .footer-copy {
-      border-top: 1px solid rgba(255,255,255,0.08);
-      margin-top: 40px;
-      padding-top: 24px;
-      text-align: center;
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.4);
-    }
-
-    /* ── RESPONSIVE ── */
+    /* ── MOBILE ── */
     @media (max-width: 768px) {
       nav { padding: 14px 20px; }
       .nav-links { display: none; }
+      .hamburger { display: flex; }
       .hero { padding: 100px 20px 60px; }
+      .mockup-sidebar { display: none; }
+      .mockup-inner { grid-template-columns: 1fr; }
       section { padding: 60px 20px; }
       .stats { padding: 48px 20px; }
       footer { padding: 40px 20px; }
       .footer-inner { grid-template-columns: 1fr; }
       .footer-links { align-items: flex-start; }
-      .mockup-inner { grid-template-columns: 1fr; }
-      .mockup-sidebar { display: none; }
       .hero-actions { flex-direction: column; align-items: center; }
       .community-actions { flex-direction: column; align-items: center; }
+      .waitlist-card { padding: 24px 20px; }
+      .waitlist-divider { display: none; }
     }
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
+    @keyframes heroFadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    .hero-inner > * { animation: fadeUp 0.6s ease both; }
+    .hero-inner > * { animation: heroFadeUp 0.6s ease both; }
     .hero-inner > *:nth-child(1) { animation-delay: 0.1s; }
     .hero-inner > *:nth-child(2) { animation-delay: 0.2s; }
     .hero-inner > *:nth-child(3) { animation-delay: 0.3s; }
     .hero-inner > *:nth-child(4) { animation-delay: 0.4s; }
     .hero-inner > *:nth-child(5) { animation-delay: 0.5s; }
     .hero-inner > *:nth-child(6) { animation-delay: 0.6s; }
-
-    /* ── WAITLIST ── */
-    .waitlist {
-      background: var(--bg);
-    }
-
-    .waitlist-card {
-      background: var(--white);
-      border: 1.5px solid var(--border);
-      border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0 8px 32px rgba(9,69,112,0.08);
-    }
-
-    .waitlist-stats {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-      margin-bottom: 36px;
-      flex-wrap: wrap;
-    }
-
-    .waitlist-stat {
-      text-align: center;
-    }
-
-    .waitlist-stat-num {
-      display: block;
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--regal);
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-
-    .waitlist-stat-label {
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    .waitlist-stat-divider {
-      width: 1px;
-      height: 40px;
-      background: var(--border);
-    }
-
-    .waitlist-form-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .waitlist-btn {
-      display: inline-block;
-      padding: 16px 48px;
-      background: linear-gradient(135deg, #094570, #1a6fa8);
-      color: var(--white);
-      border-radius: 100px;
-      font-weight: 700;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 20px rgba(9,69,112,0.3);
-      letter-spacing: 0.02em;
-    }
-
-    .waitlist-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 32px rgba(9,69,112,0.4);
-    }
-
-    .waitlist-note {
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-    }
-
-    @media (max-width: 768px) {
-      .waitlist-card { padding: 24px 20px; }
-      .waitlist-stat-divider { display: none; }
-      .waitlist-btn { padding: 14px 32px; font-size: 0.9rem; }
-    }
   </style>
 </head>
 <body>
@@ -787,17 +321,27 @@
       <li><a href="#community">Community</a></li>
       <li><a href="https://sual-seven.vercel.app/" target="_blank" class="nav-cta">Open App →</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#features" onclick="closeMenu()">Features</a>
+    <a href="#disciplines" onclick="closeMenu()">Disciplines</a>
+    <a href="#why" onclick="closeMenu()">Why Sual</a>
+    <a href="#waitlist" onclick="closeMenu()">Waitlist</a>
+    <a href="#community" onclick="closeMenu()">Community</a>
+    <a href="https://sual-seven.vercel.app/" target="_blank" class="mobile-cta" onclick="closeMenu()">Open App →</a>
+  </div>
 
   <!-- HERO -->
   <div class="hero">
     <div class="hero-inner">
       <div class="hero-arabic">سُؤَال</div>
       <h1 class="hero-title">The Islamic <span>Knowledge</span> App</h1>
-      <p class="hero-subtitle">
-        Ask. Learn. Test. Your companion for Islamic knowledge — built on
-        classical scholarship and designed for the serious student.
-      </p>
+      <p class="hero-sub">Ask. Learn. Test. Your companion for the seven Islamic sciences — built on classical scholarship and designed for the serious student.</p>
       <div class="hero-actions">
         <a href="https://sual-seven.vercel.app/" target="_blank" class="btn-primary">Open Sual App →</a>
         <a href="#features" class="btn-secondary">Explore Features</a>
@@ -811,36 +355,27 @@
         <div class="mockup-inner">
           <div class="mockup-sidebar">
             <div class="mockup-logo">سُؤَال Sual</div>
-            <div class="mockup-nav-item active">Home</div>
-            <div class="mockup-nav-item">Quiz</div>
-            <div class="mockup-nav-item">Flashcards</div>
-            <div class="mockup-nav-item">Stories</div>
-            <div class="mockup-nav-item">Duas</div>
-            <div class="mockup-nav-item">Calendar</div>
-            <div class="mockup-nav-item">Tajweed</div>
+            <div class="mockup-nav-item active">🏠 Home</div>
+            <div class="mockup-nav-item">🎯 Quiz</div>
+            <div class="mockup-nav-item">🃏 Flashcards</div>
+            <div class="mockup-nav-item">📜 Stories</div>
+            <div class="mockup-nav-item">🤲 Duas</div>
+            <div class="mockup-nav-item">🗓️ Calendar</div>
+            <div class="mockup-nav-item">🎙️ Tajweed</div>
           </div>
           <div class="mockup-content">
             <div class="mockup-title">Fiqh — Islamic Jurisprudence</div>
             <div class="mockup-card">
               <div class="mockup-card-q">What are the five essential objectives of Shariah (Maqasid al-Shariah)?</div>
-              <div class="mockup-card-tags">
-                <span class="mockup-tag">maqasid</span>
-                <span class="mockup-tag">advanced</span>
-              </div>
+              <div class="mockup-tags"><span class="mockup-tag">maqasid</span><span class="mockup-tag">advanced</span></div>
             </div>
             <div class="mockup-card">
               <div class="mockup-card-q">What is the ruling on reciting al-Fatihah behind the imam?</div>
-              <div class="mockup-card-tags">
-                <span class="mockup-tag">salah</span>
-                <span class="mockup-tag">khilaf</span>
-              </div>
+              <div class="mockup-tags"><span class="mockup-tag">salah</span><span class="mockup-tag">khilaf</span></div>
             </div>
             <div class="mockup-card">
               <div class="mockup-card-q">What is Zakah and what is its nisab for gold and silver?</div>
-              <div class="mockup-card-tags">
-                <span class="mockup-tag">zakah</span>
-                <span class="mockup-tag">nisab</span>
-              </div>
+              <div class="mockup-tags"><span class="mockup-tag">zakah</span><span class="mockup-tag">nisab</span></div>
             </div>
           </div>
         </div>
@@ -851,28 +386,28 @@
   <!-- STATS -->
   <div class="stats">
     <div class="stats-inner">
-      <div><div class="stat-number">350+</div><div class="stat-label">Scholarly Q&amp;A Entries</div></div>
-      <div><div class="stat-number">350+</div><div class="stat-label">Quiz Questions</div></div>
-      <div><div class="stat-number">7</div><div class="stat-label">Islamic Disciplines</div></div>
-      <div><div class="stat-number">30</div><div class="stat-label">Duas &amp; Adhkar</div></div>
-      <div><div class="stat-number">10</div><div class="stat-label">Stories of the Salaf</div></div>
-      <div><div class="stat-number">10</div><div class="stat-label">Tajweed Sections</div></div>
+      <div><div class="stat-num">350+</div><div class="stat-label">Scholarly Q&amp;A Entries</div></div>
+      <div><div class="stat-num">350+</div><div class="stat-label">Quiz Questions</div></div>
+      <div><div class="stat-num">7</div><div class="stat-label">Islamic Disciplines</div></div>
+      <div><div class="stat-num">30</div><div class="stat-label">Duas &amp; Adhkar</div></div>
+      <div><div class="stat-num">10</div><div class="stat-label">Stories of the Salaf</div></div>
+      <div><div class="stat-num">10</div><div class="stat-label">Tajweed Sections</div></div>
     </div>
   </div>
 
   <!-- FEATURES -->
   <section class="features" id="features">
-    <div class="section-inner">
-      <span class="section-tag">Features</span>
-      <h2 class="section-title">Everything you need to study Islam</h2>
-      <p class="section-sub">Built for the serious student who wants depth, not surface-level summaries.</p>
+    <div class="inner">
+      <span class="tag">Features</span>
+      <h2 class="sec-title">Everything you need to study Islam</h2>
+      <p class="sec-sub">Built for the serious student who wants depth, not surface-level summaries.</p>
       <div class="features-grid">
         <div class="feature-card"><div class="feature-icon">📚</div><div class="feature-name">Scholarly Q&amp;A</div><div class="feature-desc">350+ curated questions and detailed answers across seven disciplines, sourced from classical texts and authenticated references.</div></div>
         <div class="feature-card"><div class="feature-icon">🎯</div><div class="feature-name">Quiz Mode</div><div class="feature-desc">Test your knowledge with 350+ questions per discipline or in a mixed format. Track your score and review your answers.</div></div>
         <div class="feature-card"><div class="feature-icon">🃏</div><div class="feature-name">Flashcards</div><div class="feature-desc">Six decks of Arabic and Islamic terminology flashcards with Arabic script and transliteration.</div></div>
-        <div class="feature-card"><div class="feature-icon">📜</div><div class="feature-name">Stories of the Salaf</div><div class="feature-desc">Detailed biographical narratives of the Companions and Successors — written with primary source citations.</div></div>
-        <div class="feature-card"><div class="feature-icon">🤲</div><div class="feature-name">Dua Collection</div><div class="feature-desc">30 authenticated duas from the Quran and Sunnah with Arabic text, transliteration, translation, context, and virtue.</div></div>
-        <div class="feature-card"><div class="feature-icon">🗓️</div><div class="feature-name">Islamic Calendar</div><div class="feature-desc">A full Hijri calendar with important Islamic dates circled and explained — Ayyam al-Bid, Ashura, Eid, and Laylat al-Qadr.</div></div>
+        <div class="feature-card"><div class="feature-icon">📜</div><div class="feature-name">Stories of the Salaf</div><div class="feature-desc">Detailed biographical narratives of the Companions and Successors with primary source citations.</div></div>
+        <div class="feature-card"><div class="feature-icon">🤲</div><div class="feature-name">Dua Collection</div><div class="feature-desc">30 authenticated duas from the Quran and Sunnah with Arabic text, transliteration, translation, and virtue.</div></div>
+        <div class="feature-card"><div class="feature-icon">🗓️</div><div class="feature-name">Islamic Calendar</div><div class="feature-desc">A full Hijri calendar with important Islamic dates circled and explained — Ayyam al-Bid, Ashura, Eid, Laylat al-Qadr.</div></div>
         <div class="feature-card"><div class="feature-icon">🎙️</div><div class="feature-name">Tajweed Science</div><div class="feature-desc">Ten comprehensive sections covering Noon Saakinah, Madd, Qalqalah, Tafkheem, Waqf, Ghunnah and more.</div></div>
         <div class="feature-card"><div class="feature-icon">🌙</div><div class="feature-name">Dark Mode &amp; Accessibility</div><div class="feature-desc">Full dark mode, adjustable font size, and a clean interface designed for extended study sessions.</div></div>
       </div>
@@ -881,76 +416,67 @@
 
   <!-- DISCIPLINES -->
   <section class="disciplines" id="disciplines">
-    <div class="section-inner">
-      <span class="section-tag">Disciplines</span>
-      <h2 class="section-title">Seven Islamic Sciences</h2>
-      <p class="section-sub">Each discipline is treated with the depth it deserves — not as a summary but as a serious introduction to the classical tradition.</p>
-      <div class="disciplines-grid">
-        <a href="https://sual-seven.vercel.app/discipline/fiqh" target="_blank" class="discipline-card"><div class="discipline-icon">⚖️</div><div class="discipline-name">Fiqh</div><div class="discipline-arabic">الفِقْه</div></a>
-        <a href="https://sual-seven.vercel.app/discipline/seerah" target="_blank" class="discipline-card"><div class="discipline-icon">🌙</div><div class="discipline-name">Seerah</div><div class="discipline-arabic">السِّيرَة</div></a>
-        <a href="https://sual-seven.vercel.app/discipline/arabiyyah" target="_blank" class="discipline-card"><div class="discipline-icon">✍️</div><div class="discipline-name">Arabiyyah</div><div class="discipline-arabic">العَرَبِيَّة</div></a>
-        <a href="https://sual-seven.vercel.app/discipline/usul" target="_blank" class="discipline-card"><div class="discipline-icon">📐</div><div class="discipline-name">Usul al-Fiqh</div><div class="discipline-arabic">أُصُولُ الفِقْه</div></a>
-        <a href="https://sual-seven.vercel.app/discipline/sarf" target="_blank" class="discipline-card"><div class="discipline-icon">🔤</div><div class="discipline-name">Sarf</div><div class="discipline-arabic">الصَّرْف</div></a>
-        <a href="https://sual-seven.vercel.app/discipline/nahw" target="_blank" class="discipline-card"><div class="discipline-icon">📝</div><div class="discipline-name">Nahw</div><div class="discipline-arabic">النَّحْو</div></a>
-        <a href="https://sual-seven.vercel.app/discipline/tafseer" target="_blank" class="discipline-card"><div class="discipline-icon">📖</div><div class="discipline-name">Tafseer</div><div class="discipline-arabic">التَّفْسِير</div></a>
+    <div class="inner">
+      <span class="tag">Disciplines</span>
+      <h2 class="sec-title">Seven Islamic Sciences</h2>
+      <p class="sec-sub">Each discipline treated with the depth it deserves — a serious introduction to the classical tradition.</p>
+      <div class="disc-grid">
+        <a href="https://sual-seven.vercel.app//discipline/fiqh" target="_blank" class="disc-card"><div class="disc-icon">⚖️</div><div class="disc-name">Fiqh</div><div class="disc-arabic">الفِقْه</div></a>
+        <a href="https://sual-seven.vercel.app//discipline/seerah" target="_blank" class="disc-card"><div class="disc-icon">🌙</div><div class="disc-name">Seerah</div><div class="disc-arabic">السِّيرَة</div></a>
+        <a href="https://sual-seven.vercel.app//discipline/arabiyyah" target="_blank" class="disc-card"><div class="disc-icon">✍️</div><div class="disc-name">Arabiyyah</div><div class="disc-arabic">العَرَبِيَّة</div></a>
+        <a href="https://sual-seven.vercel.app//discipline/usul" target="_blank" class="disc-card"><div class="disc-icon">📐</div><div class="disc-name">Usul al-Fiqh</div><div class="disc-arabic">أُصُولُ الفِقْه</div></a>
+        <a href="https://sual-seven.vercel.app//discipline/sarf" target="_blank" class="disc-card"><div class="disc-icon">🔤</div><div class="disc-name">Sarf</div><div class="disc-arabic">الصَّرْف</div></a>
+        <a href="https://sual-seven.vercel.app//discipline/nahw" target="_blank" class="disc-card"><div class="disc-icon">📝</div><div class="disc-name">Nahw</div><div class="disc-arabic">النَّحْو</div></a>
+        <a href="https://sual-seven.vercel.app//discipline/tafseer" target="_blank" class="disc-card"><div class="disc-icon">📖</div><div class="disc-name">Tafseer</div><div class="disc-arabic">التَّفْسِير</div></a>
       </div>
     </div>
   </section>
 
   <!-- WHY -->
   <section class="why" id="why">
-    <div class="section-inner">
-      <span class="section-tag">Why Sual</span>
-      <h2 class="section-title">Built on classical scholarship</h2>
-      <p class="section-sub">Sual is not another generic Islamic app. Every piece of content is grounded in the classical tradition.</p>
+    <div class="inner">
+      <span class="tag">Why Sual</span>
+      <h2 class="sec-title">Built on classical scholarship</h2>
+      <p class="sec-sub">Sual is not another generic Islamic app. Every piece of content is grounded in the classical tradition.</p>
       <div class="why-grid">
-        <div class="why-item"><div class="why-num">01</div><div><div class="why-content-title">Primary Source Citations</div><div class="why-content-desc">Every answer cites its classical source — from Sahih al-Bukhari and Sahih Muslim to Ibn Hisham, al-Nawawi, Ibn Hajar, and al-Shatibi.</div></div></div>
-        <div class="why-item"><div class="why-num">02</div><div><div class="why-content-title">Scholarly Voice</div><div class="why-content-desc">Content is written at the level of a serious student of knowledge — not simplified to the point of distortion.</div></div></div>
-        <div class="why-item"><div class="why-num">03</div><div><div class="why-content-title">Arabic-First</div><div class="why-content-desc">Arabic terminology is preserved throughout — with full tashkeel, transliteration, and linguistic analysis.</div></div></div>
-        <div class="why-item"><div class="why-num">04</div><div><div class="why-content-title">Seven Sciences Together</div><div class="why-content-desc">No other free app covers Fiqh, Seerah, Arabiyyah, Usul al-Fiqh, Sarf, Nahw, and Tafseer at this level of depth.</div></div></div>
-        <div class="why-item"><div class="why-num">05</div><div><div class="why-content-title">Completely Free</div><div class="why-content-desc">No ads, no paywalls, no subscription. Knowledge of the Deen belongs to everyone.</div></div></div>
-        <div class="why-item"><div class="why-num">06</div><div><div class="why-content-title">Works Offline</div><div class="why-content-desc">Install it on your phone and study without an internet connection. Your progress is saved locally.</div></div></div>
+        <div class="why-item"><div class="why-num">01</div><div><div class="why-title">Primary Source Citations</div><div class="why-desc">Every answer cites its classical source — from Sahih al-Bukhari and Sahih Muslim to Ibn Hisham, al-Nawawi, Ibn Hajar, and al-Shatibi.</div></div></div>
+        <div class="why-item"><div class="why-num">02</div><div><div class="why-title">Scholarly Voice</div><div class="why-desc">Content written at the level of a serious student of knowledge — not simplified to the point of distortion.</div></div></div>
+        <div class="why-item"><div class="why-num">03</div><div><div class="why-title">Arabic-First</div><div class="why-desc">Arabic terminology preserved throughout — with full tashkeel, transliteration, and linguistic analysis.</div></div></div>
+        <div class="why-item"><div class="why-num">04</div><div><div class="why-title">Seven Sciences Together</div><div class="why-desc">No other free app covers Fiqh, Seerah, Arabiyyah, Usul al-Fiqh, Sarf, Nahw, and Tafseer at this depth.</div></div></div>
+        <div class="why-item"><div class="why-num">05</div><div><div class="why-title">Completely Free</div><div class="why-desc">No ads, no paywalls, no subscription. Knowledge of the Deen belongs to everyone.</div></div></div>
+        <div class="why-item"><div class="why-num">06</div><div><div class="why-title">Works Offline</div><div class="why-desc">Install it on your phone and study without an internet connection. Progress saved locally.</div></div></div>
       </div>
     </div>
   </section>
+
   <!-- WAITLIST -->
   <section class="waitlist" id="waitlist">
-    <div class="section-inner">
-      <span class="section-tag">Waitlist</span>
-      <h2 class="section-title">Be the first to know</h2>
-      <p class="section-sub">Join the waitlist and get notified the moment new features, content, and updates drop on Sual.</p>
+    <div class="inner">
+      <span class="tag">Waitlist</span>
+      <h2 class="sec-title">Be the first to know</h2>
+      <p class="sec-sub">Join the waitlist and get notified the moment new features, content, and updates drop on Sual.</p>
       <div class="waitlist-card">
         <div class="waitlist-stats">
-          <div class="waitlist-stat">
-            <span class="waitlist-stat-num">7,000+</span>
-            <span class="waitlist-stat-label">Community members</span>
-          </div>
-          <div class="waitlist-stat-divider"></div>
-          <div class="waitlist-stat">
-            <span class="waitlist-stat-num">Free</span>
-            <span class="waitlist-stat-label">Always and forever</span>
-          </div>
-          <div class="waitlist-stat-divider"></div>
-          <div class="waitlist-stat">
-            <span class="waitlist-stat-num">7</span>
-            <span class="waitlist-stat-label">Islamic sciences</span>
-          </div>
+          <div class="waitlist-stat"><span class="waitlist-stat-num">7,000+</span><span class="waitlist-stat-label">Community members</span></div>
+          <div class="waitlist-divider"></div>
+          <div class="waitlist-stat"><span class="waitlist-stat-num">Free</span><span class="waitlist-stat-label">Always and forever</span></div>
+          <div class="waitlist-divider"></div>
+          <div class="waitlist-stat"><span class="waitlist-stat-num">7</span><span class="waitlist-stat-label">Islamic sciences</span></div>
         </div>
-        <div class="waitlist-form-wrapper">
-          
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdRT2qg71V_r0m68BOgxrxW92TRQ0XgqQPbMaBPITjyr6rPOw/viewform" target="_blank" class="waitlist-btn">🌙 Join the Waitlist</a>
-          </a>
+        <div class="waitlist-form">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdRT2qg71V_r0m68BOgxrxW92TRQ0XgqQPbMaBPITjyr6rPOw/viewform" target="_blank" class="waitlist-btn">🌙 Join the Waitlist</a>
           <p class="waitlist-note">No spam. Just meaningful updates on Sual.</p>
         </div>
       </div>
     </div>
   </section>
+
   <!-- COMMUNITY -->
   <section class="community" id="community">
-    <div class="section-inner">
-      <span class="section-tag" style="background: rgba(255,255,255,0.15); color: var(--pastel);">Community</span>
-      <h2 class="section-title">Join the Sual Community</h2>
-      <p class="section-sub">Daily Islamic knowledge questions, discussions, and updates — delivered to your WhatsApp. Over 7,000 young adults learning together.</p>
+    <div class="inner">
+      <span class="tag">Community</span>
+      <h2 class="sec-title">Join the Sual Community</h2>
+      <p class="sec-sub">Daily Islamic knowledge questions, discussions, and updates — delivered to your WhatsApp. Over 7,000 young adults learning together.</p>
       <div class="community-actions">
         <a href="https://whatsapp.com/channel/0029Vb8gbnB5PO0ysEFozQ46" target="_blank" class="btn-white">💬 Join WhatsApp Channel</a>
         <a href="https://sual-seven.vercel.app/" target="_blank" class="btn-outline-white">Open the App →</a>
@@ -962,22 +488,22 @@
   <footer>
     <div class="footer-inner">
       <div>
-        <div class="footer-brand-arabic">سُؤَال</div>
-        <p class="footer-brand-tagline">Your companion for the Islamic sciences — ask, learn, and test your knowledge in the classical tradition.</p>
+        <div class="footer-arabic">سُؤَال</div>
+        <p class="footer-tagline">Your companion for the Islamic sciences — ask, learn, and test your knowledge in the classical tradition.</p>
         <div class="footer-social">
-          <a href="https://x.com/ask_sual" target="_blank" class="footer-social-link">𝕏 @ask_sual</a>
-          <a href="https://whatsapp.com/channel/0029Vb8gbnB5PO0ysEFozQ46" target="_blank" class="footer-social-link">💬 WhatsApp</a>
+          <a href="https://x.com/use_sual" target="_blank">𝕏 @use_sual</a>
+          <a href="https://whatsapp.com/channel/0029Vb8gbnB5PO0ysEFozQ46" target="_blank">💬 WhatsApp</a>
         </div>
       </div>
       <div class="footer-links">
-        <a href="https://sual-seven.vercel.app/" target="_blank" class="footer-link">Open App</a>
-        <a href="#features" class="footer-link">Features</a>
-        <a href="#disciplines" class="footer-link">Disciplines</a>
-        <a href="#community" class="footer-link">Community</a>
-        <a href="https://whatsapp.com/channel/0029Vb8gbnB5PO0ysEFozQ46" target="_blank" class="footer-social-link">WhatsApp Channel</a>
+        <a href="https://sual-seven.vercel.app/" target="_blank">Open App</a>
+        <a href="#features">Features</a>
+        <a href="#disciplines">Disciplines</a>
+        <a href="#waitlist">Waitlist</a>
+        <a href="#community">Community</a>
       </div>
     </div>
-    <div class="footer-copy">© 2026 Sual | سُؤَال — Built for the students of Islamic knowledge.</div>
+    <div class="footer-copy">© 2026 Sual | سُؤَال — Built for the students of Islamic knowledge. Free forever.</div>
   </footer>
 
   <script>
@@ -986,6 +512,16 @@
         document.getElementById('splash').classList.add('hidden')
       }, 2400)
     })
+
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open')
+      document.getElementById('hamburger').classList.toggle('open')
+    }
+
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open')
+      document.getElementById('hamburger').classList.remove('open')
+    }
   </script>
 
 </body>
