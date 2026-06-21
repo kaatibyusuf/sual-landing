@@ -386,12 +386,12 @@
   <!-- STATS -->
   <div class="stats">
     <div class="stats-inner">
-      <div><div class="stat-num">350+</div><div class="stat-label">Scholarly Q&amp;A Entries</div></div>
-      <div><div class="stat-num">350+</div><div class="stat-label">Quiz Questions</div></div>
-      <div><div class="stat-num">7</div><div class="stat-label">Islamic Disciplines</div></div>
-      <div><div class="stat-num">30</div><div class="stat-label">Duas &amp; Adhkar</div></div>
-      <div><div class="stat-num">10</div><div class="stat-label">Stories of the Salaf</div></div>
-      <div><div class="stat-num">10</div><div class="stat-label">Tajweed Sections</div></div>
+      <div><div class="stat-num" id="stat1">350+</div><div class="stat-label">Scholarly Q&amp;A Entries</div></div>
+      <div><div class="stat-num" id="stat2">350+</div><div class="stat-label">Quiz Questions</div></div>
+      <div><div class="stat-num" id="stat3">7</div><div class="stat-label">Islamic Disciplines</div></div>
+      <div><div class="stat-num" id="stat4">30</div><div class="stat-label">Duas &amp; Adhkar</div></div>
+      <div><div class="stat-num" id="stat5">10</div><div class="stat-label">Stories of the Salaf</div></div>
+      <div><div class="stat-num" id="stat6">10</div><div class="stat-label">Tajweed Sections</div></div>
     </div>
   </div>
 
@@ -507,11 +507,67 @@
   </footer>
 
   <script>
+    // Splash
     window.addEventListener('load', function () {
       setTimeout(function () {
         document.getElementById('splash').classList.add('hidden')
       }, 2400)
     })
+
+    // Hamburger
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open')
+      document.getElementById('hamburger').classList.toggle('open')
+    }
+
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open')
+      document.getElementById('hamburger').classList.remove('open')
+    }
+
+    // Animated counters
+    function animateCounter(el, target, duration, suffix) {
+      let start = 0
+      const step = target / (duration / 16)
+      const timer = setInterval(function () {
+        start += step
+        if (start >= target) {
+          start = target
+          clearInterval(timer)
+        }
+        const display = target >= 1000
+          ? (Math.floor(start / 100) * 100).toLocaleString()
+          : Math.floor(start)
+        el.textContent = display + suffix
+      }, 16)
+    }
+
+    function runCounters() {
+      const counters = [
+        { id: 'stat1', target: 350, suffix: '+' },
+        { id: 'stat2', target: 350, suffix: '+' },
+        { id: 'stat3', target: 7,   suffix: ''  },
+        { id: 'stat4', target: 30,  suffix: ''  },
+        { id: 'stat5', target: 10,  suffix: ''  },
+        { id: 'stat6', target: 10,  suffix: ''  },
+      ]
+      counters.forEach(function (c) {
+        const el = document.getElementById(c.id)
+        if (el) animateCounter(el, c.target, 1800, c.suffix)
+      })
+    }
+
+    // Trigger when stats section enters viewport
+    const statsSection = document.querySelector('.stats')
+    let counted = false
+    const observer = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting && !counted) {
+        counted = true
+        runCounters()
+      }
+    }, { threshold: 0.3 })
+    if (statsSection) observer.observe(statsSection)
+  </script>
 
     function toggleMenu() {
       document.getElementById('mobileMenu').classList.toggle('open')
