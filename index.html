@@ -294,6 +294,179 @@
     .hero-inner > *:nth-child(4) { animation-delay: 0.4s; }
     .hero-inner > *:nth-child(5) { animation-delay: 0.5s; }
     .hero-inner > *:nth-child(6) { animation-delay: 0.6s; }
+
+    /* ── CLOCK ── */
+    .clock-section { background: linear-gradient(160deg, #062f4a, #094570); padding: 80px 48px; }
+    .clock-section .tag { background: rgba(255,255,255,0.15); color: var(--pastel); }
+    .clock-section .sec-title { color: var(--white); font-family: var(--arabic); font-size: clamp(1.8rem,4vw,2.8rem); }
+    .clock-section .sec-sub { color: rgba(255,255,255,0.6); }
+
+    .clock-wrapper {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    /* Clock face */
+    .clock-face-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .clock-face {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, #0d5a8a, #062f4a);
+      box-shadow:
+        0 0 0 6px rgba(133,204,255,0.15),
+        0 0 0 12px rgba(9,69,112,0.2),
+        0 24px 60px rgba(0,0,0,0.5),
+        inset 0 2px 4px rgba(255,255,255,0.1);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .clock-svg { width: 100%; height: 100%; }
+
+    /* Panel */
+    .clock-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .clock-time-display {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 20px 24px;
+    }
+
+    .clock-time {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: 0.05em;
+      line-height: 1;
+      margin-bottom: 6px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .clock-date {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 2px;
+    }
+
+    .clock-hijri {
+      font-family: var(--arabic);
+      font-size: 1rem;
+      color: var(--pastel);
+    }
+
+    .clock-next {
+      background: rgba(133,204,255,0.1);
+      border: 1px solid rgba(133,204,255,0.25);
+      border-radius: 16px;
+      padding: 18px 24px;
+    }
+
+    .clock-next-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .clock-next-name {
+      font-family: var(--arabic);
+      font-size: 1.6rem;
+      color: var(--pastel);
+      margin-bottom: 4px;
+    }
+
+    .clock-next-countdown {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Prayer list */
+    .clock-prayers {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .prayer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .prayer-row.active {
+      background: rgba(133,204,255,0.15);
+      border-color: rgba(133,204,255,0.4);
+      box-shadow: 0 0 12px rgba(133,204,255,0.15);
+    }
+
+    .prayer-row.next {
+      background: rgba(133,204,255,0.08);
+      border-color: rgba(133,204,255,0.2);
+    }
+
+    .prayer-arabic {
+      font-family: var(--arabic);
+      font-size: 1.1rem;
+      color: var(--white);
+    }
+
+    .prayer-row.active .prayer-arabic { color: var(--pastel); }
+
+    .prayer-name-en {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.45);
+      font-weight: 500;
+    }
+
+    .prayer-time {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.8);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .prayer-row.active .prayer-time { color: var(--pastel); }
+
+    .prayer-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 100px;
+      background: var(--pastel);
+      color: var(--regal);
+    }
+
+    @media (max-width: 900px) {
+      .clock-wrapper { grid-template-columns: 1fr; justify-items: center; }
+      .clock-panel { width: 100%; max-width: 400px; }
+    }
+
+    @media (max-width: 768px) {
+      .clock-section { padding: 60px 20px; }
+      .clock-face { width: 240px; height: 240px; }
+    }
   </style>
 </head>
 <body>
@@ -382,7 +555,63 @@
       </div>
     </div>
   </div>
+  <!-- CLOCK -->
+  <section class="clock-section" id="clock">
+    <div class="inner">
+      <span class="tag">Prayer Times</span>
+      <h2 class="sec-title">مَوَاقِيتُ الصَّلَاة</h2>
+      <p class="sec-sub">Lagos, Nigeria — West Africa Time (WAT, UTC+1)</p>
+      <div class="clock-wrapper">
 
+        <!-- Clock Face -->
+        <div class="clock-face-wrapper">
+          <div class="clock-face" id="clockFace">
+            <svg viewBox="0 0 300 300" class="clock-svg" id="clockSvg">
+              <!-- Outer ring -->
+              <circle cx="150" cy="150" r="145" fill="none" stroke="#094570" stroke-width="3" opacity="0.2"/>
+              <circle cx="150" cy="150" r="135" fill="rgba(9,69,112,0.04)" stroke="#094570" stroke-width="1.5" opacity="0.3"/>
+
+              <!-- Hour markers -->
+              <g id="hourMarkers"></g>
+
+              <!-- Salah arcs -->
+              <g id="salahArcs"></g>
+
+              <!-- Salah labels -->
+              <g id="salahLabels"></g>
+
+              <!-- Hands -->
+              <line id="hourHand"   x1="150" y1="150" x2="150" y2="80"  stroke="#094570" stroke-width="5" stroke-linecap="round"/>
+              <line id="minuteHand" x1="150" y1="150" x2="150" y2="55"  stroke="#1a6fa8" stroke-width="3" stroke-linecap="round"/>
+              <line id="secondHand" x1="150" y1="150" x2="150" y2="45"  stroke="#85CCFF" stroke-width="1.5" stroke-linecap="round"/>
+
+              <!-- Center dot -->
+              <circle cx="150" cy="150" r="6" fill="#094570"/>
+              <circle cx="150" cy="150" r="3" fill="#85CCFF"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Salah times panel -->
+        <div class="clock-panel">
+          <div class="clock-time-display">
+            <div class="clock-time" id="clockTime">00:00:00</div>
+            <div class="clock-date" id="clockDate">—</div>
+            <div class="clock-hijri" id="clockHijri">—</div>
+          </div>
+
+          <div class="clock-next">
+            <div class="clock-next-label">Next Prayer</div>
+            <div class="clock-next-name" id="nextPrayerName">—</div>
+            <div class="clock-next-countdown" id="nextCountdown">—</div>
+          </div>
+
+          <div class="clock-prayers" id="prayerList"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
   <!-- STATS -->
   <div class="stats">
     <div class="stats-inner">
@@ -567,6 +796,278 @@
       }
     }, { threshold: 0.3 })
     if (statsSection) observer.observe(statsSection)
+
+    // ── ISLAMIC CLOCK ──
+    // Lagos coordinates
+    const LAT = 6.5244
+    const LNG = 3.3792
+    const TZ_OFFSET = 1 // WAT UTC+1
+
+    const PRAYERS = [
+      { key: 'fajr',    arabic: 'الفَجْر',   en: 'Fajr'    },
+      { key: 'sunrise', arabic: 'الشُّرُوق', en: 'Sunrise'  },
+      { key: 'dhuhr',   arabic: 'الظُّهْر',  en: 'Dhuhr'   },
+      { key: 'asr',     arabic: 'العَصْر',   en: 'Asr'     },
+      { key: 'maghrib', arabic: 'المَغْرِب', en: 'Maghrib'  },
+      { key: 'isha',    arabic: 'العِشَاء',  en: 'Isha'    },
+    ]
+
+    function calcPrayerTimes(date) {
+      const D2R = Math.PI / 180
+      const R2D = 180 / Math.PI
+
+      const year = date.getFullYear()
+      const month = date.getMonth() + 1
+      const day = date.getDate()
+
+      const JD = Math.floor(365.25 * (year + 4716)) +
+                 Math.floor(30.6001 * (month + 1)) +
+                 day - 1524.5
+
+      const T = (JD - 2451545) / 36525
+      const L0 = 280.46646 + 36000.76983 * T
+      const M = (357.52911 + 35999.05029 * T) * D2R
+      const C = (1.914602 - 0.004817 * T) * Math.sin(M) +
+                0.019993 * Math.sin(2 * M)
+      const sunLon = (L0 + C) * D2R
+      const obliq = (23.439291 - 0.013004 * T) * D2R
+      const RA = Math.atan2(Math.cos(obliq) * Math.sin(sunLon), Math.cos(sunLon)) * R2D
+      const decl = Math.asin(Math.sin(obliq) * Math.sin(sunLon))
+      const eqTime = (L0 - 0.0057183 - RA + (0) * 0) * 4
+
+      const noon = 12 - eqTime / 60 - LNG / 15 + TZ_OFFSET
+
+      function hourAngle(angle) {
+        const cosH = (Math.sin(angle * D2R) - Math.sin(LAT * D2R) * Math.sin(decl)) /
+                     (Math.cos(LAT * D2R) * Math.cos(decl))
+        if (Math.abs(cosH) > 1) return null
+        return Math.acos(cosH) * R2D / 15
+      }
+
+      function asrAngle(factor) {
+        const x = factor + Math.tan(Math.abs(LAT * D2R - decl))
+        return Math.atan(1 / x) * R2D
+      }
+
+      const fajrH   = hourAngle(-18)
+      const sunriseH = hourAngle(-0.833)
+      const asrH    = hourAngle(-asrAngle(1))
+      const maghribH = hourAngle(-0.833)
+      const ishaH   = hourAngle(-17)
+
+      return {
+        fajr:    fajrH    ? noon - fajrH    : null,
+        sunrise: sunriseH ? noon - sunriseH : null,
+        dhuhr:   noon + 0.033,
+        asr:     asrH     ? noon + Math.abs(noon - (noon - asrH)) : null,
+        maghrib: maghribH ? noon + maghribH : null,
+        isha:    ishaH    ? noon + ishaH    : null,
+      }
+    }
+
+    function decimalToTime(dec) {
+      if (dec === null) return '--:--'
+      let h = Math.floor(dec) % 24
+      let m = Math.round((dec - Math.floor(dec)) * 60)
+      if (m === 60) { h++; m = 0 }
+      return String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0')
+    }
+
+    function decimalToMinutes(dec) {
+      if (dec === null) return null
+      return Math.round(dec * 60) % (24 * 60)
+    }
+
+    function toHijri(date) {
+      const HIJRI_EPOCH = 1948439.5
+      const jd = Math.floor((14 - (date.getMonth()+1)) / 12)
+      const y = date.getFullYear() + 4800 - jd
+      const m = (date.getMonth()+1) + 12 * jd - 3
+      let jdn = date.getDate() + Math.floor((153*m+2)/5) + 365*y +
+                Math.floor(y/4) - Math.floor(y/100) + Math.floor(y/400) - 32045
+      let l = jdn - 1948440 + 10632
+      const n = Math.floor((l-1)/10631)
+      l = l - 10631*n + 354
+      const j = Math.floor((10985-l)/5316)*Math.floor((50*l)/17719) +
+                Math.floor(l/5670)*Math.floor((43*l)/15238)
+      l = l - Math.floor((30-j)/15)*Math.floor((17719*j)/50) -
+          Math.floor(j/16)*Math.floor((15238*j)/43) + 29
+      const hYear = 30*n + j - 29
+      const hMonth = Math.floor((59*l-1)/1767)
+      const hDay = l - Math.floor((29*hMonth+1)/2)
+      const MONTHS = ['مُحَرَّم','صَفَر','رَبِيعُ الأَوَّل','رَبِيعُ الآخِر',
+        'جُمَادَى الأُولَى','جُمَادَى الآخِرَة','رَجَب','شَعْبَان',
+        'رَمَضَان','شَوَّال','ذُو القَعْدَة','ذُو الحِجَّة']
+      return `${hDay} ${MONTHS[hMonth-1]} ${hYear} هـ`
+    }
+
+    // Draw clock SVG
+    function drawClockFace(prayerTimes) {
+      const markersEl = document.getElementById('hourMarkers')
+      const arcsEl    = document.getElementById('salahArcs')
+      const labelsEl  = document.getElementById('salahLabels')
+      if (!markersEl) return
+
+      const cx = 150, cy = 150, r = 125
+
+      // Hour markers
+      let html = ''
+      for (let i = 0; i < 12; i++) {
+        const angle = (i * 30 - 90) * Math.PI / 180
+        const x1 = cx + (r - 8) * Math.cos(angle)
+        const y1 = cy + (r - 8) * Math.sin(angle)
+        const x2 = cx + r * Math.cos(angle)
+        const y2 = cy + r * Math.sin(angle)
+        html += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="rgba(133,204,255,0.4)" stroke-width="${i % 3 === 0 ? 2.5 : 1}"/>`
+      }
+      markersEl.innerHTML = html
+
+      // Salah arcs and labels
+      const prayerAngles = PRAYERS.map(p => {
+        const dec = prayerTimes[p.key]
+        if (!dec) return null
+        const totalMin = decimalToMinutes(dec)
+        return (totalMin / (12 * 60)) * 360 - 90
+      })
+
+      let arcsHtml = '', labelsHtml = ''
+      const colors = ['#85CCFF','#ffd700','#7ecfff','#85CCFF','#ff9f43','#c8a2ff']
+
+      PRAYERS.forEach((p, i) => {
+        const angle = prayerAngles[i]
+        if (angle === null) return
+        const rad = angle * Math.PI / 180
+        const lx = cx + (r - 28) * Math.cos(rad)
+        const ly = cy + (r - 28) * Math.sin(rad)
+
+        // Dot on clock ring
+        const dx = cx + r * Math.cos(rad)
+        const dy = cy + r * Math.sin(rad)
+        arcsHtml += `<circle cx="${dx}" cy="${dy}" r="4" fill="${colors[i]}" opacity="0.9"/>`
+
+        // Label
+        labelsHtml += `
+          <text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle"
+            font-family="Amiri, serif" font-size="10" fill="${colors[i]}" opacity="0.9">
+            ${p.arabic}
+          </text>`
+      })
+
+      arcsEl.innerHTML = arcsHtml
+      labelsEl.innerHTML = labelsHtml
+    }
+
+    function updateClock() {
+      const now = new Date()
+      const h = now.getHours()
+      const m = now.getMinutes()
+      const s = now.getSeconds()
+
+      // Update time display
+      const timeEl = document.getElementById('clockTime')
+      if (timeEl) timeEl.textContent =
+        String(h).padStart(2,'0') + ':' +
+        String(m).padStart(2,'0') + ':' +
+        String(s).padStart(2,'0')
+
+      // Date
+      const dateEl = document.getElementById('clockDate')
+      if (dateEl) dateEl.textContent = now.toLocaleDateString('en-GB', {
+        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+      })
+
+      // Hijri
+      const hijriEl = document.getElementById('clockHijri')
+      if (hijriEl) hijriEl.textContent = toHijri(now)
+
+      // Rotate hands
+      const secDeg  = s * 6
+      const minDeg  = m * 6 + s * 0.1
+      const hourDeg = (h % 12) * 30 + m * 0.5
+
+      function rotateHand(id, deg) {
+        const el = document.getElementById(id)
+        if (!el) return
+        const rad = (deg - 90) * Math.PI / 180
+        const cx = 150, cy = 150
+        const lengths = { hourHand: 70, minuteHand: 95, secondHand: 105 }
+        const len = lengths[id]
+        el.setAttribute('x2', cx + len * Math.cos(rad))
+        el.setAttribute('y2', cy + len * Math.sin(rad))
+      }
+
+      rotateHand('hourHand', hourDeg)
+      rotateHand('minuteHand', minDeg)
+      rotateHand('secondHand', secDeg)
+
+      // Prayer times
+      const pTimes = calcPrayerTimes(now)
+      const nowMin = h * 60 + m
+
+      let nextPrayer = null
+      let nextMin = Infinity
+      let currentPrayer = null
+
+      const prayerMins = PRAYERS.map(p => ({
+        ...p,
+        minutes: decimalToMinutes(pTimes[p.key]),
+        timeStr: decimalToTime(pTimes[p.key]),
+      }))
+
+      // Find current and next
+      prayerMins.forEach((p, i) => {
+        if (p.minutes === null) return
+        if (p.minutes <= nowMin) currentPrayer = p
+        if (p.minutes > nowMin && p.minutes < nextMin) {
+          nextMin = p.minutes
+          nextPrayer = p
+        }
+      })
+
+      if (!nextPrayer) nextPrayer = prayerMins[0] // wrap to Fajr next day
+
+      // Countdown
+      const countdownEl = document.getElementById('nextCountdown')
+      const nextNameEl  = document.getElementById('nextPrayerName')
+      if (nextPrayer && countdownEl && nextNameEl) {
+        nextNameEl.textContent = nextPrayer.arabic
+        let diff = nextPrayer.minutes - nowMin
+        if (diff < 0) diff += 24 * 60
+        const ch = Math.floor(diff / 60)
+        const cm = diff % 60
+        countdownEl.textContent = `in ${ch}h ${String(cm).padStart(2,'0')}m`
+      }
+
+      // Render prayer list
+      const listEl = document.getElementById('prayerList')
+      if (listEl) {
+        listEl.innerHTML = prayerMins.map(p => {
+          const isActive  = currentPrayer && p.key === currentPrayer.key
+          const isNext    = nextPrayer && p.key === nextPrayer.key
+          return `
+            <div class="prayer-row ${isActive ? 'active' : ''} ${isNext && !isActive ? 'next' : ''}">
+              <div>
+                <div class="prayer-arabic">${p.arabic}</div>
+                <div class="prayer-name-en">${p.en}</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                ${isActive ? '<span class="prayer-badge">Now</span>' : ''}
+                ${isNext && !isActive ? '<span class="prayer-badge" style="background:rgba(133,204,255,0.2);color:var(--pastel);">Next</span>' : ''}
+                <div class="prayer-time">${p.timeStr}</div>
+              </div>
+            </div>`
+        }).join('')
+      }
+
+      // Draw face once
+      if (!window._clockDrawn) {
+        drawClockFace(pTimes)
+        window._clockDrawn = true
+      }
+    }
+
+    updateClock()
+    setInterval(updateClock, 1000)
   </script>
 
     function toggleMenu() {
