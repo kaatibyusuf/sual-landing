@@ -487,6 +487,7 @@
       <span class="nav-logo-latin">Sual</span>
     </a>
     <ul class="nav-links">
+      <li><a href="#clock">Prayer Times</a></li>
       <li><a href="#features">Features</a></li>
       <li><a href="#disciplines">Disciplines</a></li>
       <li><a href="#why">Why Sual</a></li>
@@ -501,6 +502,7 @@
 
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
+    <a href="#clock" onclick="closeMenu()">Prayer Times</a>
     <a href="#features" onclick="closeMenu()">Features</a>
     <a href="#disciplines" onclick="closeMenu()">Disciplines</a>
     <a href="#why" onclick="closeMenu()">Why Sual</a>
@@ -760,10 +762,7 @@
       const step = target / (duration / 16)
       const timer = setInterval(function () {
         start += step
-        if (start >= target) {
-          start = target
-          clearInterval(timer)
-        }
+        if (start >= target) { start = target; clearInterval(timer) }
         const display = target >= 1000
           ? (Math.floor(start / 100) * 100).toLocaleString()
           : Math.floor(start)
@@ -786,22 +785,17 @@
       })
     }
 
-    // Trigger when stats section enters viewport
     const statsSection = document.querySelector('.stats')
     let counted = false
     const observer = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting && !counted) {
-        counted = true
-        runCounters()
-      }
+      if (entries[0].isIntersecting && !counted) { counted = true; runCounters() }
     }, { threshold: 0.3 })
     if (statsSection) observer.observe(statsSection)
 
-    // ── ISLAMIC CLOCK ──
-    // Lagos coordinates
+    // Islamic Clock
     const LAT = 6.5244
     const LNG = 3.3792
-    const TZ_OFFSET = 1 // WAT UTC+1
+    const TZ_OFFSET = 1
 
     const PRAYERS = [
       { key: 'fajr',    arabic: 'الفَجْر',   en: 'Fajr'    },
@@ -815,45 +809,38 @@
     function calcPrayerTimes(date) {
       const D2R = Math.PI / 180
       const R2D = 180 / Math.PI
-
       const year = date.getFullYear()
       const month = date.getMonth() + 1
       const day = date.getDate()
-
-      const JD = Math.floor(365.25 * (year + 4716)) +
-                 Math.floor(30.6001 * (month + 1)) +
-                 day - 1524.5
-
+      const JD = Math.floor(365.25*(year+4716)) + Math.floor(30.6001*(month+1)) + day - 1524.5
       const T = (JD - 2451545) / 36525
       const L0 = 280.46646 + 36000.76983 * T
       const M = (357.52911 + 35999.05029 * T) * D2R
-      const C = (1.914602 - 0.004817 * T) * Math.sin(M) +
-                0.019993 * Math.sin(2 * M)
+      const C = (1.914602 - 0.004817*T) * Math.sin(M) + 0.019993 * Math.sin(2*M)
       const sunLon = (L0 + C) * D2R
-      const obliq = (23.439291 - 0.013004 * T) * D2R
-      const RA = Math.atan2(Math.cos(obliq) * Math.sin(sunLon), Math.cos(sunLon)) * R2D
-      const decl = Math.asin(Math.sin(obliq) * Math.sin(sunLon))
-      const eqTime = (L0 - 0.0057183 - RA + (0) * 0) * 4
-
-      const noon = 12 - eqTime / 60 - LNG / 15 + TZ_OFFSET
+      const obliq = (23.439291 - 0.013004*T) * D2R
+      const RA = Math.atan2(Math.cos(obliq)*Math.sin(sunLon), Math.cos(sunLon)) * R2D
+      const decl = Math.asin(Math.sin(obliq)*Math.sin(sunLon))
+      const eqTime = (L0 - 0.0057183 - RA) * 4
+      const noon = 12 - eqTime/60 - LNG/15 + TZ_OFFSET
 
       function hourAngle(angle) {
-        const cosH = (Math.sin(angle * D2R) - Math.sin(LAT * D2R) * Math.sin(decl)) /
-                     (Math.cos(LAT * D2R) * Math.cos(decl))
+        const cosH = (Math.sin(angle*D2R) - Math.sin(LAT*D2R)*Math.sin(decl)) /
+                     (Math.cos(LAT*D2R)*Math.cos(decl))
         if (Math.abs(cosH) > 1) return null
         return Math.acos(cosH) * R2D / 15
       }
 
       function asrAngle(factor) {
-        const x = factor + Math.tan(Math.abs(LAT * D2R - decl))
-        return Math.atan(1 / x) * R2D
+        const x = factor + Math.tan(Math.abs(LAT*D2R - decl))
+        return Math.atan(1/x) * R2D
       }
 
-      const fajrH   = hourAngle(-18)
+      const fajrH    = hourAngle(-18)
       const sunriseH = hourAngle(-0.833)
-      const asrH    = hourAngle(-asrAngle(1))
+      const asrH     = hourAngle(-asrAngle(1))
       const maghribH = hourAngle(-0.833)
-      const ishaH   = hourAngle(-17)
+      const ishaH    = hourAngle(-17)
 
       return {
         fajr:    fajrH    ? noon - fajrH    : null,
@@ -867,92 +854,83 @@
 
     function decimalToTime(dec) {
       if (dec === null) return '--:--'
-      let h = Math.floor(dec) % 24
-      let m = Math.round((dec - Math.floor(dec)) * 60)
-      if (m === 60) { h++; m = 0 }
+      let totalMins = Math.round(dec * 60)
+      totalMins = ((totalMins % (24 * 60)) + 24 * 60) % (24 * 60)
+      const h = Math.floor(totalMins / 60)
+      const m = totalMins % 60
       return String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0')
     }
 
     function decimalToMinutes(dec) {
       if (dec === null) return null
-      return Math.round(dec * 60) % (24 * 60)
+      let mins = Math.round(dec * 60)
+      mins = ((mins % (24 * 60)) + 24 * 60) % (24 * 60)
+      return mins
     }
 
     function toHijri(date) {
       const HIJRI_EPOCH = 1948439.5
-      const jd = Math.floor((14 - (date.getMonth()+1)) / 12)
-      const y = date.getFullYear() + 4800 - jd
-      const m = (date.getMonth()+1) + 12 * jd - 3
-      let jdn = date.getDate() + Math.floor((153*m+2)/5) + 365*y +
-                Math.floor(y/4) - Math.floor(y/100) + Math.floor(y/400) - 32045
-      let l = jdn - 1948440 + 10632
-      const n = Math.floor((l-1)/10631)
-      l = l - 10631*n + 354
-      const j = Math.floor((10985-l)/5316)*Math.floor((50*l)/17719) +
-                Math.floor(l/5670)*Math.floor((43*l)/15238)
-      l = l - Math.floor((30-j)/15)*Math.floor((17719*j)/50) -
-          Math.floor(j/16)*Math.floor((15238*j)/43) + 29
-      const hYear = 30*n + j - 29
-      const hMonth = Math.floor((59*l-1)/1767)
-      const hDay = l - Math.floor((29*hMonth+1)/2)
+      const GREG_EPOCH  = 1721425.5
+
+      function leapGreg(y) {
+        return (y%4===0) && (!(y%100===0)||(y%400===0))
+      }
+      function gregToJD(y, m, d) {
+        return GREG_EPOCH - 1 +
+          365*(y-1) + Math.floor((y-1)/4) - Math.floor((y-1)/100) + Math.floor((y-1)/400) +
+          Math.floor((367*m-362)/12 + (m<=2 ? 0 : leapGreg(y) ? -1 : -2) + d)
+      }
+      function hijriToJD(hy, hm, hd) {
+        return hd + Math.ceil(29.5*(hm-1)) + (hy-1)*354 +
+               Math.floor((3+11*hy)/30) + HIJRI_EPOCH - 1
+      }
+      function jdToHijri(jd) {
+        jd = Math.floor(jd) + 0.5
+        const year = Math.floor((30*(jd-HIJRI_EPOCH)+10646)/10631)
+        const month = Math.min(12, Math.ceil((jd-(29+hijriToJD(year,1,1)))/29.5)+1)
+        const day = jd - hijriToJD(year, month, 1) + 1
+        return { year, month, day: Math.floor(day) }
+      }
+
+      const jd = gregToJD(date.getFullYear(), date.getMonth()+1, date.getDate())
+      const h = jdToHijri(jd)
       const MONTHS = ['مُحَرَّم','صَفَر','رَبِيعُ الأَوَّل','رَبِيعُ الآخِر',
         'جُمَادَى الأُولَى','جُمَادَى الآخِرَة','رَجَب','شَعْبَان',
         'رَمَضَان','شَوَّال','ذُو القَعْدَة','ذُو الحِجَّة']
-      return `${hDay} ${MONTHS[hMonth-1]} ${hYear} هـ`
+      return h.day + ' ' + MONTHS[h.month-1] + ' ' + h.year + ' هـ'
     }
 
-    // Draw clock SVG
     function drawClockFace(prayerTimes) {
       const markersEl = document.getElementById('hourMarkers')
       const arcsEl    = document.getElementById('salahArcs')
       const labelsEl  = document.getElementById('salahLabels')
       if (!markersEl) return
-
       const cx = 150, cy = 150, r = 125
-
-      // Hour markers
       let html = ''
       for (let i = 0; i < 12; i++) {
-        const angle = (i * 30 - 90) * Math.PI / 180
-        const x1 = cx + (r - 8) * Math.cos(angle)
-        const y1 = cy + (r - 8) * Math.sin(angle)
-        const x2 = cx + r * Math.cos(angle)
-        const y2 = cy + r * Math.sin(angle)
-        html += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="rgba(133,204,255,0.4)" stroke-width="${i % 3 === 0 ? 2.5 : 1}"/>`
+        const angle = (i*30-90) * Math.PI/180
+        const x1 = cx + (r-8)*Math.cos(angle)
+        const y1 = cy + (r-8)*Math.sin(angle)
+        const x2 = cx + r*Math.cos(angle)
+        const y2 = cy + r*Math.sin(angle)
+        html += '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="rgba(133,204,255,0.4)" stroke-width="'+(i%3===0?2.5:1)+'"/>'
       }
       markersEl.innerHTML = html
-
-      // Salah arcs and labels
-      const prayerAngles = PRAYERS.map(p => {
-        const dec = prayerTimes[p.key]
-        if (!dec) return null
-        const totalMin = decimalToMinutes(dec)
-        return (totalMin / (12 * 60)) * 360 - 90
-      })
-
-      let arcsHtml = '', labelsHtml = ''
       const colors = ['#85CCFF','#ffd700','#7ecfff','#85CCFF','#ff9f43','#c8a2ff']
-
-      PRAYERS.forEach((p, i) => {
-        const angle = prayerAngles[i]
-        if (angle === null) return
-        const rad = angle * Math.PI / 180
-        const lx = cx + (r - 28) * Math.cos(rad)
-        const ly = cy + (r - 28) * Math.sin(rad)
-
-        // Dot on clock ring
-        const dx = cx + r * Math.cos(rad)
-        const dy = cy + r * Math.sin(rad)
-        arcsHtml += `<circle cx="${dx}" cy="${dy}" r="4" fill="${colors[i]}" opacity="0.9"/>`
-
-        // Label
-        labelsHtml += `
-          <text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle"
-            font-family="Amiri, serif" font-size="10" fill="${colors[i]}" opacity="0.9">
-            ${p.arabic}
-          </text>`
+      let arcsHtml = '', labelsHtml = ''
+      PRAYERS.forEach(function(p, i) {
+        const dec = prayerTimes[p.key]
+        if (!dec) return
+        const totalMin = decimalToMinutes(dec)
+        const angle = (totalMin/(12*60))*360 - 90
+        const rad = angle * Math.PI/180
+        const dx = cx + r*Math.cos(rad)
+        const dy = cy + r*Math.sin(rad)
+        const lx = cx + (r-26)*Math.cos(rad)
+        const ly = cy + (r-26)*Math.sin(rad)
+        arcsHtml += '<circle cx="'+dx+'" cy="'+dy+'" r="4" fill="'+colors[i]+'" opacity="0.9"/>'
+        labelsHtml += '<text x="'+lx+'" y="'+ly+'" text-anchor="middle" dominant-baseline="middle" font-family="Amiri,serif" font-size="10" fill="'+colors[i]+'" opacity="0.9">'+p.arabic+'</text>'
       })
-
       arcsEl.innerHTML = arcsHtml
       labelsEl.innerHTML = labelsHtml
     }
@@ -963,123 +941,79 @@
       const m = now.getMinutes()
       const s = now.getSeconds()
 
-      // Update time display
       const timeEl = document.getElementById('clockTime')
-      if (timeEl) timeEl.textContent =
-        String(h).padStart(2,'0') + ':' +
-        String(m).padStart(2,'0') + ':' +
-        String(s).padStart(2,'0')
+      if (timeEl) timeEl.textContent = String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')
 
-      // Date
       const dateEl = document.getElementById('clockDate')
-      if (dateEl) dateEl.textContent = now.toLocaleDateString('en-GB', {
-        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
-      })
+      if (dateEl) dateEl.textContent = now.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'})
 
-      // Hijri
       const hijriEl = document.getElementById('clockHijri')
       if (hijriEl) hijriEl.textContent = toHijri(now)
 
-      // Rotate hands
       const secDeg  = s * 6
       const minDeg  = m * 6 + s * 0.1
-      const hourDeg = (h % 12) * 30 + m * 0.5
+      const hourDeg = (h%12)*30 + m*0.5
 
       function rotateHand(id, deg) {
         const el = document.getElementById(id)
         if (!el) return
-        const rad = (deg - 90) * Math.PI / 180
+        const rad = (deg-90)*Math.PI/180
         const cx = 150, cy = 150
-        const lengths = { hourHand: 70, minuteHand: 95, secondHand: 105 }
-        const len = lengths[id]
-        el.setAttribute('x2', cx + len * Math.cos(rad))
-        el.setAttribute('y2', cy + len * Math.sin(rad))
+        const lengths = {hourHand:70, minuteHand:95, secondHand:105}
+        el.setAttribute('x2', cx + lengths[id]*Math.cos(rad))
+        el.setAttribute('y2', cy + lengths[id]*Math.sin(rad))
       }
 
       rotateHand('hourHand', hourDeg)
       rotateHand('minuteHand', minDeg)
       rotateHand('secondHand', secDeg)
 
-      // Prayer times
       const pTimes = calcPrayerTimes(now)
-      const nowMin = h * 60 + m
+      const nowMin = h*60 + m
+      let nextPrayer = null, nextMin = Infinity, currentPrayer = null
 
-      let nextPrayer = null
-      let nextMin = Infinity
-      let currentPrayer = null
-
-      const prayerMins = PRAYERS.map(p => ({
-        ...p,
-        minutes: decimalToMinutes(pTimes[p.key]),
-        timeStr: decimalToTime(pTimes[p.key]),
-      }))
-
-      // Find current and next
-      prayerMins.forEach((p, i) => {
-        if (p.minutes === null) return
-        if (p.minutes <= nowMin) currentPrayer = p
-        if (p.minutes > nowMin && p.minutes < nextMin) {
-          nextMin = p.minutes
-          nextPrayer = p
-        }
+      const prayerMins = PRAYERS.map(function(p) {
+        return { ...p, minutes: decimalToMinutes(pTimes[p.key]), timeStr: decimalToTime(pTimes[p.key]) }
       })
 
-      if (!nextPrayer) nextPrayer = prayerMins[0] // wrap to Fajr next day
+      prayerMins.forEach(function(p) {
+        if (p.minutes === null) return
+        if (p.minutes <= nowMin) currentPrayer = p
+        if (p.minutes > nowMin && p.minutes < nextMin) { nextMin = p.minutes; nextPrayer = p }
+      })
 
-      // Countdown
+      if (!nextPrayer) nextPrayer = prayerMins[0]
+
       const countdownEl = document.getElementById('nextCountdown')
       const nextNameEl  = document.getElementById('nextPrayerName')
       if (nextPrayer && countdownEl && nextNameEl) {
         nextNameEl.textContent = nextPrayer.arabic
         let diff = nextPrayer.minutes - nowMin
-        if (diff < 0) diff += 24 * 60
-        const ch = Math.floor(diff / 60)
+        if (diff < 0) diff += 24*60
+        const ch = Math.floor(diff/60)
         const cm = diff % 60
-        countdownEl.textContent = `in ${ch}h ${String(cm).padStart(2,'0')}m`
+        countdownEl.textContent = 'in ' + ch + 'h ' + String(cm).padStart(2,'0') + 'm'
       }
 
-      // Render prayer list
       const listEl = document.getElementById('prayerList')
       if (listEl) {
-        listEl.innerHTML = prayerMins.map(p => {
-          const isActive  = currentPrayer && p.key === currentPrayer.key
-          const isNext    = nextPrayer && p.key === nextPrayer.key
-          return `
-            <div class="prayer-row ${isActive ? 'active' : ''} ${isNext && !isActive ? 'next' : ''}">
-              <div>
-                <div class="prayer-arabic">${p.arabic}</div>
-                <div class="prayer-name-en">${p.en}</div>
-              </div>
-              <div style="display:flex;align-items:center;gap:8px;">
-                ${isActive ? '<span class="prayer-badge">Now</span>' : ''}
-                ${isNext && !isActive ? '<span class="prayer-badge" style="background:rgba(133,204,255,0.2);color:var(--pastel);">Next</span>' : ''}
-                <div class="prayer-time">${p.timeStr}</div>
-              </div>
-            </div>`
+        listEl.innerHTML = prayerMins.map(function(p) {
+          const isActive = currentPrayer && p.key === currentPrayer.key
+          const isNext   = nextPrayer && p.key === nextPrayer.key
+          return '<div class="prayer-row'+(isActive?' active':'')+(isNext&&!isActive?' next':'')+'">'+
+            '<div><div class="prayer-arabic">'+p.arabic+'</div><div class="prayer-name-en">'+p.en+'</div></div>'+
+            '<div style="display:flex;align-items:center;gap:8px;">'+
+            (isActive?'<span class="prayer-badge">Now</span>':'')+
+            (isNext&&!isActive?'<span class="prayer-badge" style="background:rgba(133,204,255,0.2);color:var(--pastel);">Next</span>':'')+
+            '<div class="prayer-time">'+p.timeStr+'</div></div></div>'
         }).join('')
       }
 
-      // Draw face once
-      if (!window._clockDrawn) {
-        drawClockFace(pTimes)
-        window._clockDrawn = true
-      }
+      if (!window._clockDrawn) { drawClockFace(pTimes); window._clockDrawn = true }
     }
 
     updateClock()
     setInterval(updateClock, 1000)
   </script>
-
-    function toggleMenu() {
-      document.getElementById('mobileMenu').classList.toggle('open')
-      document.getElementById('hamburger').classList.toggle('open')
-    }
-
-    function closeMenu() {
-      document.getElementById('mobileMenu').classList.remove('open')
-      document.getElementById('hamburger').classList.remove('open')
-    }
-  </script>
-
 </body>
 </html>
