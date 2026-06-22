@@ -793,9 +793,39 @@
     if (statsSection) observer.observe(statsSection)
 
     // Islamic Clock
-    const LAT = 6.5244
-    const LNG = 3.3792
-    const TZ_OFFSET = 1
+    let LAT = 6.5244
+    let LNG = 3.3792
+    let TZ_OFFSET = 1
+    let locationName = 'Lagos, Nigeria'
+
+    // Get user location
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function (pos) {
+          LAT = pos.coords.latitude
+          LNG = pos.coords.longitude
+          TZ_OFFSET = -new Date().getTimezoneOffset() / 60
+          window._clockDrawn = false
+
+          // Reverse geocode to get city name
+          fetch('https://nominatim.openstreetmap.org/reverse?lat=' + LAT + '&lon=' + LNG + '&format=json')
+            .then(function (r) { return r.json() })
+            .then(function (data) {
+              const city = data.address.city || data.address.town || data.address.village || ''
+              const country = data.address.country || ''
+              locationName = city + (country ? ', ' + country : '')
+              const subEl = document.querySelector('.clock-section .sec-sub')
+              if (subEl) subEl.textContent = locationName + ' — UTC' + (TZ_OFFSET >= 0 ? '+' : '') + TZ_OFFSET
+            })
+            .catch(function () {})
+
+          updateClock()
+        },
+        function () {
+          // Permission denied — keep Lagos defaults
+        }
+      )
+    }
 
     const PRAYERS = [
       { key: 'fajr',    arabic: 'الفَجْر',   en: 'Fajr'    },
@@ -838,15 +868,20 @@
 
       const fajrH    = hourAngle(-18)
       const sunriseH = hourAngle(-0.833)
-      const asrH     = hourAngle(-asrAngle(1))
       const maghribH = hourAngle(-0.833)
       const ishaH    = hourAngle(-17)
+
+      // Asr: use positive elevation angle
+      const asrElevation = asrAngle(1)
+      const cosAsrH = (Math.sin(asrElevation*D2R) - Math.sin(LAT*D2R)*Math.sin(decl)) /
+                      (Math.cos(LAT*D2R)*Math.cos(decl))
+      const asrH = Math.abs(cosAsrH) <= 1 ? Math.acos(cosAsrH)*R2D/15 : null
 
       return {
         fajr:    fajrH    ? noon - fajrH    : null,
         sunrise: sunriseH ? noon - sunriseH : null,
         dhuhr:   noon + 0.033,
-        asr:     asrH     ? noon + Math.abs(noon - (noon - asrH)) : null,
+        asr:     asrH     ? noon + asrH     : null,
         maghrib: maghribH ? noon + maghribH : null,
         isha:    ishaH    ? noon + ishaH    : null,
       }
