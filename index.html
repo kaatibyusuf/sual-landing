@@ -75,7 +75,6 @@
     .nav-logo-arabic { font-family: var(--arabic); font-size: 1.6rem; color: var(--regal); font-weight: 700; }
     .nav-logo-latin { font-size: 1.1rem; font-weight: 800; color: var(--regal); }
 
-    /* Desktop nav links — always visible on desktop */
     .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
     .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.875rem; font-weight: 500; transition: color 0.15s; }
     .nav-links a:hover { color: var(--regal); }
@@ -86,10 +85,8 @@
     }
     .nav-cta:hover { background: #0d5a8a !important; box-shadow: 0 4px 14px rgba(9,69,112,0.3); }
 
-    /* Hamburger — hidden on desktop */
     .hamburger {
-      display: none;
-      flex-direction: column; gap: 5px;
+      display: none; flex-direction: column; gap: 5px;
       background: none; border: none; cursor: pointer; padding: 4px;
     }
     .hamburger span {
@@ -100,10 +97,8 @@
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* Mobile dropdown menu */
     .mobile-menu {
-      display: none;
-      position: fixed; top: 57px; left: 0; right: 0; z-index: 99;
+      display: none; position: fixed; top: 57px; left: 0; right: 0; z-index: 99;
       background: rgba(255,255,255,0.98); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 12px 20px 20px; flex-direction: column; gap: 4px;
@@ -161,7 +156,6 @@
     }
     .btn-secondary:hover { background: var(--regal); color: var(--white); transform: translateY(-2px); }
 
-    /* Mockup */
     .hero-mockup {
       background: var(--white); border-radius: 20px; padding: 24px;
       box-shadow: 0 24px 80px rgba(9,69,112,0.15), 0 4px 20px rgba(9,69,112,0.08);
@@ -186,9 +180,9 @@
 
     /* ── STATS ── */
     .stats { background: var(--regal); padding: 60px 48px; }
-    .stats-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 40px; text-align: center; }
+    .stats-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: 40px; text-align: center; }
     .stat-num { font-size: 2.8rem; font-weight: 800; color: var(--pastel); line-height: 1; margin-bottom: 6px; }
-    .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.75); font-weight: 500; }
+    .stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.75); font-weight: 500; }
 
     /* ── SECTIONS ── */
     section { padding: 80px 48px; }
@@ -206,22 +200,88 @@
     .feature-name { font-size: 1rem; font-weight: 700; color: var(--regal); margin-bottom: 8px; }
     .feature-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
 
+    /* Classes */
+    .classes { background: var(--bg); }
+    .classes-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 20px; }
+    .class-card {
+      padding: 28px; background: var(--white); border: 1.5px solid var(--border);
+      border-radius: var(--radius); transition: all 0.2s ease;
+    }
+    .class-card:hover { border-color: var(--regal); box-shadow: 0 8px 24px rgba(9,69,112,0.1); transform: translateY(-3px); }
+    .class-icon { font-size: 2rem; margin-bottom: 14px; }
+    .class-name { font-size: 1rem; font-weight: 700; color: var(--regal); margin-bottom: 6px; }
+    .class-arabic { font-family: var(--arabic); font-size: 1rem; color: var(--muted); margin-bottom: 10px; }
+    .class-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.7; margin-bottom: 14px; }
+    .class-levels { display: flex; gap: 6px; flex-wrap: wrap; }
+    .class-level-tag {
+      font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 100px;
+    }
+    .level-beginner { background: #e8f5e9; color: #2e7d32; }
+    .level-intermediate { background: #fff3e0; color: #e65100; }
+    .level-advanced { background: #f3e5f5; color: #6a1b9a; }
+
     /* Disciplines */
-    .disciplines { background: var(--bg); }
+    .disciplines { background: var(--white); }
     .disc-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 16px; }
-    .disc-card { padding: 24px 20px; background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); text-align: center; transition: all 0.2s ease; text-decoration: none; }
+    .disc-card { padding: 24px 20px; background: var(--bg); border: 1.5px solid var(--border); border-radius: var(--radius); text-align: center; transition: all 0.2s ease; text-decoration: none; }
     .disc-card:hover { border-color: var(--regal); box-shadow: 0 6px 20px rgba(9,69,112,0.12); transform: translateY(-3px); }
     .disc-icon { font-size: 2rem; margin-bottom: 10px; }
     .disc-name { font-size: 0.95rem; font-weight: 700; color: var(--regal); margin-bottom: 4px; }
     .disc-arabic { font-family: var(--arabic); font-size: 1rem; color: var(--muted); }
 
+    /* Levels banner */
+    .levels { background: linear-gradient(160deg, #062f4a, #094570); padding: 80px 48px; }
+    .levels .tag { background: rgba(255,255,255,0.15); color: var(--pastel); }
+    .levels .sec-title { color: var(--white); }
+    .levels .sec-sub { color: rgba(255,255,255,0.7); }
+    .levels-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 20px; }
+    .level-card {
+      padding: 28px; border-radius: var(--radius);
+      border: 1.5px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      transition: all 0.2s ease;
+    }
+    .level-card:hover { background: rgba(255,255,255,0.10); border-color: rgba(133,204,255,0.4); }
+    .level-badge {
+      display: inline-block; padding: 4px 12px; border-radius: 100px;
+      font-size: 0.72rem; font-weight: 700; margin-bottom: 14px;
+    }
+    .level-card-title { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .level-card-arabic { font-family: var(--arabic); font-size: 1rem; color: var(--pastel); margin-bottom: 10px; }
+    .level-card-desc { font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.7; }
+
     /* Why */
-    .why { background: var(--white); }
+    .why { background: var(--bg); }
     .why-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 24px; }
     .why-item { display: flex; gap: 16px; }
     .why-num { font-size: 0.7rem; font-weight: 800; color: var(--pastel); background: var(--regal); padding: 4px 8px; border-radius: 6px; flex-shrink: 0; height: fit-content; margin-top: 2px; }
     .why-title { font-size: 0.95rem; font-weight: 700; color: var(--regal); margin-bottom: 6px; }
     .why-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.7; }
+
+    /* Spaces */
+    .spaces-section { background: var(--white); }
+    .spaces-card {
+      background: linear-gradient(135deg, #f0f7ff, #fff);
+      border: 1.5px solid var(--border); border-radius: 20px;
+      padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    .spaces-title { font-size: 1.5rem; font-weight: 800; color: var(--regal); margin-bottom: 10px; }
+    .spaces-arabic { font-family: var(--arabic); font-size: 1.1rem; color: var(--muted); margin-bottom: 14px; }
+    .spaces-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .spaces-features-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+    .spaces-feature { display: flex; align-items: center; gap: 10px; font-size: 0.875rem; color: var(--text); }
+    .spaces-feature-icon { width: 28px; height: 28px; background: var(--bg); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+    .spaces-price-display { background: var(--regal); border-radius: 14px; padding: 28px; text-align: center; color: var(--white); }
+    .spaces-price-amount { font-size: 2.5rem; font-weight: 800; color: var(--pastel); line-height: 1; }
+    .spaces-price-period { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+    .spaces-price-items { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; text-align: left; }
+    .spaces-price-item { font-size: 0.82rem; color: rgba(255,255,255,0.8); display: flex; gap: 8px; }
+    .spaces-btn {
+      display: block; padding: 13px 24px; background: var(--pastel); color: var(--regal);
+      border-radius: 100px; font-weight: 700; font-size: 0.9rem; text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .spaces-btn:hover { background: #a8d8ff; transform: translateY(-2px); }
 
     /* Waitlist */
     .waitlist { background: var(--bg); }
@@ -281,6 +341,8 @@
       .community-actions { flex-direction: column; align-items: center; }
       .waitlist-card { padding: 24px 20px; }
       .waitlist-divider { display: none; }
+      .spaces-card { grid-template-columns: 1fr; }
+      .levels { padding: 60px 20px; }
     }
 
     @keyframes heroFadeUp {
@@ -294,179 +356,6 @@
     .hero-inner > *:nth-child(4) { animation-delay: 0.4s; }
     .hero-inner > *:nth-child(5) { animation-delay: 0.5s; }
     .hero-inner > *:nth-child(6) { animation-delay: 0.6s; }
-
-    /* ── CLOCK ── */
-    .clock-section { background: linear-gradient(160deg, #062f4a, #094570); padding: 80px 48px; }
-    .clock-section .tag { background: rgba(255,255,255,0.15); color: var(--pastel); }
-    .clock-section .sec-title { color: var(--white); font-family: var(--arabic); font-size: clamp(1.8rem,4vw,2.8rem); }
-    .clock-section .sec-sub { color: rgba(255,255,255,0.6); }
-
-    .clock-wrapper {
-      display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 48px;
-      align-items: center;
-    }
-
-    /* Clock face */
-    .clock-face-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .clock-face {
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 40% 35%, #0d5a8a, #062f4a);
-      box-shadow:
-        0 0 0 6px rgba(133,204,255,0.15),
-        0 0 0 12px rgba(9,69,112,0.2),
-        0 24px 60px rgba(0,0,0,0.5),
-        inset 0 2px 4px rgba(255,255,255,0.1);
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .clock-svg { width: 100%; height: 100%; }
-
-    /* Panel */
-    .clock-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .clock-time-display {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 16px;
-      padding: 20px 24px;
-    }
-
-    .clock-time {
-      font-size: 2.8rem;
-      font-weight: 800;
-      color: var(--white);
-      letter-spacing: 0.05em;
-      line-height: 1;
-      margin-bottom: 6px;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .clock-date {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 2px;
-    }
-
-    .clock-hijri {
-      font-family: var(--arabic);
-      font-size: 1rem;
-      color: var(--pastel);
-    }
-
-    .clock-next {
-      background: rgba(133,204,255,0.1);
-      border: 1px solid rgba(133,204,255,0.25);
-      border-radius: 16px;
-      padding: 18px 24px;
-    }
-
-    .clock-next-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: rgba(255,255,255,0.5);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 6px;
-    }
-
-    .clock-next-name {
-      font-family: var(--arabic);
-      font-size: 1.6rem;
-      color: var(--pastel);
-      margin-bottom: 4px;
-    }
-
-    .clock-next-countdown {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--white);
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* Prayer list */
-    .clock-prayers {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .prayer-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 16px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      transition: all 0.3s ease;
-    }
-
-    .prayer-row.active {
-      background: rgba(133,204,255,0.15);
-      border-color: rgba(133,204,255,0.4);
-      box-shadow: 0 0 12px rgba(133,204,255,0.15);
-    }
-
-    .prayer-row.next {
-      background: rgba(133,204,255,0.08);
-      border-color: rgba(133,204,255,0.2);
-    }
-
-    .prayer-arabic {
-      font-family: var(--arabic);
-      font-size: 1.1rem;
-      color: var(--white);
-    }
-
-    .prayer-row.active .prayer-arabic { color: var(--pastel); }
-
-    .prayer-name-en {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.45);
-      font-weight: 500;
-    }
-
-    .prayer-time {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: rgba(255,255,255,0.8);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .prayer-row.active .prayer-time { color: var(--pastel); }
-
-    .prayer-badge {
-      font-size: 0.65rem;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 100px;
-      background: var(--pastel);
-      color: var(--regal);
-    }
-
-    @media (max-width: 900px) {
-      .clock-wrapper { grid-template-columns: 1fr; justify-items: center; }
-      .clock-panel { width: 100%; max-width: 400px; }
-    }
-
-    @media (max-width: 768px) {
-      .clock-section { padding: 60px 20px; }
-      .clock-face { width: 240px; height: 240px; }
-    }
   </style>
 </head>
 <body>
@@ -487,12 +376,12 @@
       <span class="nav-logo-latin">Sual</span>
     </a>
     <ul class="nav-links">
-      <li><a href="#clock">Prayer Times</a></li>
       <li><a href="#features">Features</a></li>
       <li><a href="#disciplines">Disciplines</a></li>
+      <li><a href="#classes">Classes</a></li>
+      <li><a href="#spaces">Spaces</a></li>
       <li><a href="#why">Why Sual</a></li>
       <li><a href="#waitlist">Waitlist</a></li>
-      <li><a href="#community">Community</a></li>
       <li><a href="https://sual-seven.vercel.app/" target="_blank" class="nav-cta">Open App →</a></li>
     </ul>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()">
@@ -502,12 +391,12 @@
 
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#clock" onclick="closeMenu()">Prayer Times</a>
     <a href="#features" onclick="closeMenu()">Features</a>
     <a href="#disciplines" onclick="closeMenu()">Disciplines</a>
+    <a href="#classes" onclick="closeMenu()">Classes</a>
+    <a href="#spaces" onclick="closeMenu()">Spaces</a>
     <a href="#why" onclick="closeMenu()">Why Sual</a>
     <a href="#waitlist" onclick="closeMenu()">Waitlist</a>
-    <a href="#community" onclick="closeMenu()">Community</a>
     <a href="https://sual-seven.vercel.app/" target="_blank" class="mobile-cta" onclick="closeMenu()">Open App →</a>
   </div>
 
@@ -532,97 +421,41 @@
             <div class="mockup-logo">سُؤَال Sual</div>
             <div class="mockup-nav-item active">🏠 Home</div>
             <div class="mockup-nav-item">🎯 Quiz</div>
-            <div class="mockup-nav-item">🃏 Flashcards</div>
+            <div class="mockup-nav-item">🤲 Adhkar</div>
             <div class="mockup-nav-item">📜 Stories</div>
-            <div class="mockup-nav-item">🤲 Duas</div>
             <div class="mockup-nav-item">🗓️ Calendar</div>
+            <div class="mockup-nav-item">🌐 Spaces</div>
             <div class="mockup-nav-item">🎙️ Tajweed</div>
           </div>
           <div class="mockup-content">
-            <div class="mockup-title">Fiqh — Islamic Jurisprudence</div>
+            <div class="mockup-title">Usul Al-Fiqh — Intermediate</div>
             <div class="mockup-card">
-              <div class="mockup-card-q">What are the five essential objectives of Shariah (Maqasid al-Shariah)?</div>
-              <div class="mockup-tags"><span class="mockup-tag">maqasid</span><span class="mockup-tag">advanced</span></div>
+              <div class="mockup-card-q">What are the five essential objectives of Shariah (Maqasid Ash-Shariah)?</div>
+              <div class="mockup-tags"><span class="mockup-tag">maqasid</span><span class="mockup-tag">intermediate</span></div>
             </div>
             <div class="mockup-card">
-              <div class="mockup-card-q">What is the ruling on reciting al-Fatihah behind the imam?</div>
-              <div class="mockup-tags"><span class="mockup-tag">salah</span><span class="mockup-tag">khilaf</span></div>
+              <div class="mockup-card-q">What is the difference between qat'i and zanni evidence?</div>
+              <div class="mockup-tags"><span class="mockup-tag">usul</span><span class="mockup-tag">daleel</span></div>
             </div>
             <div class="mockup-card">
-              <div class="mockup-card-q">What is Zakah and what is its nisab for gold and silver?</div>
-              <div class="mockup-tags"><span class="mockup-tag">zakah</span><span class="mockup-tag">nisab</span></div>
+              <div class="mockup-card-q">What is Al-Qiyas and what are its four pillars?</div>
+              <div class="mockup-tags"><span class="mockup-tag">qiyas</span><span class="mockup-tag">illah</span></div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- CLOCK -->
-  <section class="clock-section" id="clock">
-    <div class="inner">
-      <span class="tag">Prayer Times</span>
-      <h2 class="sec-title">مَوَاقِيتُ الصَّلَاة</h2>
-      <p class="sec-sub">Lagos, Nigeria — West Africa Time (WAT, UTC+1)</p>
-      <div class="clock-wrapper">
 
-        <!-- Clock Face -->
-        <div class="clock-face-wrapper">
-          <div class="clock-face" id="clockFace">
-            <svg viewBox="0 0 300 300" class="clock-svg" id="clockSvg">
-              <!-- Outer ring -->
-              <circle cx="150" cy="150" r="145" fill="none" stroke="#094570" stroke-width="3" opacity="0.2"/>
-              <circle cx="150" cy="150" r="135" fill="rgba(9,69,112,0.04)" stroke="#094570" stroke-width="1.5" opacity="0.3"/>
-
-              <!-- Hour markers -->
-              <g id="hourMarkers"></g>
-
-              <!-- Salah arcs -->
-              <g id="salahArcs"></g>
-
-              <!-- Salah labels -->
-              <g id="salahLabels"></g>
-
-              <!-- Hands -->
-              <line id="hourHand"   x1="150" y1="150" x2="150" y2="80"  stroke="#094570" stroke-width="5" stroke-linecap="round"/>
-              <line id="minuteHand" x1="150" y1="150" x2="150" y2="55"  stroke="#1a6fa8" stroke-width="3" stroke-linecap="round"/>
-              <line id="secondHand" x1="150" y1="150" x2="150" y2="45"  stroke="#85CCFF" stroke-width="1.5" stroke-linecap="round"/>
-
-              <!-- Center dot -->
-              <circle cx="150" cy="150" r="6" fill="#094570"/>
-              <circle cx="150" cy="150" r="3" fill="#85CCFF"/>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Salah times panel -->
-        <div class="clock-panel">
-          <div class="clock-time-display">
-            <div class="clock-time" id="clockTime">00:00:00</div>
-            <div class="clock-date" id="clockDate">—</div>
-            <div class="clock-hijri" id="clockHijri">—</div>
-          </div>
-
-          <div class="clock-next">
-            <div class="clock-next-label">Next Prayer</div>
-            <div class="clock-next-name" id="nextPrayerName">—</div>
-            <div class="clock-next-countdown" id="nextCountdown">—</div>
-          </div>
-
-          <div class="clock-prayers" id="prayerList"></div>
-        </div>
-
-      </div>
-    </div>
-  </section>
   <!-- STATS -->
   <div class="stats">
     <div class="stats-inner">
-      <div><div class="stat-num" id="stat1">350+</div><div class="stat-label">Scholarly Q&amp;A Entries</div></div>
-      <div><div class="stat-num" id="stat2">350+</div><div class="stat-label">Quiz Questions</div></div>
+      <div><div class="stat-num" id="stat1">700+</div><div class="stat-label">Scholarly Q&amp;A Entries</div></div>
+      <div><div class="stat-num" id="stat2">420+</div><div class="stat-label">Quiz Questions</div></div>
       <div><div class="stat-num" id="stat3">7</div><div class="stat-label">Islamic Disciplines</div></div>
-      <div><div class="stat-num" id="stat4">30</div><div class="stat-label">Duas &amp; Adhkar</div></div>
-      <div><div class="stat-num" id="stat5">10</div><div class="stat-label">Stories of the Salaf</div></div>
-      <div><div class="stat-num" id="stat6">10</div><div class="stat-label">Tajweed Sections</div></div>
+      <div><div class="stat-num" id="stat4">3</div><div class="stat-label">Learning Levels</div></div>
+      <div><div class="stat-num" id="stat5">2</div><div class="stat-label">Live Classes</div></div>
+      <div><div class="stat-num" id="stat6">7000+</div><div class="stat-label">Community Members</div></div>
     </div>
   </div>
 
@@ -633,14 +466,46 @@
       <h2 class="sec-title">Everything you need to study Islam</h2>
       <p class="sec-sub">Built for the serious student who wants depth, not surface-level summaries.</p>
       <div class="features-grid">
-        <div class="feature-card"><div class="feature-icon">📚</div><div class="feature-name">Scholarly Q&amp;A</div><div class="feature-desc">350+ curated questions and detailed answers across seven disciplines, sourced from classical texts and authenticated references.</div></div>
-        <div class="feature-card"><div class="feature-icon">🎯</div><div class="feature-name">Quiz Mode</div><div class="feature-desc">Test your knowledge with 350+ questions per discipline or in a mixed format. Track your score and review your answers.</div></div>
-        <div class="feature-card"><div class="feature-icon">🃏</div><div class="feature-name">Flashcards</div><div class="feature-desc">Six decks of Arabic and Islamic terminology flashcards with Arabic script and transliteration.</div></div>
-        <div class="feature-card"><div class="feature-icon">📜</div><div class="feature-name">Stories of the Salaf</div><div class="feature-desc">Detailed biographical narratives of the Companions and Successors with primary source citations.</div></div>
-        <div class="feature-card"><div class="feature-icon">🤲</div><div class="feature-name">Dua Collection</div><div class="feature-desc">30 authenticated duas from the Quran and Sunnah with Arabic text, transliteration, translation, and virtue.</div></div>
-        <div class="feature-card"><div class="feature-icon">🗓️</div><div class="feature-name">Islamic Calendar</div><div class="feature-desc">A full Hijri calendar with important Islamic dates circled and explained — Ayyam al-Bid, Ashura, Eid, Laylat al-Qadr.</div></div>
-        <div class="feature-card"><div class="feature-icon">🎙️</div><div class="feature-name">Tajweed Science</div><div class="feature-desc">Ten comprehensive sections covering Noon Saakinah, Madd, Qalqalah, Tafkheem, Waqf, Ghunnah and more.</div></div>
-        <div class="feature-card"><div class="feature-icon">🌙</div><div class="feature-name">Dark Mode &amp; Accessibility</div><div class="feature-desc">Full dark mode, adjustable font size, and a clean interface designed for extended study sessions.</div></div>
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+          <div class="feature-name">Levelled Scholarly Q&amp;A</div>
+          <div class="feature-desc">700+ curated questions and detailed answers across three levels — Beginner, Intermediate, and Advanced — sourced from classical texts and authenticated references.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <div class="feature-name">Levelled Quiz Mode</div>
+          <div class="feature-desc">Test your knowledge per discipline or in mixed format, filtered by your level. Scores are saved and tracked to measure your progress over time.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤲</div>
+          <div class="feature-name">Adhkar &amp; Duas</div>
+          <div class="feature-desc">Complete morning and evening adhkar, ruqyah verses with methodology, and a library of authenticated duas — all with Arabic text, transliteration, translation, and scholarly sources.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📜</div>
+          <div class="feature-name">Stories of the Salaf</div>
+          <div class="feature-desc">Detailed biographical narratives of the Companions and Successors with primary source citations and lessons for modern Muslim life.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🗓️</div>
+          <div class="feature-name">Islamic Calendar</div>
+          <div class="feature-desc">A full Hijri calendar with important Islamic dates — Ayyam Al-Bid, Ashura, Eid, Laylat Al-Qadr — with location-based Maghrib adjustment for accurate date transitions.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎙️</div>
+          <div class="feature-name">Tajweed Science</div>
+          <div class="feature-desc">Ten comprehensive sections covering Noon Saakinah, Madd, Qalqalah, Tafkheem, Waqf, Ghunnah, and more — with rules, examples, and Quranic illustrations.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌐</div>
+          <div class="feature-name">Spaces Community</div>
+          <div class="feature-desc">A paid members-only space for discussion, scholar Q&amp;A, and structured classes in Arabiyyah and Hadeeth. The serious student's community.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌙</div>
+          <div class="feature-name">Dark Mode &amp; PWA</div>
+          <div class="feature-desc">Full dark mode, adjustable settings, and Progressive Web App support — install it on your phone and study offline without an internet connection.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -650,15 +515,131 @@
     <div class="inner">
       <span class="tag">Disciplines</span>
       <h2 class="sec-title">Seven Islamic Sciences</h2>
-      <p class="sec-sub">Each discipline treated with the depth it deserves — a serious introduction to the classical tradition.</p>
+      <p class="sec-sub">Each discipline treated with the depth it deserves — a serious introduction to the classical tradition, now with Beginner and Intermediate content live.</p>
       <div class="disc-grid">
-        <a href="https://sual-seven.vercel.app//discipline/fiqh" target="_blank" class="disc-card"><div class="disc-icon">⚖️</div><div class="disc-name">Fiqh</div><div class="disc-arabic">الفِقْه</div></a>
-        <a href="https://sual-seven.vercel.app//discipline/seerah" target="_blank" class="disc-card"><div class="disc-icon">🌙</div><div class="disc-name">Seerah</div><div class="disc-arabic">السِّيرَة</div></a>
-        <a href="https://sual-seven.vercel.app//discipline/arabiyyah" target="_blank" class="disc-card"><div class="disc-icon">✍️</div><div class="disc-name">Arabiyyah</div><div class="disc-arabic">العَرَبِيَّة</div></a>
-        <a href="https://sual-seven.vercel.app//discipline/usul" target="_blank" class="disc-card"><div class="disc-icon">📐</div><div class="disc-name">Usul al-Fiqh</div><div class="disc-arabic">أُصُولُ الفِقْه</div></a>
-        <a href="https://sual-seven.vercel.app//discipline/sarf" target="_blank" class="disc-card"><div class="disc-icon">🔤</div><div class="disc-name">Sarf</div><div class="disc-arabic">الصَّرْف</div></a>
-        <a href="https://sual-seven.vercel.app//discipline/nahw" target="_blank" class="disc-card"><div class="disc-icon">📝</div><div class="disc-name">Nahw</div><div class="disc-arabic">النَّحْو</div></a>
-        <a href="https://sual-seven.vercel.app//discipline/tafseer" target="_blank" class="disc-card"><div class="disc-icon">📖</div><div class="disc-name">Tafseer</div><div class="disc-arabic">التَّفْسِير</div></a>
+        <a href="https://sual-seven.vercel.app/discipline/fiqh" target="_blank" class="disc-card">
+          <div class="disc-icon">⚖️</div><div class="disc-name">Fiqh</div><div class="disc-arabic">الفِقْه</div>
+        </a>
+        <a href="https://sual-seven.vercel.app/discipline/seerah" target="_blank" class="disc-card">
+          <div class="disc-icon">🌙</div><div class="disc-name">Seerah</div><div class="disc-arabic">السِّيرَة</div>
+        </a>
+        <a href="https://sual-seven.vercel.app/discipline/arabiyyah" target="_blank" class="disc-card">
+          <div class="disc-icon">✍️</div><div class="disc-name">Arabiyyah</div><div class="disc-arabic">العَرَبِيَّة</div>
+        </a>
+        <a href="https://sual-seven.vercel.app/discipline/usul" target="_blank" class="disc-card">
+          <div class="disc-icon">📐</div><div class="disc-name">Usul al-Fiqh</div><div class="disc-arabic">أُصُولُ الفِقْه</div>
+        </a>
+        <a href="https://sual-seven.vercel.app/discipline/sarf" target="_blank" class="disc-card">
+          <div class="disc-icon">🔤</div><div class="disc-name">Sarf</div><div class="disc-arabic">الصَّرْف</div>
+        </a>
+        <a href="https://sual-seven.vercel.app/discipline/nahw" target="_blank" class="disc-card">
+          <div class="disc-icon">📝</div><div class="disc-name">Nahw</div><div class="disc-arabic">النَّحْو</div>
+        </a>
+        <a href="https://sual-seven.vercel.app/discipline/tafseer" target="_blank" class="disc-card">
+          <div class="disc-icon">📖</div><div class="disc-name">Tafseer</div><div class="disc-arabic">التَّفْسِير</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEVELS -->
+  <section class="levels" id="levels">
+    <div class="inner">
+      <span class="tag">Learning Levels</span>
+      <h2 class="sec-title">Three levels. One clear path.</h2>
+      <p class="sec-sub">Wherever you are in your journey, Sual meets you there and takes you further.</p>
+      <div class="levels-grid">
+        <div class="level-card">
+          <span class="level-badge" style="background: rgba(46,125,50,0.3); color: #a5d6a7;">🌱 Beginner — مُبْتَدِئ</span>
+          <div class="level-card-title">Foundations of the Faith</div>
+          <div class="level-card-arabic">أُسُسُ الدِّين</div>
+          <div class="level-card-desc">Core rulings, essential fiqh, introductory seerah, basic Arabic grammar, and the fundamental principles every Muslim must know. Accessible, deep, and sourced.</div>
+        </div>
+        <div class="level-card">
+          <span class="level-badge" style="background: rgba(230,81,0,0.3); color: #ffcc80;">📖 Intermediate — مُتَوَسِّط</span>
+          <div class="level-card-title">Deeper into the Sciences</div>
+          <div class="level-card-arabic">أَعْمَقُ فِي العُلُوم</div>
+          <div class="level-card-desc">Technical usul, detailed morphological and syntactic analysis, advanced seerah narrations, classical fiqh positions with their evidences, and Quranic linguistic depth.</div>
+        </div>
+        <div class="level-card">
+          <span class="level-badge" style="background: rgba(106,27,154,0.3); color: #ce93d8;">🏛️ Advanced — مُتَقَدِّم</span>
+          <div class="level-card-title">Classical Scholarship</div>
+          <div class="level-card-arabic">العِلْمُ الكِلَاسِيكِيّ</div>
+          <div class="level-card-desc">Study at the level of classical Islamic scholarship — primary texts, scholarly commentary, advanced usul disputes, and the sciences that produce independent students of knowledge. Coming soon.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLASSES -->
+  <section class="classes" id="classes">
+    <div class="inner">
+      <span class="tag">Live Classes</span>
+      <h2 class="sec-title">Structured learning. Real progress.</h2>
+      <p class="sec-sub">Two structured classes now open inside Spaces — for paid members. Join a cohort and learn with others under guidance.</p>
+      <div class="classes-grid">
+        <div class="class-card">
+          <div class="class-icon">✍️</div>
+          <div class="class-name">Arabiyyah Class</div>
+          <div class="class-arabic">فَصْلُ العَرَبِيَّة</div>
+          <div class="class-desc">A complete structured Arabic programme — from the Duruusu-l-Lughah Al-Arabiyyah at beginner level, through Nahw, Sarf, and Insha at intermediate, to Alfiyyah Ibn Malik and Balaghah at advanced. The goal: independent reading of classical Arabic texts.</div>
+          <div class="class-levels">
+            <span class="class-level-tag level-beginner">Duruusu-l-Lughah</span>
+            <span class="class-level-tag level-intermediate">Nahw, Sarf, Insha</span>
+            <span class="class-level-tag level-advanced">Alfiyyah, Balaghah</span>
+          </div>
+        </div>
+        <div class="class-card">
+          <div class="class-icon">📜</div>
+          <div class="class-name">Hadeeth Class</div>
+          <div class="class-arabic">فَصْلُ الحَدِيث</div>
+          <div class="class-desc">A structured hadeeth memorization and study programme from the complete Forty Hadith of Imam An-Nawawi at beginner level, through Bulugh Al-Maram and Umdat Al-Ahkam at intermediate, to Sahih Al-Bukhari with Fath Al-Bari at advanced.</div>
+          <div class="class-levels">
+            <span class="class-level-tag level-beginner">Al-Arba'oon An-Nawawi</span>
+            <span class="class-level-tag level-intermediate">Bulughul-Maram</span>
+            <span class="class-level-tag level-advanced">Sahih Al-Bukhari</span>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top: 32px;">
+        <a href="https://sual-seven.vercel.app/" target="_blank" class="btn-primary">Join a Class Inside Spaces →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPACES -->
+  <section class="spaces-section" id="spaces">
+    <div class="inner">
+      <span class="tag">Spaces</span>
+      <h2 class="sec-title">The serious student's community</h2>
+      <p class="sec-sub">An exclusive paid community for members who want more than content — they want guidance, accountability, and company on the path.</p>
+      <div class="spaces-card">
+        <div>
+          <div class="spaces-title">Spaces — فَضَاءَات</div>
+          <div class="spaces-arabic">مُجْتَمَعُ طُلَّابِ العِلْم</div>
+          <div class="spaces-desc">Spaces is where the Sual community lives. Ask questions, start discussions, get scholar-verified answers, and join structured classes — all in a private, moderated environment for serious students.</div>
+          <div class="spaces-features-list">
+            <div class="spaces-feature"><span class="spaces-feature-icon">🎓</span> Direct scholar answers on your questions</div>
+            <div class="spaces-feature"><span class="spaces-feature-icon">✍️</span> Arabiyyah Class — Beginner to Advanced</div>
+            <div class="spaces-feature"><span class="spaces-feature-icon">📜</span> Hadeeth Class — An-Nawawi to Al-Bukhari</div>
+            <div class="spaces-feature"><span class="spaces-feature-icon">💬</span> Threaded discussions across six categories</div>
+            <div class="spaces-feature"><span class="spaces-feature-icon">👥</span> Private community of serious students</div>
+            <div class="spaces-feature"><span class="spaces-feature-icon">📲</span> Class groups for each level</div>
+          </div>
+        </div>
+        <div class="spaces-price-display">
+          <div style="font-size:0.78rem; color:rgba(255,255,255,0.5); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.08em;">Monthly Membership</div>
+          <div class="spaces-price-amount">₦2,500</div>
+          <div class="spaces-price-period">per month · cancel anytime</div>
+          <div class="spaces-price-items">
+            <div class="spaces-price-item">✓ Full community access</div>
+            <div class="spaces-price-item">✓ Arabiyyah Class enrollment</div>
+            <div class="spaces-price-item">✓ Hadeeth Class enrollment</div>
+            <div class="spaces-price-item">✓ Scholar Q&amp;A responses</div>
+            <div class="spaces-price-item">✓ Class groups</div>
+          </div>
+          <a href="https://sual-seven.vercel.app/spaces" target="_blank" class="spaces-btn">Join Spaces →</a>
+        </div>
       </div>
     </div>
   </section>
@@ -670,12 +651,48 @@
       <h2 class="sec-title">Built on classical scholarship</h2>
       <p class="sec-sub">Sual is not another generic Islamic app. Every piece of content is grounded in the classical tradition.</p>
       <div class="why-grid">
-        <div class="why-item"><div class="why-num">01</div><div><div class="why-title">Primary Source Citations</div><div class="why-desc">Every answer cites its classical source — from Sahih al-Bukhari and Sahih Muslim to Ibn Hisham, al-Nawawi, Ibn Hajar, and al-Shatibi.</div></div></div>
-        <div class="why-item"><div class="why-num">02</div><div><div class="why-title">Scholarly Voice</div><div class="why-desc">Content written at the level of a serious student of knowledge — not simplified to the point of distortion.</div></div></div>
-        <div class="why-item"><div class="why-num">03</div><div><div class="why-title">Arabic-First</div><div class="why-desc">Arabic terminology preserved throughout — with full tashkeel, transliteration, and linguistic analysis.</div></div></div>
-        <div class="why-item"><div class="why-num">04</div><div><div class="why-title">Seven Sciences Together</div><div class="why-desc">No other free app covers Fiqh, Seerah, Arabiyyah, Usul al-Fiqh, Sarf, Nahw, and Tafseer at this depth.</div></div></div>
-        <div class="why-item"><div class="why-num">05</div><div><div class="why-title">Completely Free</div><div class="why-desc">No ads, no paywalls, no subscription. Knowledge of the Deen belongs to everyone.</div></div></div>
-        <div class="why-item"><div class="why-num">06</div><div><div class="why-title">Works Offline</div><div class="why-desc">Install it on your phone and study without an internet connection. Progress saved locally.</div></div></div>
+        <div class="why-item">
+          <div class="why-num">01</div>
+          <div>
+            <div class="why-title">Primary Source Citations</div>
+            <div class="why-desc">Every answer cites its classical source.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">02</div>
+          <div>
+            <div class="why-title">Scholarly Voice</div>
+            <div class="why-desc">Content written at the level of a serious student of knowledge, not simplified to the point of distortion, not inaccessible to the point of uselessness.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">03</div>
+          <div>
+            <div class="why-title">Arabic-First</div>
+            <div class="why-desc">Arabic terminology preserved throughout with full tashkeel, proper transliteration with sun and moon letter rules, and linguistic analysis where relevant.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">04</div>
+          <div>
+            <div class="why-title">Seven Sciences Together</div>
+            <div class="why-desc">No other free app covers Fiqh, Seerah, Arabiyyah, Usulul-Fiqh, Sarf, Nahw, and Tafseer at this depth across three structured learning levels.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">05</div>
+          <div>
+            <div class="why-title">Free at Its Core</div>
+            <div class="why-desc">No ads. No paywalls on the knowledge content. Spaces is paid because it costs real resources, but the app itself is free and always will be.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-num">06</div>
+          <div>
+            <div class="why-title">Works Offline</div>
+            <div class="why-desc">Install it and study without an internet connection. Built for the student in every circumstance.</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -683,20 +700,34 @@
   <!-- WAITLIST -->
   <section class="waitlist" id="waitlist">
     <div class="inner">
-      <span class="tag">Waitlist</span>
+      <span class="tag">Stay Updated</span>
       <h2 class="sec-title">Be the first to know</h2>
-      <p class="sec-sub">Join the waitlist and get notified the moment new features, content, and updates drop on Sual.</p>
+      <p class="sec-sub">Join the waitlist and get notified the moment new features, content updates, and Advanced level content drops on Sual.</p>
       <div class="waitlist-card">
         <div class="waitlist-stats">
-          <div class="waitlist-stat"><span class="waitlist-stat-num">7,000+</span><span class="waitlist-stat-label">Community members</span></div>
+          <div class="waitlist-stat">
+            <span class="waitlist-stat-num">7,000+</span>
+            <span class="waitlist-stat-label">Community members</span>
+          </div>
           <div class="waitlist-divider"></div>
-          <div class="waitlist-stat"><span class="waitlist-stat-num">Free</span><span class="waitlist-stat-label">Always and forever</span></div>
+          <div class="waitlist-stat">
+            <span class="waitlist-stat-num">700+</span>
+            <span class="waitlist-stat-label">Q&amp;As live</span>
+          </div>
           <div class="waitlist-divider"></div>
-          <div class="waitlist-stat"><span class="waitlist-stat-num">7</span><span class="waitlist-stat-label">Islamic sciences</span></div>
+          <div class="waitlist-stat">
+            <span class="waitlist-stat-num">Free</span>
+            <span class="waitlist-stat-label">Always and forever</span>
+          </div>
+          <div class="waitlist-divider"></div>
+          <div class="waitlist-stat">
+            <span class="waitlist-stat-num">7</span>
+            <span class="waitlist-stat-label">Islamic sciences</span>
+          </div>
         </div>
         <div class="waitlist-form">
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSdRT2qg71V_r0m68BOgxrxW92TRQ0XgqQPbMaBPITjyr6rPOw/viewform" target="_blank" class="waitlist-btn">🌙 Join the Waitlist</a>
-          <p class="waitlist-note">No spam. Just meaningful updates on Sual.</p>
+          <p class="waitlist-note">No spam. Just meaningful updates when something real drops.</p>
         </div>
       </div>
     </div>
@@ -707,7 +738,7 @@
     <div class="inner">
       <span class="tag">Community</span>
       <h2 class="sec-title">Join the Sual Community</h2>
-      <p class="sec-sub">Daily Islamic knowledge questions, discussions, and updates — delivered to your WhatsApp. Over 7,000 young adults learning together.</p>
+      <p class="sec-sub">Daily Islamic knowledge questions, discussions, and updates — delivered to your WhatsApp. Over 7,000 students learning together.</p>
       <div class="community-actions">
         <a href="https://whatsapp.com/channel/0029Vb8gbnB5PO0ysEFozQ46" target="_blank" class="btn-white">💬 Join WhatsApp Channel</a>
         <a href="https://sual-seven.vercel.app/" target="_blank" class="btn-outline-white">Open the App →</a>
@@ -730,6 +761,8 @@
         <a href="https://sual-seven.vercel.app/" target="_blank">Open App</a>
         <a href="#features">Features</a>
         <a href="#disciplines">Disciplines</a>
+        <a href="#classes">Classes</a>
+        <a href="#spaces">Spaces</a>
         <a href="#waitlist">Waitlist</a>
         <a href="#community">Community</a>
       </div>
@@ -750,7 +783,6 @@
       document.getElementById('mobileMenu').classList.toggle('open')
       document.getElementById('hamburger').classList.toggle('open')
     }
-
     function closeMenu() {
       document.getElementById('mobileMenu').classList.remove('open')
       document.getElementById('hamburger').classList.remove('open')
@@ -772,12 +804,12 @@
 
     function runCounters() {
       const counters = [
-        { id: 'stat1', target: 350, suffix: '+' },
-        { id: 'stat2', target: 350, suffix: '+' },
-        { id: 'stat3', target: 7,   suffix: ''  },
-        { id: 'stat4', target: 30,  suffix: ''  },
-        { id: 'stat5', target: 10,  suffix: ''  },
-        { id: 'stat6', target: 10,  suffix: ''  },
+        { id: 'stat1', target: 700,  suffix: '+'  },
+        { id: 'stat2', target: 420,  suffix: '+'  },
+        { id: 'stat3', target: 7,    suffix: ''   },
+        { id: 'stat4', target: 3,    suffix: ''   },
+        { id: 'stat5', target: 2,    suffix: ''   },
+        { id: 'stat6', target: 7000, suffix: '+'  },
       ]
       counters.forEach(function (c) {
         const el = document.getElementById(c.id)
@@ -791,264 +823,6 @@
       if (entries[0].isIntersecting && !counted) { counted = true; runCounters() }
     }, { threshold: 0.3 })
     if (statsSection) observer.observe(statsSection)
-
-    // Islamic Clock
-    let LAT = 6.5244
-    let LNG = 3.3792
-    let TZ_OFFSET = 1
-    let locationName = 'Lagos, Nigeria'
-
-    // Get user location
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        function (pos) {
-          LAT = pos.coords.latitude
-          LNG = pos.coords.longitude
-          TZ_OFFSET = -new Date().getTimezoneOffset() / 60
-          window._clockDrawn = false
-
-          // Reverse geocode to get city name
-          fetch('https://nominatim.openstreetmap.org/reverse?lat=' + LAT + '&lon=' + LNG + '&format=json')
-            .then(function (r) { return r.json() })
-            .then(function (data) {
-              const city = data.address.city || data.address.town || data.address.village || ''
-              const country = data.address.country || ''
-              locationName = city + (country ? ', ' + country : '')
-              const subEl = document.querySelector('.clock-section .sec-sub')
-              if (subEl) subEl.textContent = locationName + ' — UTC' + (TZ_OFFSET >= 0 ? '+' : '') + TZ_OFFSET
-            })
-            .catch(function () {})
-
-          updateClock()
-        },
-        function () {
-          // Permission denied — keep Lagos defaults
-        }
-      )
-    }
-
-    const PRAYERS = [
-      { key: 'fajr',    arabic: 'الفَجْر',   en: 'Fajr'    },
-      { key: 'sunrise', arabic: 'الشُّرُوق', en: 'Sunrise'  },
-      { key: 'dhuhr',   arabic: 'الظُّهْر',  en: 'Dhuhr'   },
-      { key: 'asr',     arabic: 'العَصْر',   en: 'Asr'     },
-      { key: 'maghrib', arabic: 'المَغْرِب', en: 'Maghrib'  },
-      { key: 'isha',    arabic: 'العِشَاء',  en: 'Isha'    },
-    ]
-
-    function calcPrayerTimes(date) {
-      const D2R = Math.PI / 180
-      const R2D = 180 / Math.PI
-      const year = date.getFullYear()
-      const month = date.getMonth() + 1
-      const day = date.getDate()
-      const JD = Math.floor(365.25*(year+4716)) + Math.floor(30.6001*(month+1)) + day - 1524.5
-      const T = (JD - 2451545) / 36525
-      const L0 = 280.46646 + 36000.76983 * T
-      const M = (357.52911 + 35999.05029 * T) * D2R
-      const C = (1.914602 - 0.004817*T) * Math.sin(M) + 0.019993 * Math.sin(2*M)
-      const sunLon = (L0 + C) * D2R
-      const obliq = (23.439291 - 0.013004*T) * D2R
-      const RA = Math.atan2(Math.cos(obliq)*Math.sin(sunLon), Math.cos(sunLon)) * R2D
-      const decl = Math.asin(Math.sin(obliq)*Math.sin(sunLon))
-      const eqTime = (L0 - 0.0057183 - RA) * 4
-      const noon = 12 - eqTime/60 - LNG/15 + TZ_OFFSET
-
-      function hourAngle(angle) {
-        const cosH = (Math.sin(angle*D2R) - Math.sin(LAT*D2R)*Math.sin(decl)) /
-                     (Math.cos(LAT*D2R)*Math.cos(decl))
-        if (Math.abs(cosH) > 1) return null
-        return Math.acos(cosH) * R2D / 15
-      }
-
-      function asrAngle(factor) {
-        const x = factor + Math.tan(Math.abs(LAT*D2R - decl))
-        return Math.atan(1/x) * R2D
-      }
-
-      const fajrH    = hourAngle(-18)
-      const sunriseH = hourAngle(-0.833)
-      const maghribH = hourAngle(-0.833)
-      const ishaH    = hourAngle(-17)
-
-      // Asr: use positive elevation angle
-      const asrElevation = asrAngle(1)
-      const cosAsrH = (Math.sin(asrElevation*D2R) - Math.sin(LAT*D2R)*Math.sin(decl)) /
-                      (Math.cos(LAT*D2R)*Math.cos(decl))
-      const asrH = Math.abs(cosAsrH) <= 1 ? Math.acos(cosAsrH)*R2D/15 : null
-
-      return {
-        fajr:    fajrH    ? noon - fajrH    : null,
-        sunrise: sunriseH ? noon - sunriseH : null,
-        dhuhr:   noon + 0.033,
-        asr:     asrH     ? noon + asrH     : null,
-        maghrib: maghribH ? noon + maghribH : null,
-        isha:    ishaH    ? noon + ishaH    : null,
-      }
-    }
-
-    function decimalToTime(dec) {
-      if (dec === null) return '--:--'
-      let totalMins = Math.round(dec * 60)
-      totalMins = ((totalMins % (24 * 60)) + 24 * 60) % (24 * 60)
-      const h = Math.floor(totalMins / 60)
-      const m = totalMins % 60
-      return String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0')
-    }
-
-    function decimalToMinutes(dec) {
-      if (dec === null) return null
-      let mins = Math.round(dec * 60)
-      mins = ((mins % (24 * 60)) + 24 * 60) % (24 * 60)
-      return mins
-    }
-
-    function toHijri(date) {
-      const HIJRI_EPOCH = 1948439.5
-      const GREG_EPOCH  = 1721425.5
-
-      function leapGreg(y) {
-        return (y%4===0) && (!(y%100===0)||(y%400===0))
-      }
-      function gregToJD(y, m, d) {
-        return GREG_EPOCH - 1 +
-          365*(y-1) + Math.floor((y-1)/4) - Math.floor((y-1)/100) + Math.floor((y-1)/400) +
-          Math.floor((367*m-362)/12 + (m<=2 ? 0 : leapGreg(y) ? -1 : -2) + d)
-      }
-      function hijriToJD(hy, hm, hd) {
-        return hd + Math.ceil(29.5*(hm-1)) + (hy-1)*354 +
-               Math.floor((3+11*hy)/30) + HIJRI_EPOCH - 1
-      }
-      function jdToHijri(jd) {
-        jd = Math.floor(jd) + 0.5
-        const year = Math.floor((30*(jd-HIJRI_EPOCH)+10646)/10631)
-        const month = Math.min(12, Math.ceil((jd-(29+hijriToJD(year,1,1)))/29.5)+1)
-        const day = jd - hijriToJD(year, month, 1) + 1
-        return { year, month, day: Math.floor(day) }
-      }
-
-      const jd = gregToJD(date.getFullYear(), date.getMonth()+1, date.getDate())
-      const h = jdToHijri(jd)
-      const MONTHS = ['مُحَرَّم','صَفَر','رَبِيعُ الأَوَّل','رَبِيعُ الآخِر',
-        'جُمَادَى الأُولَى','جُمَادَى الآخِرَة','رَجَب','شَعْبَان',
-        'رَمَضَان','شَوَّال','ذُو القَعْدَة','ذُو الحِجَّة']
-      return h.day + ' ' + MONTHS[h.month-1] + ' ' + h.year + ' هـ'
-    }
-
-    function drawClockFace(prayerTimes) {
-      const markersEl = document.getElementById('hourMarkers')
-      const arcsEl    = document.getElementById('salahArcs')
-      const labelsEl  = document.getElementById('salahLabels')
-      if (!markersEl) return
-      const cx = 150, cy = 150, r = 125
-      let html = ''
-      for (let i = 0; i < 12; i++) {
-        const angle = (i*30-90) * Math.PI/180
-        const x1 = cx + (r-8)*Math.cos(angle)
-        const y1 = cy + (r-8)*Math.sin(angle)
-        const x2 = cx + r*Math.cos(angle)
-        const y2 = cy + r*Math.sin(angle)
-        html += '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="rgba(133,204,255,0.4)" stroke-width="'+(i%3===0?2.5:1)+'"/>'
-      }
-      markersEl.innerHTML = html
-      const colors = ['#85CCFF','#ffd700','#7ecfff','#85CCFF','#ff9f43','#c8a2ff']
-      let arcsHtml = '', labelsHtml = ''
-      PRAYERS.forEach(function(p, i) {
-        const dec = prayerTimes[p.key]
-        if (!dec) return
-        const totalMin = decimalToMinutes(dec)
-        const angle = (totalMin/(12*60))*360 - 90
-        const rad = angle * Math.PI/180
-        const dx = cx + r*Math.cos(rad)
-        const dy = cy + r*Math.sin(rad)
-        const lx = cx + (r-26)*Math.cos(rad)
-        const ly = cy + (r-26)*Math.sin(rad)
-        arcsHtml += '<circle cx="'+dx+'" cy="'+dy+'" r="4" fill="'+colors[i]+'" opacity="0.9"/>'
-        labelsHtml += '<text x="'+lx+'" y="'+ly+'" text-anchor="middle" dominant-baseline="middle" font-family="Amiri,serif" font-size="10" fill="'+colors[i]+'" opacity="0.9">'+p.arabic+'</text>'
-      })
-      arcsEl.innerHTML = arcsHtml
-      labelsEl.innerHTML = labelsHtml
-    }
-
-    function updateClock() {
-      const now = new Date()
-      const h = now.getHours()
-      const m = now.getMinutes()
-      const s = now.getSeconds()
-
-      const timeEl = document.getElementById('clockTime')
-      if (timeEl) timeEl.textContent = String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')
-
-      const dateEl = document.getElementById('clockDate')
-      if (dateEl) dateEl.textContent = now.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'})
-
-      const hijriEl = document.getElementById('clockHijri')
-      if (hijriEl) hijriEl.textContent = toHijri(now)
-
-      const secDeg  = s * 6
-      const minDeg  = m * 6 + s * 0.1
-      const hourDeg = (h%12)*30 + m*0.5
-
-      function rotateHand(id, deg) {
-        const el = document.getElementById(id)
-        if (!el) return
-        const rad = (deg-90)*Math.PI/180
-        const cx = 150, cy = 150
-        const lengths = {hourHand:70, minuteHand:95, secondHand:105}
-        el.setAttribute('x2', cx + lengths[id]*Math.cos(rad))
-        el.setAttribute('y2', cy + lengths[id]*Math.sin(rad))
-      }
-
-      rotateHand('hourHand', hourDeg)
-      rotateHand('minuteHand', minDeg)
-      rotateHand('secondHand', secDeg)
-
-      const pTimes = calcPrayerTimes(now)
-      const nowMin = h*60 + m
-      let nextPrayer = null, nextMin = Infinity, currentPrayer = null
-
-      const prayerMins = PRAYERS.map(function(p) {
-        return { ...p, minutes: decimalToMinutes(pTimes[p.key]), timeStr: decimalToTime(pTimes[p.key]) }
-      })
-
-      prayerMins.forEach(function(p) {
-        if (p.minutes === null) return
-        if (p.minutes <= nowMin) currentPrayer = p
-        if (p.minutes > nowMin && p.minutes < nextMin) { nextMin = p.minutes; nextPrayer = p }
-      })
-
-      if (!nextPrayer) nextPrayer = prayerMins[0]
-
-      const countdownEl = document.getElementById('nextCountdown')
-      const nextNameEl  = document.getElementById('nextPrayerName')
-      if (nextPrayer && countdownEl && nextNameEl) {
-        nextNameEl.textContent = nextPrayer.arabic
-        let diff = nextPrayer.minutes - nowMin
-        if (diff < 0) diff += 24*60
-        const ch = Math.floor(diff/60)
-        const cm = diff % 60
-        countdownEl.textContent = 'in ' + ch + 'h ' + String(cm).padStart(2,'0') + 'm'
-      }
-
-      const listEl = document.getElementById('prayerList')
-      if (listEl) {
-        listEl.innerHTML = prayerMins.map(function(p) {
-          const isActive = currentPrayer && p.key === currentPrayer.key
-          const isNext   = nextPrayer && p.key === nextPrayer.key
-          return '<div class="prayer-row'+(isActive?' active':'')+(isNext&&!isActive?' next':'')+'">'+
-            '<div><div class="prayer-arabic">'+p.arabic+'</div><div class="prayer-name-en">'+p.en+'</div></div>'+
-            '<div style="display:flex;align-items:center;gap:8px;">'+
-            (isActive?'<span class="prayer-badge">Now</span>':'')+
-            (isNext&&!isActive?'<span class="prayer-badge" style="background:rgba(133,204,255,0.2);color:var(--pastel);">Next</span>':'')+
-            '<div class="prayer-time">'+p.timeStr+'</div></div></div>'
-        }).join('')
-      }
-
-      if (!window._clockDrawn) { drawClockFace(pTimes); window._clockDrawn = true }
-    }
-
-    updateClock()
-    setInterval(updateClock, 1000)
   </script>
 </body>
 </html>
