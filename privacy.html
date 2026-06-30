@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | Sual — سُؤَال</title>
+  <meta name="description" content="Privacy Policy for Sual, the Islamic knowledge app." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --regal: #094570;
+      --pastel: #85CCFF;
+      --white: #ffffff;
+      --bg: #F0F8FF;
+      --text: #0d1b2a;
+      --muted: #4a6080;
+      --border: #c8d8e8;
+      --radius: 14px;
+      --font: 'Inter', sans-serif;
+      --arabic: 'Amiri', serif;
+      --page-bg: var(--white);
+      --nav-bg: rgba(255,255,255,0.95);
+    }
+
+    html[data-theme="dark"] {
+      --regal: #5cb3f0;
+      --pastel: #85CCFF;
+      --white: #14202e;
+      --bg: #1b2a3a;
+      --text: #eaf2fa;
+      --muted: #9fb4c9;
+      --border: #2c3f54;
+      --page-bg: #0f1924;
+      --nav-bg: rgba(15,25,36,0.92);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); color: var(--text); background: var(--page-bg); overflow-x: hidden; line-height: 1.7; transition: background 0.3s ease, color 0.3s ease; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 48px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-arabic { font-family: var(--arabic); font-size: 1.6rem; color: var(--regal); font-weight: 700; }
+    .nav-logo-latin { font-size: 1.1rem; font-weight: 800; color: var(--regal); }
+    .nav-back {
+      font-size: 0.85rem; font-weight: 600; color: var(--muted); text-decoration: none;
+      display: flex; align-items: center; gap: 6px; transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--regal); }
+    .theme-toggle {
+      background: var(--bg); border: 1.5px solid var(--border); cursor: pointer;
+      border-radius: 100px; width: 36px; height: 36px; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s ease; line-height: 1; margin-left: 16px;
+    }
+    .theme-toggle:hover { border-color: var(--regal); transform: translateY(-1px); }
+    .nav-right { display: flex; align-items: center; }
+
+    main { max-width: 760px; margin: 0 auto; padding: 140px 24px 100px; }
+    .doc-tag {
+      display: inline-block; padding: 4px 14px; background: rgba(9,69,112,0.08);
+      border-radius: 100px; font-size: 0.72rem; font-weight: 700; color: var(--regal);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;
+    }
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; color: var(--regal);
+      letter-spacing: -0.01em; margin-bottom: 8px;
+    }
+    .updated { color: var(--muted); font-size: 0.85rem; margin-bottom: 40px; }
+    h2 { color: var(--regal); font-size: 1.15rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 12px; }
+    p { font-size: 0.95rem; color: var(--text); margin-bottom: 12px; }
+    ul { margin: 0 0 12px 0; padding-left: 22px; }
+    li { font-size: 0.95rem; color: var(--text); margin-bottom: 8px; }
+    a { color: var(--regal); }
+    .contact-card {
+      margin-top: 48px; padding: 28px; background: var(--bg);
+      border: 1.5px solid var(--border); border-radius: var(--radius);
+    }
+    .contact-card h2 { margin-top: 0; }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      main { padding: 110px 20px 70px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <span class="nav-logo-arabic">سُؤَال</span>
+      <span class="nav-logo-latin">Sual</span>
+    </a>
+    <div class="nav-right">
+      <a href="/" class="nav-back">← Back to Sual</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+    </div>
+  </nav>
+
+  <main>
+    <span class="doc-tag">Legal</span>
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: June 30, 2026</p>
+
+    <p>Sual ("we", "our", or "us") operates the Sual mobile and web application (the "Service"), an Islamic knowledge platform. This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service.</p>
+
+    <h2>Information we collect</h2>
+    <p>When you create an account, we collect:</p>
+    <ul>
+      <li>Your name and email address</li>
+      <li>Profile photo, if you choose to upload one</li>
+      <li>Quiz results and learning progress data</li>
+      <li>Posts and replies you submit within the Spaces community feature</li>
+    </ul>
+    <p>If you use our prayer times feature, we may request access to your approximate location to calculate accurate prayer timings. This data is used only for this purpose and is not stored on our servers.</p>
+
+    <h2>How we use your information</h2>
+    <p>We use the information we collect to:</p>
+    <ul>
+      <li>Provide and maintain the Service</li>
+      <li>Track your learning progress and quiz history</li>
+      <li>Send you account-related emails, such as confirmation, password reset, and welcome messages</li>
+      <li>Operate the Spaces community feature for paid subscribers</li>
+      <li>Improve and personalize your experience</li>
+    </ul>
+
+    <h2>Payment information</h2>
+    <p>Subscriptions to Spaces are processed through Paystack, a third-party payment processor. We do not store your card details. Please refer to <a href="https://paystack.com/privacy-policy" target="_blank" rel="noopener">Paystack's privacy policy</a> for information on how they handle payment data.</p>
+
+    <h2>Data storage</h2>
+    <p>Your data is stored securely using Supabase, our backend infrastructure provider. We implement industry-standard security measures, including row-level security policies, to protect your information.</p>
+
+    <h2>Data sharing</h2>
+    <p>We do not sell your personal data. We do not share your information with third parties except as necessary to provide the Service (such as our payment processor, email provider, and hosting infrastructure) or as required by law.</p>
+
+    <h2>Your rights</h2>
+    <p>You may:</p>
+    <ul>
+      <li>Access and update your profile information at any time within the app</li>
+      <li>Request deletion of your account and associated data by contacting us</li>
+      <li>Opt out of non-essential emails</li>
+    </ul>
+
+    <h2>Children's privacy</h2>
+    <p>Our Service is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>We may update this Privacy Policy from time to time. We will notify users of any material changes by updating the date at the top of this page.</p>
+
+    <div class="contact-card">
+      <h2>Contact us</h2>
+      <p style="margin-bottom: 0;">If you have questions about this Privacy Policy, please contact us at <a href="mailto:noreply@usesual.com">noreply@usesual.com</a>.</p>
+    </div>
+  </main>
+
+  <script>
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark')
+      } else {
+        document.documentElement.removeAttribute('data-theme')
+      }
+      var icon = document.getElementById('themeToggle')
+      if (icon) icon.textContent = theme === 'dark' ? '☀️' : '🌙'
+    }
+
+    function getPreferredTheme() {
+      var saved = localStorage.getItem('sual-theme')
+      if (saved) return saved
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    }
+
+    function toggleTheme() {
+      var current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
+      var next = current === 'dark' ? 'light' : 'dark'
+      localStorage.setItem('sual-theme', next)
+      applyTheme(next)
+    }
+
+    applyTheme(getPreferredTheme())
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme)
+  </script>
+</body>
+</html>

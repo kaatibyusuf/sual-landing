@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Sual | سُؤَال</title>
+  <meta name="description" content="Why Sual is built differently — primary source citations, scholarly voice, Arabic-first, and seven sciences taught together." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --regal: #094570;
+      --pastel: #85CCFF;
+      --white: #ffffff;
+      --bg: #F0F8FF;
+      --text: #0d1b2a;
+      --muted: #4a6080;
+      --border: #c8d8e8;
+      --radius: 14px;
+      --font: 'Inter', sans-serif;
+      --arabic: 'Amiri', serif;
+      --card-bg: var(--white);
+      --page-bg: var(--white);
+      --nav-bg: rgba(255,255,255,0.95);
+      --mobile-menu-bg: rgba(255,255,255,0.98);
+    }
+
+    html[data-theme="dark"] {
+      --regal: #5cb3f0;
+      --pastel: #85CCFF;
+      --white: #14202e;
+      --bg: #1b2a3a;
+      --text: #eaf2fa;
+      --muted: #9fb4c9;
+      --border: #2c3f54;
+      --card-bg: #1b2a3a;
+      --page-bg: #0f1924;
+      --nav-bg: rgba(15,25,36,0.92);
+      --mobile-menu-bg: rgba(15,25,36,0.97);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); color: var(--text); background: var(--page-bg); overflow-x: hidden; line-height: 1.7; transition: background 0.3s ease, color 0.3s ease; }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 48px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-arabic { font-family: var(--arabic); font-size: 1.6rem; color: var(--regal); font-weight: 700; }
+    .nav-logo-latin { font-size: 1.1rem; font-weight: 800; color: var(--regal); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.875rem; font-weight: 500; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--regal); }
+    .nav-cta {
+      padding: 9px 22px; background: var(--regal); color: var(--white) !important;
+      border-radius: 100px; font-weight: 700 !important; font-size: 0.85rem !important;
+      transition: all 0.2s ease !important;
+    }
+    .nav-cta:hover { background: #0d5a8a !important; box-shadow: 0 4px 14px rgba(9,69,112,0.3); }
+    .theme-toggle, .theme-toggle-mobile {
+      background: var(--bg); border: 1.5px solid var(--border); cursor: pointer;
+      border-radius: 100px; width: 36px; height: 36px; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s ease; line-height: 1;
+    }
+    .theme-toggle:hover, .theme-toggle-mobile:hover { border-color: var(--regal); transform: translateY(-1px); }
+    .theme-toggle-mobile { display: none; margin-right: 8px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--regal); border-radius: 2px; transition: all 0.3s ease; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none; position: fixed; top: 57px; left: 0; right: 0; z-index: 99;
+      background: var(--mobile-menu-bg); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px 20px; flex-direction: column; gap: 4px;
+    }
+    .mobile-menu.open { display: flex; animation: slideDown 0.25s ease both; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    .mobile-menu a { padding: 12px 16px; border-radius: 10px; color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: background 0.15s; display: block; }
+    .mobile-menu a:hover { background: var(--bg); color: var(--regal); }
+    .mobile-menu .mobile-cta { margin-top: 8px; background: var(--regal); color: var(--white) !important; border-radius: 12px; text-align: center; font-weight: 700 !important; }
+
+    /* ── HERO ── */
+    .page-hero { padding: 140px 48px 60px; background: var(--page-bg); text-align: center; position: relative; overflow: hidden; }
+    .page-hero::before {
+      content: 'سُؤَال'; font-family: var(--arabic); position: absolute;
+      font-size: 24vw; color: var(--regal); opacity: 0.04; top: 50%; left: 50%;
+      transform: translate(-50%,-50%); pointer-events: none; user-select: none; white-space: nowrap;
+    }
+    .page-hero-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+    .tag { display: inline-block; padding: 4px 14px; background: rgba(9,69,112,0.08); border-radius: 100px; font-size: 0.72rem; font-weight: 700; color: var(--regal); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+    .page-title { font-size: clamp(2rem,5vw,3rem); font-weight: 800; color: var(--regal); margin-bottom: 16px; letter-spacing: -0.02em; }
+    .page-sub { font-size: 1rem; color: var(--muted); line-height: 1.8; }
+
+    /* ── REASONS LIST ── */
+    .reasons-list { max-width: 900px; margin: 0 auto; padding: 60px 48px 0; display: flex; flex-direction: column; gap: 16px; }
+    .reason-row {
+      background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 16px;
+      padding: 28px 32px; display: grid; grid-template-columns: 60px 1fr; gap: 24px; align-items: center;
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reason-row:hover { border-color: var(--pastel); box-shadow: 0 10px 30px rgba(9,69,112,0.1); transform: translateX(6px); }
+    .reason-num { font-size: 1.5rem; font-weight: 800; color: var(--pastel); background: var(--regal); width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+    .reason-row.in .reason-num { transform: scale(1.05); }
+    .reason-title { font-size: 1.05rem; font-weight: 700; color: var(--regal); margin-bottom: 6px; }
+    .reason-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.75; }
+
+    @media (max-width: 600px) {
+      .reason-row { grid-template-columns: 48px 1fr; padding: 22px; gap: 16px; }
+      .reason-num { width: 44px; height: 44px; font-size: 1.1rem; border-radius: 12px; }
+    }
+
+    /* ── COMPARISON ── */
+    .compare-section { max-width: 900px; margin: 0 auto; padding: 90px 48px 0; text-align: center; }
+    .sec-title { font-size: clamp(1.5rem,3vw,2rem); font-weight: 800; color: var(--regal); margin-bottom: 10px; }
+    .sec-sub { font-size: 0.92rem; color: var(--muted); max-width: 520px; margin: 0 auto 40px; line-height: 1.7; }
+    .compare-table { background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 18px; overflow: hidden; text-align: left; }
+    .compare-row { display: grid; grid-template-columns: 1fr 90px; align-items: center; padding: 18px 28px; border-bottom: 1px solid var(--border); }
+    .compare-row:last-child { border-bottom: none; }
+    .compare-row.head { background: var(--bg); font-weight: 700; color: var(--regal); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .compare-label { font-size: 0.9rem; color: var(--text); }
+    .compare-check { display: flex; justify-content: center; }
+    .check-yes { width: 26px; height: 26px; border-radius: 50%; background: #e8f5e9; color: #2e7d32; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; }
+    html[data-theme="dark"] .check-yes { background: rgba(46,125,50,0.2); color: #a5d6a7; }
+
+    @media (max-width: 600px) {
+      .compare-row { grid-template-columns: 1fr 70px; padding: 14px 18px; }
+    }
+
+    /* ── QUOTE ── */
+    .hadith-section { max-width: 700px; margin: 80px auto 0; padding: 0 48px; text-align: center; }
+    .hadith-text { font-family: var(--arabic); font-size: clamp(1.2rem, 2.5vw, 1.5rem); color: var(--regal); line-height: 1.8; font-style: italic; }
+    .hadith-source { font-size: 0.82rem; color: var(--muted); margin-top: 12px; font-weight: 600; }
+
+    /* ── CTA ── */
+    .cta-section { background: #06304d; padding: 80px 48px 64px; text-align: center; margin-top: 80px; }
+    .cta-section .tag { background: rgba(255,255,255,0.15); color: var(--pastel); }
+    .cta-title { font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 800; color: var(--white); margin-bottom: 14px; }
+    .cta-sub { font-size: 0.95rem; color: rgba(255,255,255,0.8); max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
+    .btn-white { padding: 14px 32px; background: var(--white); color: var(--regal); border-radius: 100px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.2s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: inline-block; }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+
+    /* ── FOOTER ── */
+    footer { background: #06304d; padding: 0 48px 48px; }
+    .footer-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: start; }
+    .footer-arabic { font-family: var(--arabic); font-size: 2rem; color: var(--pastel); margin-bottom: 6px; }
+    .footer-tagline { font-size: 0.875rem; color: rgba(255,255,255,0.6); margin-bottom: 20px; max-width: 360px; line-height: 1.6; }
+    .footer-links { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+    .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.15s; }
+    .footer-links a:hover { color: var(--pastel); }
+    .footer-copy { border-top: 1px solid rgba(255,255,255,0.08); margin-top: 40px; padding-top: 24px; text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .theme-toggle-mobile { display: flex; }
+      .page-hero { padding: 110px 20px 48px; }
+      .reasons-list { padding: 40px 20px 0; }
+      .compare-section { padding: 60px 20px 0; }
+      .hadith-section { padding: 0 20px; margin-top: 60px; }
+      .cta-section { padding: 60px 20px 48px; margin-top: 60px; }
+      footer { padding: 0 20px 40px; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-links { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <span class="nav-logo-arabic">سُؤَال</span>
+      <span class="nav-logo-latin">Sual</span>
+    </a>
+    <ul class="nav-links">
+        <li><a href="/index.html">Home</a></li>
+      <li><a href="/Features.html">Features</a></li>
+      <li><a href="/Disciplines.html">Disciplines</a></li>
+      <li><a href="/Classes.html">Classes</a></li>
+      <li><a href="/Spaces.html">Spaces</a></li>
+      <li><a href="/Community.html">Community</a></li>
+      <li><a href="/Waitlist.html">Waitlist</a></li>
+      <li><button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button></li>
+      <li><a href="https://app.usesual.com" target="_blank" class="nav-cta">Open App →</a></li>
+    </ul>
+    <button class="theme-toggle-mobile" id="themeToggleMobile" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/index.html">Home</a>
+    <a href="/Features.html" onclick="closeMenu()">Features</a>
+    <a href="/Disciplines.html" onclick="closeMenu()">Disciplines</a>
+    <a href="/Classes.html" onclick="closeMenu()">Classes</a>
+    <a href="/Spaces.html" onclick="closeMenu()">Spaces</a>
+    <a href="/Community.html" onclick="closeMenu()">Community</a>
+    <a href="/Waitlist.html" onclick="closeMenu()">Waitlist</a>
+    <a href="https://app.usesual.com" target="_blank" class="mobile-cta" onclick="closeMenu()">Open App →</a>
+  </div>
+
+  <div class="page-hero">
+    <div class="page-hero-inner reveal">
+      <h1 class="page-title">Built on Classical Scholarship</h1>
+      <p class="page-sub">Sual is not another generic Islamic app. Every piece of content is grounded in the classical tradition — here's exactly why that matters.</p>
+    </div>
+  </div>
+
+  <div class="reasons-list">
+
+    <div class="reason-row reveal">
+      <div class="reason-num">01</div>
+      <div>
+        <div class="reason-title">Primary Source Citations</div>
+        <div class="reason-desc">Every answer on Sual cites its classical source — not a paraphrase of a paraphrase. You can trace every ruling, narration, or linguistic point back to where it actually comes from.</div>
+      </div>
+    </div>
+
+    <div class="reason-row reveal">
+      <div class="reason-num">02</div>
+      <div>
+        <div class="reason-title">Scholarly Voice</div>
+        <div class="reason-desc">Content is written at the level of a serious student of knowledge — not simplified to the point of distortion, and not so dense it becomes inaccessible. The goal is depth you can actually use.</div>
+      </div>
+    </div>
+
+    <div class="reason-row reveal">
+      <div class="reason-num">03</div>
+      <div>
+        <div class="reason-title">Arabic-First</div>
+        <div class="reason-desc">Arabic terminology is preserved throughout with full tashkeel, proper transliteration following sun and moon letter rules, and linguistic analysis where it adds real understanding.</div>
+      </div>
+    </div>
+
+    <div class="reason-row reveal">
+      <div class="reason-num">04</div>
+      <div>
+        <div class="reason-title">Seven Sciences Together</div>
+        <div class="reason-desc">No other free app covers Fiqh, Seerah, Arabiyyah, Usul al-Fiqh, Sarf, Nahw, and Tafseer at this depth across three structured learning levels — all in one place.</div>
+      </div>
+    </div>
+
+    <div class="reason-row reveal">
+      <div class="reason-num">05</div>
+      <div>
+        <div class="reason-title">Free at Its Core</div>
+        <div class="reason-desc">No ads. No paywalls on the knowledge content. Spaces is paid because running a real community costs real resources — but the app itself is free and always will be.</div>
+      </div>
+    </div>
+
+    <div class="reason-row reveal">
+      <div class="reason-num">06</div>
+      <div>
+        <div class="reason-title">Works Offline</div>
+        <div class="reason-desc">Install Sual and study without an internet connection. Built for the student in every circumstance — on the train, in low signal, or anywhere else.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="compare-section">
+    <h2 class="sec-title reveal">What sets Sual apart</h2>
+    <p class="sec-sub reveal">A quick look at what you actually get, compared to a typical Islamic content app.</p>
+    <div class="compare-table reveal">
+      <div class="compare-row head">
+        <div>What you get</div>
+        <div style="text-align:center;">Sual</div>
+      </div>
+      <div class="compare-row"><div class="compare-label">Sourced from classical scholarship</div><div class="compare-check"><span class="check-yes">✓</span></div></div>
+      <div class="compare-row"><div class="compare-label">Seven disciplines in one app</div><div class="compare-check"><span class="check-yes">✓</span></div></div>
+      <div class="compare-row"><div class="compare-label">Three structured learning levels</div><div class="compare-check"><span class="check-yes">✓</span></div></div>
+      <div class="compare-row"><div class="compare-label">No advertisements, anywhere</div><div class="compare-check"><span class="check-yes">✓</span></div></div>
+      <div class="compare-row"><div class="compare-label">Full Arabic text with tashkeel</div><div class="compare-check"><span class="check-yes">✓</span></div></div>
+      <div class="compare-row"><div class="compare-label">Works fully offline</div><div class="compare-check"><span class="check-yes">✓</span></div></div>
+      <div class="compare-row"><div class="compare-label">Live community and classes</div><div class="compare-check"><span class="check-yes">✓</span></div></div>
+    </div>
+  </div>
+
+  <div class="hadith-section reveal">
+    <p class="hadith-text">"The superiority of the scholar over the worshipper is like the superiority of the moon over the rest of the stars."</p>
+    <p class="hadith-source">Sunan Abu Dawud 3641</p>
+  </div>
+
+  <div class="cta-section">
+    <span class="tag">Get Started</span>
+    <h2 class="cta-title">Experience it for yourself</h2>
+    <p class="cta-sub">Open Sual and see the difference depth makes.</p>
+    <a href="https://app.usesual.com" target="_blank" class="btn-white">Open Sual App →</a>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-arabic">سُؤَال</div>
+        <p class="footer-tagline">Your companion for the Islamic sciences. Ask, learn, and test your knowledge in the classical tradition.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://app.usesual.com" target="_blank">Open App</a>
+        <a href="/Features.html">Features</a>
+        <a href="/Disciplines.html">Disciplines</a>
+        <a href="/Classes.html">Classes</a>
+        <a href="/Spaces.html">Spaces</a>
+        <a href="/Community.html">Community</a>
+        <a href="/privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-copy">© 2026 Sual | سُؤَال — Built for the students of Islamic knowledge. Free forever.</div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open')
+      document.getElementById('hamburger').classList.toggle('open')
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open')
+      document.getElementById('hamburger').classList.remove('open')
+    }
+
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark')
+      } else {
+        document.documentElement.removeAttribute('data-theme')
+      }
+      var icons = [document.getElementById('themeToggle'), document.getElementById('themeToggleMobile')]
+      icons.forEach(function (el) { if (el) el.textContent = theme === 'dark' ? '☀️' : '🌙' })
+    }
+
+    function getPreferredTheme() {
+      var saved = localStorage.getItem('sual-theme')
+      if (saved) return saved
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    }
+
+    function toggleTheme() {
+      var current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
+      var next = current === 'dark' ? 'light' : 'dark'
+      localStorage.setItem('sual-theme', next)
+      applyTheme(next)
+    }
+
+    applyTheme(getPreferredTheme())
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme)
+    document.getElementById('themeToggleMobile').addEventListener('click', toggleTheme)
+
+    // Scroll reveal animations
+    const revealEls = document.querySelectorAll('.reveal, .reason-row')
+    const revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in')
+          revealObserver.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' })
+    revealEls.forEach(function (el) { revealObserver.observe(el) })
+
+    document.querySelectorAll('.reason-row').forEach(function (el, i) {
+      el.style.transitionDelay = (i * 0.06) + 's'
+    })
+
+    window.addEventListener('load', function () {
+      const hero = document.querySelector('.page-hero-inner')
+      if (hero) hero.classList.add('in')
+    })
+  </script>
+</body>
+</html>
