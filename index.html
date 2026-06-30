@@ -269,9 +269,9 @@
     }
 
     /* ── LEVELS: warm horizontal cards ── */
-    .levels-band { background: var(--navy); border-radius: 32px; padding: 72px 56px; color: var(--cream); }
+    .levels-band { background: #16324F; border-radius: 32px; padding: 72px 56px; color: #FBF6EE; }
     .levels-band .eyebrow { color: var(--gold); }
-    .levels-band .sec-title { color: var(--cream); }
+    .levels-band .sec-title { color: #FBF6EE; }
     .levels-band .sec-sub { color: rgba(251,246,238,0.65); }
     .levels-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .level-tile {
@@ -347,7 +347,11 @@
     .hadith-source { font-size: 0.82rem; color: var(--ink-soft); margin-top: 16px; font-weight: 600; }
 
     /* ── FOOTER ── */
-    footer { background: var(--ink); color: var(--cream); padding: 80px 56px 40px; border-radius: 40px 40px 0 0; margin-top: 60px; }
+    /* Fixed colors here on purpose: footer should always read as a dark navy band
+       with cream text, regardless of light/dark mode. Using the theme-reactive
+       --ink/--cream vars here was the bug — they flip in dark mode, which washed
+       the footer out to near-white-on-near-white. */
+    footer { background: #16324F; color: #FBF6EE; padding: 80px 56px 40px; border-radius: 40px 40px 0 0; margin-top: 60px; }
     .footer-inner { max-width: 1180px; margin: 0 auto; }
     .footer-top { display: grid; grid-template-columns: 1.3fr repeat(3, 1fr); gap: 48px; margin-bottom: 64px; }
     .footer-brand-mark { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
@@ -356,7 +360,7 @@
     .footer-tagline { font-size: 0.88rem; color: rgba(251,246,238,0.55); line-height: 1.7; max-width: 280px; }
     .footer-col-title { font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 18px; }
     .footer-col a { display: block; color: rgba(251,246,238,0.65); text-decoration: none; font-size: 0.88rem; margin-bottom: 12px; transition: color 0.2s; }
-    .footer-col a:hover { color: var(--cream); }
+    .footer-col a:hover { color: #FBF6EE; }
     .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid rgba(251,246,238,0.12); font-size: 0.78rem; color: rgba(251,246,238,0.4); flex-wrap: wrap; gap: 12px; }
 
     @media (max-width: 900px) {

@@ -7,95 +7,66 @@
   <meta name="description" content="Privacy Policy for Sual, the Islamic knowledge app." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --regal: #094570;
-      --pastel: #85CCFF;
-      --white: #ffffff;
-      --bg: #F0F8FF;
-      --text: #0d1b2a;
-      --muted: #4a6080;
-      --border: #c8d8e8;
-      --radius: 14px;
-      --font: 'Inter', sans-serif;
-      --arabic: 'Amiri', serif;
-      --page-bg: var(--white);
-      --nav-bg: rgba(255,255,255,0.95);
+      --ink: #16324F; --ink-soft: #4A6580; --cream: #FBF6EE; --cream-deep: #F4EBD9; --paper: #ffffff;
+      --terracotta: #C4633F; --terracotta-deep: #9C4A2E; --olive: #6B7A4F; --gold: #C99A3E; --navy: #16324F;
+      --line: #E6DCC6; --line-strong: #D8C9A8;
+      --font-display: 'Fraunces', serif; --font-body: 'Inter', sans-serif; --font-arabic: 'Amiri', serif;
     }
-
     html[data-theme="dark"] {
-      --regal: #5cb3f0;
-      --pastel: #85CCFF;
-      --white: #14202e;
-      --bg: #1b2a3a;
-      --text: #eaf2fa;
-      --muted: #9fb4c9;
-      --border: #2c3f54;
-      --page-bg: #0f1924;
-      --nav-bg: rgba(15,25,36,0.92);
+      --ink: #F2EBDC; --ink-soft: #C8BCA3; --cream: #1C1812; --cream-deep: #25201A; --paper: #242019;
+      --terracotta: #E07A52; --terracotta-deep: #C4633F; --olive: #8FA06B; --gold: #DCB155; --navy: #6F9CC9;
+      --line: #3A332A; --line-strong: #4A4136;
     }
-
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font); color: var(--text); background: var(--page-bg); overflow-x: hidden; line-height: 1.7; transition: background 0.3s ease, color 0.3s ease; }
+    body { font-family: var(--font-body); color: var(--ink); background: var(--cream); overflow-x: hidden; line-height: 1.7; transition: background 0.4s ease, color 0.4s ease; }
+    .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.35; mix-blend-mode: multiply; background-image: radial-gradient(var(--line-strong) 0.6px, transparent 0.6px); background-size: 18px 18px; }
+    html[data-theme="dark"] .grain { mix-blend-mode: screen; opacity: 0.12; }
 
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 48px;
-      background: var(--nav-bg);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      transition: background 0.3s ease, border-color 0.3s ease;
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 56px; background: rgba(251,246,238,0.88); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); transition: background 0.4s ease, border-color 0.4s ease; }
+    html[data-theme="dark"] nav { background: rgba(28,24,18,0.88); }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo-arabic { font-family: var(--arabic); font-size: 1.6rem; color: var(--regal); font-weight: 700; }
-    .nav-logo-latin { font-size: 1.1rem; font-weight: 800; color: var(--regal); }
-    .nav-back {
-      font-size: 0.85rem; font-weight: 600; color: var(--muted); text-decoration: none;
-      display: flex; align-items: center; gap: 6px; transition: color 0.15s;
-    }
-    .nav-back:hover { color: var(--regal); }
-    .theme-toggle {
-      background: var(--bg); border: 1.5px solid var(--border); cursor: pointer;
-      border-radius: 100px; width: 36px; height: 36px; font-size: 1rem;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s ease; line-height: 1; margin-left: 16px;
-    }
-    .theme-toggle:hover { border-color: var(--regal); transform: translateY(-1px); }
+    .nav-logo-arabic { font-family: var(--font-arabic); font-size: 1.7rem; color: var(--navy); font-weight: 700; line-height: 1; }
+    .nav-logo-latin { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--ink); }
+    .nav-back { font-size: 0.85rem; font-weight: 600; color: var(--ink-soft); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.15s; }
+    .nav-back:hover { color: var(--terracotta); }
+    .theme-toggle { background: var(--paper); border: 1px solid var(--line); cursor: pointer; border-radius: 100px; width: 38px; height: 38px; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.25s ease; margin-left: 18px; }
+    .theme-toggle:hover { border-color: var(--terracotta); transform: rotate(-12deg); }
     .nav-right { display: flex; align-items: center; }
 
-    main { max-width: 760px; margin: 0 auto; padding: 140px 24px 100px; }
-    .doc-tag {
-      display: inline-block; padding: 4px 14px; background: rgba(9,69,112,0.08);
-      border-radius: 100px; font-size: 0.72rem; font-weight: 700; color: var(--regal);
-      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;
-    }
-    h1 {
-      font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; color: var(--regal);
-      letter-spacing: -0.01em; margin-bottom: 8px;
-    }
-    .updated { color: var(--muted); font-size: 0.85rem; margin-bottom: 40px; }
-    h2 { color: var(--regal); font-size: 1.15rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 12px; }
-    p { font-size: 0.95rem; color: var(--text); margin-bottom: 12px; }
+    main { max-width: 740px; margin: 0 auto; padding: 150px 24px 110px; position: relative; z-index: 1; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 0.8rem; font-weight: 600; color: var(--terracotta-deep); margin-bottom: 18px; }
+    .eyebrow-mark { width: 22px; height: 1.5px; background: var(--terracotta); }
+    h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.9rem, 4vw, 2.6rem); color: var(--ink); letter-spacing: -0.01em; margin-bottom: 8px; }
+    .updated { color: var(--ink-soft); font-size: 0.85rem; margin-bottom: 44px; }
+    h2 { font-family: var(--font-display); color: var(--ink); font-size: 1.2rem; font-weight: 600; margin-top: 2.6rem; margin-bottom: 12px; }
+    p { font-size: 0.95rem; color: var(--ink); margin-bottom: 12px; }
     ul { margin: 0 0 12px 0; padding-left: 22px; }
-    li { font-size: 0.95rem; color: var(--text); margin-bottom: 8px; }
-    a { color: var(--regal); }
-    .contact-card {
-      margin-top: 48px; padding: 28px; background: var(--bg);
-      border: 1.5px solid var(--border); border-radius: var(--radius);
-    }
+    li { font-size: 0.95rem; color: var(--ink); margin-bottom: 8px; }
+    a { color: var(--terracotta-deep); }
+    .contact-card { margin-top: 48px; padding: 30px; background: var(--paper); border: 1px solid var(--line); border-radius: 20px; }
     .contact-card h2 { margin-top: 0; }
 
+    footer { background: #16324F; color: #FBF6EE; padding: 56px 56px 32px; border-radius: 32px 32px 0 0; }
+    .footer-inner { max-width: 1180px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-brand-mark { display: flex; align-items: center; gap: 10px; }
+    .footer-arabic-mark { font-family: var(--font-arabic); font-size: 1.4rem; color: var(--gold); }
+    .footer-latin-mark { font-family: var(--font-display); font-size: 1.05rem; font-weight: 600; }
+    .footer-bottom-text { font-size: 0.78rem; color: rgba(251,246,238,0.5); }
+
     @media (max-width: 768px) {
-      nav { padding: 14px 20px; }
-      main { padding: 110px 20px 70px; }
+      nav { padding: 16px 20px; }
+      main { padding: 120px 20px 80px; }
+      footer { padding: 40px 24px 28px; border-radius: 24px 24px 0 0; }
     }
   </style>
 </head>
 <body>
+
+  <div class="grain"></div>
 
   <nav>
     <a href="/" class="nav-logo">
@@ -103,13 +74,13 @@
       <span class="nav-logo-latin">Sual</span>
     </a>
     <div class="nav-right">
-      <a href="/" class="nav-back">← Back to Sual</a>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+      <a href="/index.html" class="nav-back">← Back to Sual</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
     </div>
   </nav>
 
   <main>
-    <span class="doc-tag">Legal</span>
+    <span class="eyebrow"><span class="eyebrow-mark"></span>Legal</span>
     <h1>Privacy Policy</h1>
     <p class="updated">Last updated: June 30, 2026</p>
 
@@ -164,30 +135,31 @@
     </div>
   </main>
 
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand-mark"><span class="footer-arabic-mark">سُؤَال</span><span class="footer-latin-mark">Sual</span></div>
+      <span class="footer-bottom-text">© 2026 Sual | سُؤَال — Built for the students of Islamic knowledge.</span>
+    </div>
+  </footer>
+
   <script>
     function applyTheme(theme) {
-      if (theme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark')
-      } else {
-        document.documentElement.removeAttribute('data-theme')
-      }
+      if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark')
+      else document.documentElement.removeAttribute('data-theme')
       var icon = document.getElementById('themeToggle')
       if (icon) icon.textContent = theme === 'dark' ? '☀️' : '🌙'
     }
-
     function getPreferredTheme() {
       var saved = localStorage.getItem('sual-theme')
       if (saved) return saved
       return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     }
-
     function toggleTheme() {
       var current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
       var next = current === 'dark' ? 'light' : 'dark'
       localStorage.setItem('sual-theme', next)
       applyTheme(next)
     }
-
     applyTheme(getPreferredTheme())
     document.getElementById('themeToggle').addEventListener('click', toggleTheme)
   </script>
