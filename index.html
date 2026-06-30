@@ -22,10 +22,32 @@
       --radius: 14px;
       --font: 'Inter', sans-serif;
       --arabic: 'Amiri', serif;
+      --card-bg: var(--white);
+      --page-bg: var(--white);
+      --nav-bg: rgba(255,255,255,0.95);
+      --mobile-menu-bg: rgba(255,255,255,0.98);
+      --shadow-color: rgba(9,69,112,0.1);
+      --hero-bg: linear-gradient(160deg, #F0F8FF 0%, #fff 50%, #e8f4ff 100%);
+    }
+
+    html[data-theme="dark"] {
+      --regal: #5cb3f0;
+      --pastel: #85CCFF;
+      --white: #14202e;
+      --bg: #1b2a3a;
+      --text: #eaf2fa;
+      --muted: #9fb4c9;
+      --border: #2c3f54;
+      --card-bg: #1b2a3a;
+      --page-bg: #0f1924;
+      --nav-bg: rgba(15,25,36,0.92);
+      --mobile-menu-bg: rgba(15,25,36,0.97);
+      --shadow-color: rgba(0,0,0,0.4);
+      --hero-bg: linear-gradient(160deg, #0f1924 0%, #14202e 50%, #182838 100%);
     }
 
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font); color: var(--text); background: var(--white); overflow-x: hidden; line-height: 1.6; }
+    body { font-family: var(--font); color: var(--text); background: var(--page-bg); overflow-x: hidden; line-height: 1.6; transition: background 0.3s ease, color 0.3s ease; }
 
     /* ── SPLASH ── */
     #splash {
@@ -67,10 +89,20 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 16px 48px;
-      background: rgba(255,255,255,0.95);
+      background: var(--nav-bg);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
+
+    .theme-toggle, .theme-toggle-mobile {
+      background: var(--bg); border: 1.5px solid var(--border); cursor: pointer;
+      border-radius: 100px; width: 36px; height: 36px; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s ease; line-height: 1;
+    }
+    .theme-toggle:hover, .theme-toggle-mobile:hover { border-color: var(--regal); transform: translateY(-1px); }
+    .theme-toggle-mobile { display: none; margin-right: 8px; }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-logo-arabic { font-family: var(--arabic); font-size: 1.6rem; color: var(--regal); font-weight: 700; }
     .nav-logo-latin { font-size: 1.1rem; font-weight: 800; color: var(--regal); }
@@ -99,7 +131,7 @@
 
     .mobile-menu {
       display: none; position: fixed; top: 57px; left: 0; right: 0; z-index: 99;
-      background: rgba(255,255,255,0.98); backdrop-filter: blur(12px);
+      background: var(--mobile-menu-bg); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 12px 20px 20px; flex-direction: column; gap: 4px;
     }
@@ -124,7 +156,7 @@
     .hero {
       min-height: 100vh; display: flex; align-items: center; justify-content: center;
       padding: 120px 48px 80px;
-      background: linear-gradient(160deg, #F0F8FF 0%, #fff 50%, #e8f4ff 100%);
+      background: var(--hero-bg);
       position: relative; overflow: hidden;
     }
     .hero::before {
@@ -185,7 +217,7 @@
     .stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.75); font-weight: 500; }
 
     /* ── SECTIONS ── */
-    section { padding: 80px 48px; }
+    section { padding: 80px 48px; transition: background 0.3s ease; }
     .inner { max-width: 1000px; margin: 0 auto; }
     .tag { display: inline-block; padding: 4px 14px; background: rgba(9,69,112,0.08); border-radius: 100px; font-size: 0.72rem; font-weight: 700; color: var(--regal); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
     .sec-title { font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 800; color: var(--regal); margin-bottom: 12px; letter-spacing: -0.01em; }
@@ -261,9 +293,10 @@
     /* Spaces */
     .spaces-section { background: var(--white); }
     .spaces-card {
-      background: linear-gradient(135deg, #f0f7ff, #fff);
+      background: var(--card-bg);
       border: 1.5px solid var(--border); border-radius: 20px;
       padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
     .spaces-title { font-size: 1.5rem; font-weight: 800; color: var(--regal); margin-bottom: 10px; }
     .spaces-arabic { font-family: var(--arabic); font-size: 1.1rem; color: var(--muted); margin-bottom: 14px; }
@@ -329,6 +362,7 @@
       nav { padding: 14px 20px; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
+      .theme-toggle-mobile { display: flex; }
       .hero { padding: 100px 20px 60px; }
       .mockup-sidebar { display: none; }
       .mockup-inner { grid-template-columns: 1fr; }
@@ -382,8 +416,10 @@
       <li><a href="#spaces">Spaces</a></li>
       <li><a href="#why">Why Sual</a></li>
       <li><a href="#waitlist">Waitlist</a></li>
+      <li><button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button></li>
       <li><a href="https://sual-seven.vercel.app/" target="_blank" class="nav-cta">Open App →</a></li>
     </ul>
+    <button class="theme-toggle-mobile" id="themeToggleMobile" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -405,7 +441,7 @@
     <div class="hero-inner">
       <div class="hero-arabic">سُؤَال</div>
       <h1 class="hero-title">The Islamic <span>Knowledge</span> App</h1>
-      <p class="hero-sub">Ask. Learn. Test. Your companion for the seven Islamic sciences — built on classical scholarship and designed for the serious student.</p>
+      <p class="hero-sub">Ask. Learn. Test. Your companion for the seven Islamic sciences, built on classical scholarship and designed for the serious student.</p>
       <div class="hero-actions">
         <a href="https://sual-seven.vercel.app/" target="_blank" class="btn-primary">Open Sual App →</a>
         <a href="#features" class="btn-secondary">Explore Features</a>
@@ -469,7 +505,7 @@
         <div class="feature-card">
           <div class="feature-icon">📚</div>
           <div class="feature-name">Levelled Scholarly Q&amp;A</div>
-          <div class="feature-desc">700+ curated questions and detailed answers across three levels — Beginner, Intermediate, and Advanced — sourced from classical texts and authenticated references.</div>
+          <div class="feature-desc">700+ curated questions and detailed answers across three levels; Beginner, Intermediate, and Advanced. Sourced from classical texts and authenticated references.</div>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🎯</div>
@@ -479,7 +515,7 @@
         <div class="feature-card">
           <div class="feature-icon">🤲</div>
           <div class="feature-name">Adhkar &amp; Duas</div>
-          <div class="feature-desc">Complete morning and evening adhkar, ruqyah verses with methodology, and a library of authenticated duas — all with Arabic text, transliteration, translation, and scholarly sources.</div>
+          <div class="feature-desc">Complete morning and evening adhkar, ruqyah verses with methodology, and a library of authenticated duas, all with Arabic text, transliteration, translation, and scholarly sources.</div>
         </div>
         <div class="feature-card">
           <div class="feature-icon">📜</div>
@@ -489,7 +525,7 @@
         <div class="feature-card">
           <div class="feature-icon">🗓️</div>
           <div class="feature-name">Islamic Calendar</div>
-          <div class="feature-desc">A full Hijri calendar with important Islamic dates — Ayyam Al-Bid, Ashura, Eid, Laylat Al-Qadr — with location-based Maghrib adjustment for accurate date transitions.</div>
+          <div class="feature-desc">A full Hijri calendar with important Islamic dates; Ayyamul-Bid, Ashura, Eid, Laylatul-Qadr, with location-based Maghrib adjustment for accurate date transitions.</div>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🎙️</div>
@@ -504,7 +540,6 @@
         <div class="feature-card">
           <div class="feature-icon">🌙</div>
           <div class="feature-name">Dark Mode &amp; PWA</div>
-          <div class="feature-desc">Full dark mode, adjustable settings, and Progressive Web App support — install it on your phone and study offline without an internet connection.</div>
         </div>
       </div>
     </div>
@@ -576,13 +611,13 @@
     <div class="inner">
       <span class="tag">Live Classes</span>
       <h2 class="sec-title">Structured learning. Real progress.</h2>
-      <p class="sec-sub">Two structured classes now open inside Spaces — for paid members. Join a cohort and learn with others under guidance.</p>
+      <p class="sec-sub">Two structured classes now open inside Spaces for paid members. Join a cohort and learn with others under guidance.</p>
       <div class="classes-grid">
         <div class="class-card">
           <div class="class-icon">✍️</div>
           <div class="class-name">Arabiyyah Class</div>
           <div class="class-arabic">فَصْلُ العَرَبِيَّة</div>
-          <div class="class-desc">A complete structured Arabic programme — from the Duruusu-l-Lughah Al-Arabiyyah at beginner level, through Nahw, Sarf, and Insha at intermediate, to Alfiyyah Ibn Malik and Balaghah at advanced. The goal: independent reading of classical Arabic texts.</div>
+          <div class="class-desc">A complete structured Arabic programme from the Duruusu-l-Lughah at beginner level, through Nahw, Sarf, and Insha at intermediate, to Alfiyyah Ibn Malik and Balaghah at advanced. The goal: independent reading of classical Arabic texts.</div>
           <div class="class-levels">
             <span class="class-level-tag level-beginner">Duruusu-l-Lughah</span>
             <span class="class-level-tag level-intermediate">Nahw, Sarf, Insha</span>
@@ -612,7 +647,7 @@
     <div class="inner">
       <span class="tag">Spaces</span>
       <h2 class="sec-title">The serious student's community</h2>
-      <p class="sec-sub">An exclusive paid community for members who want more than content — they want guidance, accountability, and company on the path.</p>
+      <p class="sec-sub">An exclusive paid community for members who want want guidance, accountability, and company on the path.</p>
       <div class="spaces-card">
         <div>
           <div class="spaces-title">Spaces — فَضَاءَات</div>
@@ -738,7 +773,7 @@
     <div class="inner">
       <span class="tag">Community</span>
       <h2 class="sec-title">Join the Sual Community</h2>
-      <p class="sec-sub">Daily Islamic knowledge questions, discussions, and updates — delivered to your WhatsApp. Over 7,000 students learning together.</p>
+      <p class="sec-sub">Daily Islamic knowledge questions, discussions, and updates. Over 7,000 students learning together.</p>
       <div class="community-actions">
         <a href="https://whatsapp.com/channel/0029Vb8gbnB5PO0ysEFozQ46" target="_blank" class="btn-white">💬 Join WhatsApp Channel</a>
         <a href="https://sual-seven.vercel.app/" target="_blank" class="btn-outline-white">Open the App →</a>
@@ -751,7 +786,7 @@
     <div class="footer-inner">
       <div>
         <div class="footer-arabic">سُؤَال</div>
-        <p class="footer-tagline">Your companion for the Islamic sciences — ask, learn, and test your knowledge in the classical tradition.</p>
+        <p class="footer-tagline">Your companion for the Islamic sciences. Ask, learn, and test your knowledge in the classical tradition.</p>
         <div class="footer-social">
           <a href="https://x.com/use_sual" target="_blank">𝕏 @ask_sual</a>
           <a href="https://whatsapp.com/channel/0029Vb8gbnB5PO0ysEFozQ46" target="_blank">💬 WhatsApp</a>
@@ -787,6 +822,34 @@
       document.getElementById('mobileMenu').classList.remove('open')
       document.getElementById('hamburger').classList.remove('open')
     }
+
+    // Theme toggle
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark')
+      } else {
+        document.documentElement.removeAttribute('data-theme')
+      }
+      var icons = [document.getElementById('themeToggle'), document.getElementById('themeToggleMobile')]
+      icons.forEach(function (el) { if (el) el.textContent = theme === 'dark' ? '☀️' : '🌙' })
+    }
+
+    function getPreferredTheme() {
+      var saved = localStorage.getItem('sual-theme')
+      if (saved) return saved
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    }
+
+    function toggleTheme() {
+      var current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
+      var next = current === 'dark' ? 'light' : 'dark'
+      localStorage.setItem('sual-theme', next)
+      applyTheme(next)
+    }
+
+    applyTheme(getPreferredTheme())
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme)
+    document.getElementById('themeToggleMobile').addEventListener('click', toggleTheme)
 
     // Animated counters
     function animateCounter(el, target, duration, suffix) {
