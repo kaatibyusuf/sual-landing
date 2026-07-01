@@ -7,284 +7,408 @@
   <meta name="description" content="Explore the seven Islamic sciences taught on Sual — Fiqh, Seerah, Arabiyyah, Usul al-Fiqh, Sarf, Nahw, and Tafseer." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --ink: #16324F; --ink-soft: #4A6580; --cream: #FBF6EE; --cream-deep: #F4EBD9; --paper: #ffffff;
-      --terracotta: #C4633F; --terracotta-deep: #9C4A2E; --olive: #6B7A4F; --gold: #C99A3E; --navy: #16324F;
-      --line: #E6DCC6; --line-strong: #D8C9A8;
-      --font-display: 'Fraunces', serif; --font-body: 'Inter', sans-serif; --font-arabic: 'Amiri', serif;
-    }
-    html[data-theme="dark"] {
-      --ink: #F2EBDC; --ink-soft: #C8BCA3; --cream: #1C1812; --cream-deep: #25201A; --paper: #242019;
-      --terracotta: #E07A52; --terracotta-deep: #C4633F; --olive: #8FA06B; --gold: #DCB155; --navy: #6F9CC9;
-      --line: #3A332A; --line-strong: #4A4136;
-    }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--font-body); color: var(--ink); background: var(--cream); overflow-x: hidden; line-height: 1.6; transition: background 0.4s ease, color 0.4s ease; }
-    ::selection { background: var(--gold); color: var(--navy); }
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
-    .reveal.in { opacity: 1; transform: translateY(0); }
-    .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.35; mix-blend-mode: multiply; background-image: radial-gradient(var(--line-strong) 0.6px, transparent 0.6px); background-size: 18px 18px; }
-    html[data-theme="dark"] .grain { mix-blend-mode: screen; opacity: 0.12; }
 
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 56px; background: rgba(251,246,238,0.88); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); transition: background 0.4s ease, border-color 0.4s ease; }
-    html[data-theme="dark"] nav { background: rgba(28,24,18,0.88); }
+    :root {
+      --regal: #094570;
+      --pastel: #85CCFF;
+      --white: #ffffff;
+      --bg: #F0F8FF;
+      --text: #0d1b2a;
+      --muted: #4a6080;
+      --border: #c8d8e8;
+      --radius: 14px;
+      --font: 'Inter', sans-serif;
+      --arabic: 'Amiri', serif;
+      --card-bg: var(--white);
+      --page-bg: var(--white);
+      --nav-bg: rgba(255,255,255,0.95);
+      --mobile-menu-bg: rgba(255,255,255,0.98);
+    }
+
+    html[data-theme="dark"] {
+      --regal: #5cb3f0;
+      --pastel: #85CCFF;
+      --white: #14202e;
+      --bg: #1b2a3a;
+      --text: #eaf2fa;
+      --muted: #9fb4c9;
+      --border: #2c3f54;
+      --card-bg: #1b2a3a;
+      --page-bg: #0f1924;
+      --nav-bg: rgba(15,25,36,0.92);
+      --mobile-menu-bg: rgba(15,25,36,0.97);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); color: var(--text); background: var(--page-bg); overflow-x: hidden; line-height: 1.7; transition: background 0.3s ease, color 0.3s ease; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 48px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo-arabic { font-family: var(--font-arabic); font-size: 1.7rem; color: var(--navy); font-weight: 700; line-height: 1; }
-    .nav-logo-latin { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--ink); }
-    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
-    .nav-links a { text-decoration: none; color: var(--ink-soft); font-size: 0.88rem; font-weight: 500; transition: color 0.2s; position: relative; }
-    .nav-links a:not(.nav-cta)::after { content: ''; position: absolute; left: 0; bottom: -4px; width: 0; height: 1.5px; background: var(--terracotta); transition: width 0.25s ease; }
-    .nav-links a:not(.nav-cta):hover::after { width: 100%; }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-cta { padding: 10px 24px; background: var(--navy); color: var(--cream) !important; border-radius: 100px; font-weight: 600 !important; font-size: 0.85rem !important; transition: all 0.25s ease !important; }
-    .nav-cta:hover { background: var(--terracotta-deep) !important; transform: translateY(-2px); }
-    .theme-toggle, .theme-toggle-mobile { background: var(--paper); border: 1px solid var(--line); cursor: pointer; border-radius: 100px; width: 38px; height: 38px; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.25s ease; }
-    .theme-toggle:hover, .theme-toggle-mobile:hover { border-color: var(--terracotta); transform: rotate(-12deg); }
-    .theme-toggle-mobile { display: none; margin-right: 10px; }
+    .nav-logo-arabic { font-family: var(--arabic); font-size: 1.6rem; color: var(--regal); font-weight: 700; }
+    .nav-logo-latin { font-size: 1.1rem; font-weight: 800; color: var(--regal); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.875rem; font-weight: 500; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--regal); }
+    .nav-cta {
+      padding: 9px 22px; background: var(--regal); color: var(--white) !important;
+      border-radius: 100px; font-weight: 700 !important; font-size: 0.85rem !important;
+      transition: all 0.2s ease !important;
+    }
+    .nav-cta:hover { background: #0d5a8a !important; box-shadow: 0 4px 14px rgba(9,69,112,0.3); }
+    .theme-toggle, .theme-toggle-mobile {
+      background: var(--bg); border: 1.5px solid var(--border); cursor: pointer;
+      border-radius: 100px; width: 36px; height: 36px; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s ease; line-height: 1;
+    }
+    .theme-toggle:hover, .theme-toggle-mobile:hover { border-color: var(--regal); transform: translateY(-1px); }
+    .theme-toggle-mobile { display: none; margin-right: 8px; }
     .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all 0.3s ease; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--regal); border-radius: 2px; transition: all 0.3s ease; }
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-    .mobile-menu { display: none; position: fixed; top: 78px; left: 0; right: 0; z-index: 99; background: var(--paper); border-bottom: 1px solid var(--line); padding: 12px 20px 24px; flex-direction: column; gap: 2px; }
-    .mobile-menu.open { display: flex; animation: slideDown 0.3s ease both; }
-    @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-    .mobile-menu a { padding: 14px 16px; border-radius: 12px; color: var(--ink); text-decoration: none; font-size: 1rem; font-weight: 600; transition: background 0.15s; display: block; }
-    .mobile-menu a:hover { background: var(--cream-deep); }
-    .mobile-menu .mobile-cta { margin-top: 10px; background: var(--navy); color: var(--cream) !important; border-radius: 14px; text-align: center; }
-    @media (max-width: 980px) { .nav-links { display: none; } .hamburger { display: flex; } .theme-toggle-mobile { display: flex; } }
+    .mobile-menu {
+      display: none; position: fixed; top: 57px; left: 0; right: 0; z-index: 99;
+      background: var(--mobile-menu-bg); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px 20px; flex-direction: column; gap: 4px;
+    }
+    .mobile-menu.open { display: flex; animation: slideDown 0.25s ease both; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    .mobile-menu a { padding: 12px 16px; border-radius: 10px; color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: background 0.15s; display: block; }
+    .mobile-menu a:hover { background: var(--bg); color: var(--regal); }
+    .mobile-menu .mobile-cta { margin-top: 8px; background: var(--regal); color: var(--white) !important; border-radius: 12px; text-align: center; font-weight: 700 !important; }
 
-    .page-hero { padding: 160px 56px 70px; text-align: center; position: relative; max-width: 900px; margin: 0 auto; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 0.8rem; font-weight: 600; color: var(--terracotta-deep); margin-bottom: 18px; justify-content: center; }
-    .eyebrow-mark { width: 22px; height: 1.5px; background: var(--terracotta); }
-    .page-title { font-family: var(--font-display); font-weight: 600; font-size: clamp(2.2rem, 4.6vw, 3.6rem); line-height: 1.08; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 22px; }
-    .page-sub { font-size: 1.02rem; color: var(--ink-soft); max-width: 560px; margin: 0 auto; line-height: 1.8; }
+    /* ── HERO ── */
+    .page-hero {
+      padding: 140px 48px 60px;
+      background: var(--page-bg);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: 'سُؤَال'; font-family: var(--arabic); position: absolute;
+      font-size: 24vw; color: var(--regal); opacity: 0.04; top: 50%; left: 50%;
+      transform: translate(-50%,-50%); pointer-events: none; user-select: none; white-space: nowrap;
+    }
+    .page-hero-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+    .tag { display: inline-block; padding: 4px 14px; background: rgba(9,69,112,0.08); border-radius: 100px; font-size: 0.72rem; font-weight: 700; color: var(--regal); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+    .page-title { font-size: clamp(2rem,5vw,3rem); font-weight: 800; color: var(--regal); margin-bottom: 16px; letter-spacing: -0.02em; }
+    .page-sub { font-size: 1rem; color: var(--muted); line-height: 1.8; }
 
-    section { padding: 0 56px 130px; }
+    /* ── DISCIPLINE BLOCKS ── */
+    .disciplines-list { max-width: 920px; margin: 0 auto; padding: 60px 48px 100px; display: flex; flex-direction: column; gap: 20px; }
+    .disc-block {
+      background: var(--card-bg); border: 1.5px solid var(--border); border-radius: 18px;
+      padding: 36px; display: grid; grid-template-columns: auto 1fr; gap: 24px;
+      transition: all 0.2s ease;
+    }
+    .disc-block:hover { border-color: var(--pastel); box-shadow: 0 10px 32px rgba(9,69,112,0.1); }
+    .disc-icon-wrap {
+      width: 64px; height: 64px; border-radius: 16px; background: var(--bg);
+      display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0;
+    }
+    .disc-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+    .disc-name { font-size: 1.3rem; font-weight: 800; color: var(--regal); }
+    .disc-arabic { font-family: var(--arabic); font-size: 1.3rem; color: var(--muted); }
+    .disc-summary { font-size: 0.78rem; font-weight: 600; color: var(--pastel); background: rgba(9,69,112,0.08); display: inline-block; padding: 3px 12px; border-radius: 100px; margin-bottom: 14px; }
+    html[data-theme="dark"] .disc-summary { color: var(--regal); background: rgba(133,204,255,0.12); }
+    .disc-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-bottom: 18px; }
+    .disc-levels { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+    .disc-level-tag { font-size: 0.7rem; font-weight: 700; padding: 4px 12px; border-radius: 100px; }
+    .level-beginner { background: #e8f5e9; color: #2e7d32; }
+    .level-intermediate { background: #fff3e0; color: #e65100; }
+    .level-advanced { background: #f3e5f5; color: #6a1b9a; }
+    html[data-theme="dark"] .level-beginner { background: rgba(46,125,50,0.2); color: #a5d6a7; }
+    html[data-theme="dark"] .level-intermediate { background: rgba(230,81,0,0.2); color: #ffcc80; }
+    html[data-theme="dark"] .level-advanced { background: rgba(106,27,154,0.2); color: #ce93d8; }
+    .disc-link {
+      display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 700;
+      color: var(--regal); text-decoration: none; transition: gap 0.15s ease;
+    }
+    .disc-link:hover { gap: 10px; }
 
-    /* DISCIPLINE LIST */
-    .disc-list { display: flex; flex-direction: column; max-width: 980px; margin: 0 auto; }
-    .disc-row { display: grid; grid-template-columns: 90px 1fr; gap: 32px; padding: 44px 8px; border-bottom: 1px solid var(--line); align-items: flex-start; transition: padding-left 0.3s ease, background 0.3s ease; }
-    .disc-row:first-child { border-top: 1px solid var(--line); }
-    .disc-row:hover { padding-left: 22px; background: var(--cream-deep); }
-    .disc-index { font-family: var(--font-display); font-size: 1.6rem; color: var(--line-strong); font-weight: 600; transition: color 0.3s ease; }
-    .disc-row:hover .disc-index { color: var(--terracotta); }
-    .disc-title-row { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
-    .disc-name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--ink); }
-    .disc-arabic-inline { font-family: var(--font-arabic); font-size: 1.3rem; color: var(--terracotta); }
-    .disc-tagline { font-size: 0.76rem; font-weight: 700; color: var(--olive); background: #E5EAD8; padding: 4px 13px; border-radius: 100px; }
-    html[data-theme="dark"] .disc-tagline { background: rgba(107,122,79,0.25); }
-    .disc-desc { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.8; max-width: 640px; margin-bottom: 16px; }
-    .disc-levels { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-    .disc-level-tag { font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 100px; }
-    .level-beginner { background: #E5EAD8; color: #3F4A2D; }
-    .level-intermediate { background: #F5E7C8; color: #7A5B1E; }
-    .level-advanced { background: #F3DDD0; color: #8A4329; }
-    html[data-theme="dark"] .level-beginner { background: rgba(107,122,79,0.25); color: #C5D9A4; }
-    html[data-theme="dark"] .level-intermediate { background: rgba(201,154,62,0.25); color: #F0D898; }
-    html[data-theme="dark"] .level-advanced { background: rgba(196,99,63,0.25); color: #F0A988; }
-    .disc-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; font-weight: 600; color: var(--ink); text-decoration: none; border-bottom: 1.5px solid var(--terracotta); padding-bottom: 2px; transition: gap 0.2s ease; }
-    .disc-link:hover { gap: 12px; }
+    @media (max-width: 640px) {
+      .disc-block { grid-template-columns: 1fr; }
+      .disc-icon-wrap { margin-bottom: 4px; }
+    }
 
-    @media (max-width: 640px) { .disc-row { grid-template-columns: 1fr; gap: 16px; } .disc-index { font-size: 1.2rem; } }
+    /* ── CTA ── */
+    .cta-section { background: #06304d; padding: 80px 48px 64px; text-align: center; }
+    .cta-section .tag { background: rgba(255,255,255,0.15); color: var(--pastel); }
+    .cta-title { font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 800; color: var(--white); margin-bottom: 14px; }
+    .cta-sub { font-size: 0.95rem; color: rgba(255,255,255,0.8); max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
+    .btn-white { padding: 14px 32px; background: var(--white); color: var(--regal); border-radius: 100px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.2s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: inline-block; }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
 
-    .cta-band { background: var(--navy); border-radius: 32px; padding: 72px 56px; text-align: center; max-width: 1180px; margin: 0 auto; }
-    .cta-band .eyebrow { color: var(--gold); }
-    .cta-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 600; color: var(--cream); margin-bottom: 14px; }
-    .cta-sub { font-size: 0.96rem; color: rgba(251,246,238,0.7); max-width: 460px; margin: 0 auto 32px; line-height: 1.7; }
-    .btn-cream { padding: 16px 36px; background: var(--cream); color: var(--navy); border-radius: 100px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.25s ease; display: inline-block; }
-    .btn-cream:hover { transform: translateY(-3px); background: var(--gold); }
+    /* ── FOOTER ── */
+    footer { background: #06304d; padding: 0 48px 48px; }
+    .footer-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: start; }
+    .footer-arabic { font-family: var(--arabic); font-size: 2rem; color: var(--pastel); margin-bottom: 6px; }
+    .footer-tagline { font-size: 0.875rem; color: rgba(255,255,255,0.6); margin-bottom: 20px; max-width: 360px; line-height: 1.6; }
+    .footer-links { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
+    .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.15s; }
+    .footer-links a:hover { color: var(--pastel); }
+    .footer-copy { border-top: 1px solid rgba(255,255,255,0.08); margin-top: 40px; padding-top: 24px; text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.4); }
 
-    @media (max-width: 768px) { .page-hero { padding: 130px 24px 50px; } section { padding: 0 20px 90px; } .cta-band { padding: 48px 28px; border-radius: 24px; } }
-
-    footer { background: var(--navy); color: var(--cream); padding: 80px 56px 40px; border-radius: 40px 40px 0 0; margin-top: 60px; }
-    .footer-inner { max-width: 1180px; margin: 0 auto; }
-    .footer-top { display: grid; grid-template-columns: 1.3fr repeat(3, 1fr); gap: 48px; margin-bottom: 64px; }
-    .footer-brand-mark { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
-    .footer-arabic-mark { font-family: var(--font-arabic); font-size: 1.8rem; color: var(--gold); }
-    .footer-latin-mark { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; }
-    .footer-tagline { font-size: 0.88rem; color: rgba(251,246,238,0.55); line-height: 1.7; max-width: 280px; }
-    .footer-col-title { font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 18px; }
-    .footer-col a { display: block; color: rgba(251,246,238,0.65); text-decoration: none; font-size: 0.88rem; margin-bottom: 12px; transition: color 0.2s; }
-    .footer-col a:hover { color: var(--cream); }
-    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid rgba(251,246,238,0.12); font-size: 0.78rem; color: rgba(251,246,238,0.4); flex-wrap: wrap; gap: 12px; }
-    @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; } footer { padding: 56px 24px 32px; border-radius: 28px 28px 0 0; } }
-    @media (max-width: 560px) { .footer-top { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .theme-toggle-mobile { display: flex; }
+      .page-hero { padding: 110px 20px 48px; }
+      .disciplines-list { padding: 40px 20px 70px; }
+      .cta-section { padding: 60px 20px; }
+      footer { padding: 40px 20px; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-links { align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
 
-  <div class="grain"></div>
-
   <nav>
-    <a href="/" class="nav-logo"><span class="nav-logo-arabic">سُؤَال</span><span class="nav-logo-latin">Sual</span></a>
+    <a href="/" class="nav-logo">
+      <span class="nav-logo-arabic">سُؤَال</span>
+      <span class="nav-logo-latin">Sual</span>
+    </a>
     <ul class="nav-links">
-        <a href="/index.html">Home</a>
-      <li><a href="/Features.html">Features</a></li>
-      <li><a href="/Disciplines.html">Disciplines</a></li>
-      <li><a href="/Classes.html">Classes</a></li>
-      <li><a href="/Spaces.html">Spaces</a></li>
-      <li><a href="/Community.html">Community</a></li>
-      <li><a href="/Why.html">Why Sual</a></li>
-      <li><a href="/Waitlist.html">Waitlist</a></li>
-      <li><button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">🌙</button></li>
-      <li><a href="https://app.usesual.com" target="_blank" class="nav-cta">Open app</a></li>
+      <li><a href="/#features">Features</a></li>
+      <li><a href="/disciplines.html">Disciplines</a></li>
+      <li><a href="/#classes">Classes</a></li>
+      <li><a href="/#spaces">Spaces</a></li>
+      <li><a href="/#why">Why Sual</a></li>
+      <li><a href="/#waitlist">Waitlist</a></li>
+      <li><button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button></li>
+      <li><a href="https://app.usesual.com" target="_blank" class="nav-cta">Open App →</a></li>
     </ul>
-    <button class="theme-toggle-mobile" id="themeToggleMobile" type="button" aria-label="Toggle dark mode">🌙</button>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <button class="theme-toggle-mobile" id="themeToggleMobile" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
-    <a href="/index.html" onclick="closeMenu()">Home</a>
-    <a href="/Features.html" onclick="closeMenu()">Features</a>
-    <a href="/Disciplines.html" onclick="closeMenu()">Disciplines</a>
-    <a href="/Classes.html" onclick="closeMenu()">Classes</a>
-    <a href="/Spaces.html" onclick="closeMenu()">Spaces</a>
-    <a href="/Community.html" onclick="closeMenu()">Community</a>
-    <a href="/Why.html" onclick="closeMenu()">Why Sual</a>
-    <a href="/Waitlist.html" onclick="closeMenu()">Waitlist</a>
-    <a href="https://app.usesual.com" target="_blank" class="mobile-cta" onclick="closeMenu()">Open app</a>
+    <a href="/#features" onclick="closeMenu()">Features</a>
+    <a href="/disciplines.html" onclick="closeMenu()">Disciplines</a>
+    <a href="/#classes" onclick="closeMenu()">Classes</a>
+    <a href="/#spaces" onclick="closeMenu()">Spaces</a>
+    <a href="/#why" onclick="closeMenu()">Why Sual</a>
+    <a href="/#waitlist" onclick="closeMenu()">Waitlist</a>
+    <a href="https://app.usesual.com" target="_blank" class="mobile-cta" onclick="closeMenu()">Open App →</a>
   </div>
 
   <div class="page-hero">
-    <div class="reveal in">
-      <span class="eyebrow"><span class="eyebrow-mark"></span>Disciplines</span>
-      <h1 class="page-title">The seven Islamic sciences</h1>
+    <div class="page-hero-inner">
+      <span class="tag">Disciplines</span>
+      <h1 class="page-title">The Seven Islamic Sciences</h1>
       <p class="page-sub">Each discipline on Sual is treated with the depth it deserves — a serious introduction to the classical tradition, structured across Beginner, Intermediate, and Advanced levels.</p>
     </div>
   </div>
 
-  <section>
-    <div class="disc-list">
+  <div class="disciplines-list">
 
-      <div class="disc-row reveal">
-        <span class="disc-index">01</span>
-        <div>
-          <div class="disc-title-row"><span class="disc-name">Fiqh</span><span class="disc-arabic-inline">الفِقْه</span><span class="disc-tagline">Islamic jurisprudence</span></div>
-          <p class="disc-desc">Fiqh is the science of deriving practical rulings from the sources of Islamic law — covering worship, transactions, family law, and everyday conduct. You'll work through core rulings on salah, zakah, sawm, and hajj at the beginner level, then move into the evidences and scholarly positions behind classical fiqh questions.</p>
-          <div class="disc-levels"><span class="disc-level-tag level-beginner">Beginner — live</span><span class="disc-level-tag level-intermediate">Intermediate — live</span><span class="disc-level-tag level-advanced">Advanced — live</span></div>
-          <a href="https://app.usesual.com/discipline/fiqh" target="_blank" class="disc-link">Study Fiqh →</a>
+    <div class="disc-block">
+      <div class="disc-icon-wrap">⚖️</div>
+      <div>
+        <div class="disc-head">
+          <span class="disc-name">Fiqh</span>
+          <span class="disc-arabic">الفِقْه</span>
         </div>
-      </div>
-
-      <div class="disc-row reveal">
-        <span class="disc-index">02</span>
-        <div>
-          <div class="disc-title-row"><span class="disc-name">Seerah</span><span class="disc-arabic-inline">السِّيرَة</span><span class="disc-tagline">Prophetic biography</span></div>
-          <p class="disc-desc">Seerah is the study of the life of the Prophet Muhammad ﷺ — his character, his struggles, his companions, and the lessons drawn from his biography. Sual covers the major events of his life chronologically with attention to the wisdom behind each episode.</p>
-          <div class="disc-levels"><span class="disc-level-tag level-beginner">Beginner — live</span><span class="disc-level-tag level-intermediate">Intermediate — live</span><span class="disc-level-tag level-advanced">Advanced — live</span></div>
-          <a href="https://app.usesual.com/discipline/seerah" target="_blank" class="disc-link">Study Seerah →</a>
+        <span class="disc-summary">Islamic Jurisprudence</span>
+        <p class="disc-desc">Fiqh is the science of deriving practical rulings from the sources of Islamic law — covering worship, transactions, family law, and everyday conduct. On Sual, you'll work through core rulings on salah, zakah, sawm, and hajj at the beginner level, then move into the evidences and scholarly positions behind classical fiqh questions at intermediate and advanced levels.</p>
+        <div class="disc-levels">
+          <span class="disc-level-tag level-beginner">Beginner — live</span>
+          <span class="disc-level-tag level-intermediate">Intermediate — live</span>
+          <span class="disc-level-tag level-advanced">Advanced — live</span>
         </div>
+        <a href="https://app.usesual.com/discipline/fiqh" target="_blank" class="disc-link">Study Fiqh →</a>
       </div>
-
-      <div class="disc-row reveal">
-        <span class="disc-index">03</span>
-        <div>
-          <div class="disc-title-row"><span class="disc-name">Arabiyyah</span><span class="disc-arabic-inline">العَرَبِيَّة</span><span class="disc-tagline">Arabic language</span></div>
-          <p class="disc-desc">Arabiyyah is the gateway to every other Islamic science — the language in which the Quran, hadith, and the entire classical tradition were written. Coverage spans vocabulary, sentence structure, and reading comprehension, building toward independent engagement with classical texts.</p>
-          <div class="disc-levels"><span class="disc-level-tag level-beginner">Beginner — live</span><span class="disc-level-tag level-intermediate">Intermediate — live</span><span class="disc-level-tag level-advanced">Advanced — live</span></div>
-          <a href="https://app.usesual.com/discipline/arabiyyah" target="_blank" class="disc-link">Study Arabiyyah →</a>
-        </div>
-      </div>
-
-      <div class="disc-row reveal">
-        <span class="disc-index">04</span>
-        <div>
-          <div class="disc-title-row"><span class="disc-name">Usul al-Fiqh</span><span class="disc-arabic-inline">أُصُولُ الفِقْه</span><span class="disc-tagline">Principles of jurisprudence</span></div>
-          <p class="disc-desc">Usul al-Fiqh is the methodology behind fiqh — how scholars derive rulings from the Quran, Sunnah, ijma, and qiyas. Essential for understanding why scholars differ and how rulings are actually reached.</p>
-          <div class="disc-levels"><span class="disc-level-tag level-beginner">Beginner — live</span><span class="disc-level-tag level-intermediate">Intermediate — live</span><span class="disc-level-tag level-advanced">Advanced — live</span></div>
-          <a href="https://app.usesual.com/discipline/usul" target="_blank" class="disc-link">Study Usul al-Fiqh →</a>
-        </div>
-      </div>
-
-      <div class="disc-row reveal">
-        <span class="disc-index">05</span>
-        <div>
-          <div class="disc-title-row"><span class="disc-name">Sarf</span><span class="disc-arabic-inline">الصَّرْف</span><span class="disc-tagline">Arabic morphology</span></div>
-          <p class="disc-desc">Sarf is the study of word formation in Arabic — how a single root branches into dozens of related words through patterns of derivation. Unlocks the internal logic of the Arabic lexicon.</p>
-          <div class="disc-levels"><span class="disc-level-tag level-beginner">Beginner — live</span><span class="disc-level-tag level-intermediate">Intermediate — live</span><span class="disc-level-tag level-advanced">Advanced — live</span></div>
-          <a href="https://app.usesual.com/discipline/sarf" target="_blank" class="disc-link">Study Sarf →</a>
-        </div>
-      </div>
-
-      <div class="disc-row reveal">
-        <span class="disc-index">06</span>
-        <div>
-          <div class="disc-title-row"><span class="disc-name">Nahw</span><span class="disc-arabic-inline">النَّحْو</span><span class="disc-tagline">Arabic syntax</span></div>
-          <p class="disc-desc">Nahw is Arabic grammar — the rules governing how words relate to one another within a sentence, including case endings and sentence structure. Mastery allows correct parsing of any Quranic verse or classical text.</p>
-          <div class="disc-levels"><span class="disc-level-tag level-beginner">Beginner — live</span><span class="disc-level-tag level-intermediate">Intermediate — live</span><span class="disc-level-tag level-advanced">Advanced — live</span></div>
-          <a href="https://app.usesual.com/discipline/nahw" target="_blank" class="disc-link">Study Nahw →</a>
-        </div>
-      </div>
-
-      <div class="disc-row reveal">
-        <span class="disc-index">07</span>
-        <div>
-          <div class="disc-title-row"><span class="disc-name">Tafseer</span><span class="disc-arabic-inline">التَّفْسِير</span><span class="disc-tagline">Quranic exegesis</span></div>
-          <p class="disc-desc">Tafseer is the science of explaining the Quran — its meanings, context of revelation, linguistic nuances, and the rulings and lessons derived from each verse, drawing on classical tafseer works.</p>
-          <div class="disc-levels"><span class="disc-level-tag level-beginner">Beginner — live</span><span class="disc-level-tag level-intermediate">Intermediate — live</span><span class="disc-level-tag level-advanced">Advanced — live</span></div>
-          <a href="https://app.usesual.com/discipline/tafseer" target="_blank" class="disc-link">Study Tafseer →</a>
-        </div>
-      </div>
-
     </div>
-  </section>
 
-  <section style="padding-top: 0;">
-    <div class="cta-band reveal">
-      <span class="eyebrow"><span class="eyebrow-mark"></span>Get started</span>
-      <h2 class="cta-title">Start with any discipline today</h2>
-      <p class="cta-sub">Every discipline is free to study. No paywalls, no ads — just structured, sourced Islamic knowledge.</p>
-      <a href="https://app.usesual.com" target="_blank" class="btn-cream">Open Sual app →</a>
+    <div class="disc-block">
+      <div class="disc-icon-wrap">🌙</div>
+      <div>
+        <div class="disc-head">
+          <span class="disc-name">Seerah</span>
+          <span class="disc-arabic">السِّيرَة</span>
+        </div>
+        <span class="disc-summary">Prophetic Biography</span>
+        <p class="disc-desc">Seerah is the study of the life of the Prophet Muhammad ﷺ — his character, his struggles, his companions, and the lessons drawn from his biography. Sual covers the major events of his life chronologically, from before prophethood through the Makkan and Madinan periods, with attention to the wisdom behind each episode.</p>
+        <div class="disc-levels">
+          <span class="disc-level-tag level-beginner">Beginner — live</span>
+          <span class="disc-level-tag level-intermediate">Intermediate — live</span>
+          <span class="disc-level-tag level-advanced">Advanced — live</span>
+        </div>
+        <a href="https://app.usesual.com/discipline/seerah" target="_blank" class="disc-link">Study Seerah →</a>
+      </div>
     </div>
-  </section>
+
+    <div class="disc-block">
+      <div class="disc-icon-wrap">✍️</div>
+      <div>
+        <div class="disc-head">
+          <span class="disc-name">Arabiyyah</span>
+          <span class="disc-arabic">العَرَبِيَّة</span>
+        </div>
+        <span class="disc-summary">Arabic Language</span>
+        <p class="disc-desc">Arabiyyah is the gateway to every other Islamic science — the language in which the Quran, hadith, and the entire classical tradition were written. Sual's Arabiyyah content covers vocabulary, sentence structure, and reading comprehension, building toward independent engagement with classical Arabic texts.</p>
+        <div class="disc-levels">
+          <span class="disc-level-tag level-beginner">Beginner — live</span>
+          <span class="disc-level-tag level-intermediate">Intermediate — live</span>
+          <span class="disc-level-tag level-advanced">Advanced — live</span>
+        </div>
+        <a href="https://app.usesual.com/discipline/arabiyyah" target="_blank" class="disc-link">Study Arabiyyah →</a>
+      </div>
+    </div>
+
+    <div class="disc-block">
+      <div class="disc-icon-wrap">📐</div>
+      <div>
+        <div class="disc-head">
+          <span class="disc-name">Usul al-Fiqh</span>
+          <span class="disc-arabic">أُصُولُ الفِقْه</span>
+        </div>
+        <span class="disc-summary">Principles of Jurisprudence</span>
+        <p class="disc-desc">Usul al-Fiqh is the methodology behind fiqh — how scholars derive rulings from the Quran, Sunnah, ijma, and qiyas. It covers the rules of interpretation, the categories of evidence, and the principles that govern juristic reasoning. This discipline is essential for understanding why scholars differ and how rulings are actually reached.</p>
+        <div class="disc-levels">
+          <span class="disc-level-tag level-beginner">Beginner — live</span>
+          <span class="disc-level-tag level-intermediate">Intermediate — live</span>
+          <span class="disc-level-tag level-advanced">Advanced — live</span>
+        </div>
+        <a href="https://app.usesual.com/discipline/usul" target="_blank" class="disc-link">Study Usul al-Fiqh →</a>
+      </div>
+    </div>
+
+    <div class="disc-block">
+      <div class="disc-icon-wrap">🔤</div>
+      <div>
+        <div class="disc-head">
+          <span class="disc-name">Sarf</span>
+          <span class="disc-arabic">الصَّرْف</span>
+        </div>
+        <span class="disc-summary">Arabic Morphology</span>
+        <p class="disc-desc">Sarf is the study of word formation in Arabic — how a single root branches into dozens of related words through patterns of derivation. Understanding Sarf unlocks the internal logic of the Arabic lexicon, making it possible to recognize and derive new words rather than memorizing them in isolation.</p>
+        <div class="disc-levels">
+          <span class="disc-level-tag level-beginner">Beginner — live</span>
+          <span class="disc-level-tag level-intermediate">Intermediate — live</span>
+          <span class="disc-level-tag level-advanced">Advanced — live</span>
+        </div>
+        <a href="https://app.usesual.com/discipline/sarf" target="_blank" class="disc-link">Study Sarf →</a>
+      </div>
+    </div>
+
+    <div class="disc-block">
+      <div class="disc-icon-wrap">📝</div>
+      <div>
+        <div class="disc-head">
+          <span class="disc-name">Nahw</span>
+          <span class="disc-arabic">النَّحْو</span>
+        </div>
+        <span class="disc-summary">Arabic Syntax</span>
+        <p class="disc-desc">Nahw is Arabic grammar — the rules governing how words relate to one another within a sentence, including case endings, sentence structure, and grammatical function. Mastery of Nahw is what allows a student to correctly parse a verse of the Quran or a line of classical prose and understand precisely what each word is doing.</p>
+        <div class="disc-levels">
+          <span class="disc-level-tag level-beginner">Beginner — live</span>
+          <span class="disc-level-tag level-intermediate">Intermediate — live</span>
+          <span class="disc-level-tag level-advanced">Advanced — live</span>
+        </div>
+        <a href="https://app.usesual.com/discipline/nahw" target="_blank" class="disc-link">Study Nahw →</a>
+      </div>
+    </div>
+
+    <div class="disc-block">
+      <div class="disc-icon-wrap">📖</div>
+      <div>
+        <div class="disc-head">
+          <span class="disc-name">Tafseer</span>
+          <span class="disc-arabic">التَّفْسِير</span>
+        </div>
+        <span class="disc-summary">Quranic Exegesis</span>
+        <p class="disc-desc">Tafseer is the science of explaining the Quran — its meanings, context of revelation, linguistic nuances, and the rulings and lessons derived from each verse. Sual draws on classical tafseer works to present the meaning of selected verses alongside the scholarly reasoning behind each interpretation.</p>
+        <div class="disc-levels">
+          <span class="disc-level-tag level-beginner">Beginner — live</span>
+          <span class="disc-level-tag level-intermediate">Intermediate — live</span>
+          <span class="disc-level-tag level-advanced">Advanced — live</span>
+        </div>
+        <a href="https://app.usesual.com/discipline/tafseer" target="_blank" class="disc-link">Study Tafseer →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cta-section">
+    <span class="tag">Get Started</span>
+    <h2 class="cta-title">Start with any discipline today</h2>
+    <p class="cta-sub">Every discipline is free to study. No paywalls, no ads — just structured, sourced Islamic knowledge.</p>
+    <a href="https://app.usesual.com" target="_blank" class="btn-white">Open Sual App →</a>
+  </div>
 
   <footer>
     <div class="footer-inner">
-      <div class="footer-top">
-        <div>
-          <div class="footer-brand-mark"><span class="footer-arabic-mark">سُؤَال</span><span class="footer-latin-mark">Sual</span></div>
-          <p class="footer-tagline">Your companion for the Islamic sciences. Ask, learn, and test your knowledge in the classical tradition.</p>
-        </div>
-        <div class="footer-col"><div class="footer-col-title">Explore</div><a href="/features.html">Features</a><a href="/disciplines.html">Disciplines</a><a href="/classes.html">Classes</a><a href="/why.html">Why Sual</a></div>
-        <div class="footer-col"><div class="footer-col-title">Community</div><a href="/spaces.html">Spaces</a><a href="/community.html">Community</a><a href="/waitlist.html">Waitlist</a><a href="https://whatsapp.com/channel/0029Vb8gbnB5PO0ysEFozQ46" target="_blank">WhatsApp</a></div>
-        <div class="footer-col"><div class="footer-col-title">Sual</div><a href="https://app.usesual.com" target="_blank">Open app</a><a href="https://x.com/use_sual" target="_blank">𝕏 @use_sual</a><a href="/privacy.html">Privacy policy</a></div>
+      <div>
+        <div class="footer-arabic">سُؤَال</div>
+        <p class="footer-tagline">Your companion for the Islamic sciences. Ask, learn, and test your knowledge in the classical tradition.</p>
       </div>
-      <div class="footer-bottom"><span>© 2026 Sual | سُؤَال — Built for the students of Islamic knowledge.</span><span>Free forever.</span></div>
+      <div class="footer-links">
+        <a href="https://app.usesual.com" target="_blank">Open App</a>
+        <a href="/#features">Features</a>
+        <a href="/disciplines.html">Disciplines</a>
+        <a href="/#classes">Classes</a>
+        <a href="/#spaces">Spaces</a>
+        <a href="/privacy.html">Privacy Policy</a>
+      </div>
     </div>
+    <div class="footer-copy">© 2026 Sual | سُؤَال — Built for the students of Islamic knowledge. Free forever.</div>
   </footer>
 
   <script>
-    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); document.getElementById('hamburger').classList.toggle('open') }
-    function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); document.getElementById('hamburger').classList.remove('open') }
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open')
+      document.getElementById('hamburger').classList.toggle('open')
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open')
+      document.getElementById('hamburger').classList.remove('open')
+    }
+
     function applyTheme(theme) {
-      if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark')
-      else document.documentElement.removeAttribute('data-theme')
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark')
+      } else {
+        document.documentElement.removeAttribute('data-theme')
+      }
       var icons = [document.getElementById('themeToggle'), document.getElementById('themeToggleMobile')]
       icons.forEach(function (el) { if (el) el.textContent = theme === 'dark' ? '☀️' : '🌙' })
     }
+
     function getPreferredTheme() {
       var saved = localStorage.getItem('sual-theme')
       if (saved) return saved
       return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     }
+
     function toggleTheme() {
       var current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
       var next = current === 'dark' ? 'light' : 'dark'
       localStorage.setItem('sual-theme', next)
       applyTheme(next)
     }
+
     applyTheme(getPreferredTheme())
     document.getElementById('themeToggle').addEventListener('click', toggleTheme)
     document.getElementById('themeToggleMobile').addEventListener('click', toggleTheme)
-    const revealEls = document.querySelectorAll('.reveal')
-    const revealObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) { if (entry.isIntersecting) { entry.target.classList.add('in'); revealObserver.unobserve(entry.target) } })
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' })
-    revealEls.forEach(function (el) { revealObserver.observe(el) })
   </script>
 </body>
 </html>
